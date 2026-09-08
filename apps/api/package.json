@@ -23,7 +23,6 @@
     "compression": "^1.8.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
-    "drizzle-orm": "0.45.2",
     "express": "catalog:",
     "express-rate-limit": "^7.5.0",
     "express-slow-down": "^2.1.0",
