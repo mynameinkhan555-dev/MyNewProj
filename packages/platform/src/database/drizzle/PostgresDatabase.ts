@@ -1,13 +1,12 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
-import { DrizzleConnection } from "./DrizzleConnection.js";
+import type { DatabaseHealthResult } from "../DatabaseHealthCheck.js";
 
 const { Pool } = pg;
 
 export interface PostgresDatabase {
   db: ReturnType<typeof drizzle>;
   pool: InstanceType<typeof Pool>;
-  connection: DrizzleConnection;
   close(): Promise<void>;
 }
 
@@ -18,12 +17,28 @@ export interface PostgresDatabase {
 export function createPostgresDatabase(connectionString: string): PostgresDatabase {
   const pool = new Pool({ connectionString });
   const db = drizzle(pool);
-  const connection = new DrizzleConnection(db as never);
 
   return {
     db,
     pool,
-    connection,
     close: () => pool.end(),
   };
+}
+
+/** Platform-owned PostgreSQL health probe. */
+export async function checkPostgresDatabaseHealth(
+  database: PostgresDatabase,
+): Promise<DatabaseHealthResult> {
+  const start = Date.now();
+
+  try {
+    await database.pool.query("SELECT 1");
+    return { healthy: true, latency: Date.now() - start };
+  } catch (err: unknown) {
+    return {
+      healthy: false,
+      latency: Date.now() - start,
+      error: err instanceof Error ? err.message : String(err),
+    };
+  }
 }
