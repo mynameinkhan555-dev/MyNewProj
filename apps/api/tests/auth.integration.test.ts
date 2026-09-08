@@ -4,8 +4,10 @@ import type { AddressInfo } from "node:net";
 import type { Server } from "node:http";
 import { createContainer } from "../src/container";
 import { createServer } from "../src/server";
-import { db } from "@workspace/db";
 import { DrizzleRoleRepository } from "@workspace/iam";
+
+const databaseUrl = process.env["DATABASE_URL"];
+if (!databaseUrl) throw new Error("DATABASE_URL is required for integration tests");
 
 const password = "PersistPass123!";
 const email = `auth-test-${Date.now()}@example.com`;
@@ -21,7 +23,7 @@ async function request(path: string, init: RequestInit): Promise<{
 }
 
 before(async () => {
-  const app = createServer(await createContainer({ startBackgroundWorkers: false }));
+  const app = createServer(await createContainer({ databaseUrl, startBackgroundWorkers: false }));
   server = await new Promise<Server>((resolve) => {
     const listener = app.listen(0, "127.0.0.1", () => resolve(listener));
   });
@@ -149,7 +151,7 @@ test("logs in, creates a persistent session, and logs out", async () => {
 });
 
 test("keeps RBAC seeds idempotent and roles persistent across container initialization", async () => {
-  const secondContainer = await createContainer({ startBackgroundWorkers: false });
+  const secondContainer = await createContainer({ databaseUrl, startBackgroundWorkers: false });
   const rolesApp = createServer(secondContainer);
   const rolesServer = await new Promise<Server>((resolve) => {
     const listener = rolesApp.listen(0, "127.0.0.1", () => resolve(listener));
@@ -177,7 +179,7 @@ test("keeps RBAC seeds idempotent and roles persistent across container initiali
     const loginBody = await login.json() as { data: { accessToken: string; user: { roles: string[] } } };
     assert.deepEqual(loginBody.data.user.roles, ["user"]);
 
-    const roleRepository = new DrizzleRoleRepository(db);
+    const roleRepository = new DrizzleRoleRepository(secondContainer.database.db);
     const persistedRoles = await roleRepository.findAll();
     assert.deepEqual(persistedRoles.map((role) => role.name.value).sort(), ["admin", "guest", "moderator", "user"]);
     const userRole = persistedRoles.find((role) => role.name.value === "user");
