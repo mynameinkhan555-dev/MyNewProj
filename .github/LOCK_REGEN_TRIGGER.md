@@ -1,1 +1,0 @@
-Temporary trigger for canonical pnpm-lock.yaml regeneration. This file is removed after regeneration.
