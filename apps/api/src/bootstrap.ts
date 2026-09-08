@@ -11,8 +11,7 @@ export interface Bootstrapped {
 
 export async function bootstrap(): Promise<Bootstrapped> {
   const config = loadConfig();
-  const container = await createContainer();
+  const container = await createContainer({ databaseUrl: config.databaseUrl });
   const app = createServer(container);
-
   return { app, config, container };
 }
