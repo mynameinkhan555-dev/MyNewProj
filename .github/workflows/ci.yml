@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, develop, 'chore/**']
   pull_request:
     branches: [main, develop]
 
@@ -68,7 +68,7 @@ jobs:
         run: pnpm run lint
 
       - name: Run Prettier check
-        run: pnpm run format --check
+        run: pnpm run format:check
 
       - name: Run TypeScript typecheck
         run: pnpm run typecheck
