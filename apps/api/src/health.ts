@@ -1,6 +1,6 @@
 import { Router, type IRouter } from "express";
 import { z } from "zod";
-import { db } from "@workspace/db";
+import { checkDatabaseHealth, type PostgresDatabase } from "@workspace/platform";
 
 const HealthCheckResponse = z.object({
   status: z.enum(["ok", "degraded", "down"]),
@@ -13,36 +13,25 @@ const HealthCheckResponse = z.object({
   }),
 });
 
-const router: IRouter = Router();
+export function createHealthRouter(database: PostgresDatabase): IRouter {
+  const router: IRouter = Router();
 
-router.get("/healthz", async (_req, res) => {
-  const checks = {
-    database: await checkDatabase(),
-  };
+  router.get("/healthz", async (_req, res) => {
+    const databaseHealth = await checkDatabaseHealth(database.db);
+    const databaseCheck = databaseHealth.healthy
+      ? { status: "up" as const, latency: databaseHealth.latency }
+      : { status: "down" as const };
 
-  const overallStatus = Object.values(checks).every((c) => c.status === "up")
-    ? "ok"
-    : Object.values(checks).some((c) => c.status === "up")
-    ? "degraded"
-    : "down";
+    const status = databaseCheck.status === "up" ? "ok" : "down";
 
-  res.json(
-    HealthCheckResponse.parse({
-      status: overallStatus,
-      timestamp: new Date().toISOString(),
-      checks,
-    }),
-  );
-});
+    res.status(status === "ok" ? 200 : 503).json(
+      HealthCheckResponse.parse({
+        status,
+        timestamp: new Date().toISOString(),
+        checks: { database: databaseCheck },
+      }),
+    );
+  });
 
-async function checkDatabase(): Promise<{ status: "up" | "down"; latency?: number }> {
-  const start = Date.now();
-  try {
-    await db.execute("SELECT 1");
-    return { status: "up", latency: Date.now() - start };
-  } catch {
-    return { status: "down" };
-  }
+  return router;
 }
-
-export default router;
