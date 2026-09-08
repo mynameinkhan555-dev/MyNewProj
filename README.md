@@ -90,3 +90,6 @@ _Describe the high-level user-facing capabilities of this app once they exist._
   and package details.
 - See `docs/architecture.md` before adding a package, moving a capability,
   or introducing a new top-level folder.
+
+## Git Workflow Test
+This change was created on the main development computer.
