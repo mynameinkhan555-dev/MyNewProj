@@ -1,9 +1,5 @@
 import { Router, type IRouter } from "express";
-import {
-  checkDatabaseHealth,
-  DrizzleConnection,
-  type PostgresDatabase,
-} from "@workspace/platform";
+import { checkDatabaseHealth, type PostgresDatabase } from "@workspace/platform";
 import { z } from "zod";
 
 const HealthCheckResponse = z.object({
@@ -19,10 +15,9 @@ const HealthCheckResponse = z.object({
 
 export function createHealthRouter(database: PostgresDatabase): IRouter {
   const router: IRouter = Router();
-  const connection = new DrizzleConnection(database.db);
 
   router.get("/healthz", async (_req, res) => {
-    const databaseHealth = await checkDatabaseHealth(connection);
+    const databaseHealth = await checkDatabaseHealth(database.connection);
     const databaseCheck = databaseHealth.healthy
       ? { status: "up" as const, latency: databaseHealth.latency }
       : { status: "down" as const };
