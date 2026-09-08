@@ -13,5 +13,5 @@ export { DrizzleConnection } from "./drizzle/DrizzleConnection.js";
 export type { DrizzleExecutor } from "./drizzle/DrizzleConnection.js";
 export { DrizzleTransaction } from "./drizzle/DrizzleTransaction.js";
 export type { TransactionalDatabase } from "./drizzle/DrizzleTransaction.js";
-export { createPostgresDatabase } from "./drizzle/PostgresDatabase.js";
+export { createPostgresDatabase, checkPostgresDatabaseHealth } from "./drizzle/PostgresDatabase.js";
 export type { PostgresDatabase } from "./drizzle/PostgresDatabase.js";
