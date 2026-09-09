@@ -11,3 +11,7 @@ export default function LogoutPage() {
 
   return <main className="center-page"><p>Signing you out…</p></main>;
 }
+
+export const getServerSideProps = () => ({
+  props: {},
+});

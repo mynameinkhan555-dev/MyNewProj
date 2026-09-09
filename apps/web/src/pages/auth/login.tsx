@@ -60,6 +60,10 @@ export default function LoginPage() {
   );
 }
 
+export const getServerSideProps = () => ({
+  props: {},
+});
+
 function getDeviceId(): string {
   const key = "identity-platform.device-id";
   const runtime = globalThis as typeof globalThis & {

@@ -4,7 +4,11 @@ export default function UsersPage() {
   return (
     <StatusPage
       title="Users"
-      description="User administration is available through the IAM API and will be surfaced here."
+      description="User management will be available soon."
     />
   );
 }
+
+export const getServerSideProps = () => ({
+  props: {},
+});

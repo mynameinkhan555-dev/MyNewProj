@@ -54,3 +54,7 @@ export default function RegisterPage() {
     </AuthCard>
   );
 }
+
+export const getServerSideProps = () => ({
+  props: {},
+});
