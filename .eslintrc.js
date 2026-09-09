@@ -4,7 +4,6 @@ module.exports = {
     '@workspace/eslint-config',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
-    'plugin:prettier/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -15,7 +14,6 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'import'],
   rules: {
-    // TypeScript specific rules
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -28,38 +26,25 @@ module.exports = {
     '@typescript-eslint/prefer-optional-chain': 'error',
     '@typescript-eslint/prefer-readonly': 'error',
     '@typescript-eslint/strict-boolean-expressions': 'error',
-
-    // Import rules
     'import/order': [
       'error',
       {
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          ['parent', 'sibling'],
-          'index',
-        ],
+        groups: ['builtin', 'external', 'internal', ['parent', 'sibling'], 'index'],
         'newlines-between': 'always',
-        alphabetize: {
-          order: 'asc',
-          caseInsensitive: true,
-        },
+        alphabetize: { order: 'asc', caseInsensitive: true },
       },
     ],
     'import/no-unresolved': 'off',
     'import/no-cycle': 'error',
     'import/no-duplicates': 'error',
-
-    // General rules
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-debugger': 'error',
     'no-var': 'error',
     'prefer-const': 'error',
     'prefer-arrow-callback': 'error',
     'prefer-template': 'error',
-    'eqeqeq': ['error', 'always'],
-    'curly': ['error', 'all'],
+    eqeqeq: ['error', 'always'],
+    curly: ['error', 'all'],
     'no-throw-literal': 'error',
     'prefer-promise-reject-errors': 'error',
   },
