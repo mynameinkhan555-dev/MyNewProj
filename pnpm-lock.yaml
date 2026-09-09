@@ -902,9 +902,6 @@ importers:
       '@workspace/kernel':
         specifier: workspace:*
         version: link:../../kernel
-      '@workspace/platform':
-        specifier: workspace:*
-        version: link:..
       '@workspace/ui':
         specifier: workspace:*
         version: link:../../ui

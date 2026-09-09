@@ -27,7 +27,6 @@
   "dependencies": {
     "@workspace/kernel": "workspace:*",
     "@workspace/contracts": "workspace:*",
-    "@workspace/platform": "workspace:*",
     "@workspace/ui": "workspace:*",
     "ky": "catalog:",
     "@tanstack/react-query": "catalog:",
