@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const GetSimilarRequestSchema = z.object({
   limit: z.number().optional(),

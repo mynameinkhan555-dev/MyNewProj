@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const DeleteSubtitlesResponseSchema = z.object({
   deleted: z.literal(true),

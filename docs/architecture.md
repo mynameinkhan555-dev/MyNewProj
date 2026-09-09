@@ -35,9 +35,9 @@ Modules never depend on each other directly — not even through `contracts`.
 The module-level dependency matrix is the identity matrix: every module may
 depend on itself, nothing else.
 
-| Module | iam | billing | tenant | notification | audit | (all others) |
-|---|---|---|---|---|---|---|
-| any module | ✅ (self only) | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Module     | iam            | billing | tenant | notification | audit | (all others) |
+| ---------- | -------------- | ------- | ------ | ------------ | ----- | ------------ |
+| any module | ✅ (self only) | ❌      | ❌     | ❌           | ❌    | ❌           |
 
 - Cross-module communication happens only via **Event / Command / Query**
   (published on `packages/platform`'s messaging bus) — never a direct
@@ -53,13 +53,13 @@ depend on itself, nothing else.
 
 ## 4. Package dependency matrix
 
-| Package | kernel | contracts | platform | ui | tooling |
-|---|---|---|---|---|---|
-| `ui` | ✅ | ❌ | ❌ | — | ❌ |
-| `platform` (backend) | ✅ | ✅ | — | ❌ | ❌ |
-| `platform/client` | ✅ | ✅ | ✅ | ✅ | ❌ |
-| `modules/*` | ✅ | ✅ | ✅ | ❌ | ❌ |
-| `apps/*` | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Package              | kernel | contracts | platform | ui  | tooling |
+| -------------------- | ------ | --------- | -------- | --- | ------- |
+| `ui`                 | ✅     | ❌        | ❌       | —   | ❌      |
+| `platform` (backend) | ✅     | ✅        | —        | ❌  | ❌      |
+| `platform/client`    | ✅     | ✅        | ✅       | ✅  | ❌      |
+| `modules/*`          | ✅     | ✅        | ✅       | ❌  | ❌      |
+| `apps/*`             | ✅     | ✅        | ✅       | ✅  | ✅      |
 
 - `kernel` has zero dependencies (DDD building blocks only).
 - `contracts` depends only on `kernel` (DTOs/types, no implementation).
@@ -68,24 +68,24 @@ depend on itself, nothing else.
 
 ## 5. Capability → implementation map
 
-| Capability | Backend (`packages/platform`) | Frontend (`packages/platform/client`) |
-|---|---|---|
-| HTTP | `server/` (Express) | `http/` (ky) |
-| Logging / Analytics | `logger/` (pino) | `analytics/` |
-| Config / Theme | `config/` | `theme/` |
-| Storage | `storage/` (S3) | `storage/` (localStorage/IndexedDB) |
-| Cache / Server state | `cache/` (Redis) | `query/` (TanStack Query) |
-| Security / Auth | `security/` (JWT issuer) | `auth/` (JWT consumer) |
-| Validation | `validation/` (Zod) | `forms/` (TanStack Form + Zod) |
-| Database | `database/` (Drizzle) | — |
-| Messaging | `messaging/` | `notifications/` |
-| Observability | `observability/` (OpenTelemetry) | `analytics/` |
-| Routing | `server/` route mounting | `router/` (TanStack Router) |
-| State | — | `state/` (Zustand) |
-| Tables / lists | — | `table/` / `virtual/` (TanStack) |
-| Scheduling | `scheduler/` | `browser/` |
-| Locking | `locking/` | — |
-| Cookies | — | `cookies/` |
+| Capability           | Backend (`packages/platform`)    | Frontend (`packages/platform/client`) |
+| -------------------- | -------------------------------- | ------------------------------------- |
+| HTTP                 | `server/` (Express)              | `http/` (ky)                          |
+| Logging / Analytics  | `logger/` (pino)                 | `analytics/`                          |
+| Config / Theme       | `config/`                        | `theme/`                              |
+| Storage              | `storage/` (S3)                  | `storage/` (localStorage/IndexedDB)   |
+| Cache / Server state | `cache/` (Redis)                 | `query/` (TanStack Query)             |
+| Security / Auth      | `security/` (JWT issuer)         | `auth/` (JWT consumer)                |
+| Validation           | `validation/` (Zod)              | `forms/` (TanStack Form + Zod)        |
+| Database             | `database/` (Drizzle)            | —                                     |
+| Messaging            | `messaging/`                     | `notifications/`                      |
+| Observability        | `observability/` (OpenTelemetry) | `analytics/`                          |
+| Routing              | `server/` route mounting         | `router/` (TanStack Router)           |
+| State                | —                                | `state/` (Zustand)                    |
+| Tables / lists       | —                                | `table/` / `virtual/` (TanStack)      |
+| Scheduling           | `scheduler/`                     | `browser/`                            |
+| Locking              | `locking/`                       | —                                     |
+| Cookies              | —                                | `cookies/`                            |
 
 `platform/client` is its own workspace package (`@workspace/platform-client`,
 at `packages/platform/client`) so browser bundles never pull in backend-only
@@ -93,19 +93,19 @@ native deps (pg, ioredis, argon2, etc.) from `@workspace/platform`.
 
 ## 6. Frontend Technology Decision Registry (TDR)
 
-| Capability | Chosen | Rejected alternatives | Why |
-|---|---|---|---|
-| HTTP client | ky | axios, fetch | Smaller, better API |
-| Server state | TanStack Query | SWR, RTK Query | Best devtools/caching |
-| Routing | TanStack Router | React Router | Type-safe, fast |
-| Forms | TanStack Form | React Hook Form | Type-safe, reactive |
-| Tables | TanStack Table | ag-Grid | Headless, flexible |
-| Virtualization | TanStack Virtual | react-window | Performance |
-| Client state | Zustand | Redux, Jotai | Simple, performant |
-| Styling | Tailwind CSS | CSS Modules | Utility-first |
-| UI components | shadcn/ui | MUI, Radix (raw) | Unstyled, accessible |
-| Icons | Lucide | Font Awesome | Modern, consistent |
-| Animation | Motion/Framer Motion | — | Modern API |
+| Capability     | Chosen               | Rejected alternatives | Why                   |
+| -------------- | -------------------- | --------------------- | --------------------- |
+| HTTP client    | ky                   | axios, fetch          | Smaller, better API   |
+| Server state   | TanStack Query       | SWR, RTK Query        | Best devtools/caching |
+| Routing        | TanStack Router      | React Router          | Type-safe, fast       |
+| Forms          | TanStack Form        | React Hook Form       | Type-safe, reactive   |
+| Tables         | TanStack Table       | ag-Grid               | Headless, flexible    |
+| Virtualization | TanStack Virtual     | react-window          | Performance           |
+| Client state   | Zustand              | Redux, Jotai          | Simple, performant    |
+| Styling        | Tailwind CSS         | CSS Modules           | Utility-first         |
+| UI components  | shadcn/ui            | MUI, Radix (raw)      | Unstyled, accessible  |
+| Icons          | Lucide               | Font Awesome          | Modern, consistent    |
+| Animation      | Motion/Framer Motion | —                     | Modern API            |
 
 `apps/web` and `apps/admin` must not add these libraries directly —
 depend on `@workspace/platform-client` instead, which owns the versions.
@@ -129,29 +129,29 @@ No app-root `hooks/`, `stores/`, `types/`, or `utils/` catch-alls.
 `apps/api` versions all business routes under `/api/v1/<domain>`. Each
 domain is owned by exactly one module (§3 — never split across modules):
 
-| Domain(s) | Owning module | Status |
-|---|---|---|
-| identity, auth, users | `iam` | scaffolded (Identity-First, §2) |
-| billing | `billing` | scaffolded |
-| subscriptions | `subscription` | scaffolded |
-| tenant | `tenant` | scaffolded |
-| notifications | `notification` | scaffolded |
-| audit | `audit` | scaffolded |
-| catalog | `catalog` | scaffolded |
-| content | `content` | scaffolded |
-| viewing | `viewing` | scaffolded |
-| media | `media` | scaffolded |
-| search | `search` | scaffolded |
-| analytics | `analytics` | scaffolded |
-| access-control | `access-control` | scaffolded |
-| features | `features` | scaffolded |
-| devices | `devices` | scaffolded |
-| integrations | `integrations` | scaffolded |
-| advertising | `advertising` | scaffolded |
-| social | `social` | scaffolded |
-| admin | `admin` | scaffolded |
-| reports | `reports` | scaffolded |
-| platform, system (health/metrics/version/config) | *(none — lives in `apps/api` directly)* | implemented (`apps/api/src/health.ts`) |
+| Domain(s)                                        | Owning module                           | Status                                 |
+| ------------------------------------------------ | --------------------------------------- | -------------------------------------- |
+| identity, auth, users                            | `iam`                                   | scaffolded (Identity-First, §2)        |
+| billing                                          | `billing`                               | scaffolded                             |
+| subscriptions                                    | `subscription`                          | scaffolded                             |
+| tenant                                           | `tenant`                                | scaffolded                             |
+| notifications                                    | `notification`                          | scaffolded                             |
+| audit                                            | `audit`                                 | scaffolded                             |
+| catalog                                          | `catalog`                               | scaffolded                             |
+| content                                          | `content`                               | scaffolded                             |
+| viewing                                          | `viewing`                               | scaffolded                             |
+| media                                            | `media`                                 | scaffolded                             |
+| search                                           | `search`                                | scaffolded                             |
+| analytics                                        | `analytics`                             | scaffolded                             |
+| access-control                                   | `access-control`                        | scaffolded                             |
+| features                                         | `features`                              | scaffolded                             |
+| devices                                          | `devices`                               | scaffolded                             |
+| integrations                                     | `integrations`                          | scaffolded                             |
+| advertising                                      | `advertising`                           | scaffolded                             |
+| social                                           | `social`                                | scaffolded                             |
+| admin                                            | `admin`                                 | scaffolded                             |
+| reports                                          | `reports`                               | scaffolded                             |
+| platform, system (health/metrics/version/config) | _(none — lives in `apps/api` directly)_ | implemented (`apps/api/src/health.ts`) |
 
 - "scaffolded" = the module exists with the standard hexagonal skeleton
   (`domain/application/infrastructure/presentation`, empty) and a

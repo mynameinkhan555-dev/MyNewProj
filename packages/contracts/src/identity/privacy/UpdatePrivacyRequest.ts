@@ -1,7 +1,7 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const UpdatePrivacyRequestSchema = z.object({
-  profileVisibility: z.enum(["public", "private", "friends"]).optional(),
+  profileVisibility: z.enum(['public', 'private', 'friends']).optional(),
   showEmail: z.boolean().optional(),
   showPhone: z.boolean().optional(),
   showActivity: z.boolean().optional(),

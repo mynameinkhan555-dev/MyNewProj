@@ -1,12 +1,12 @@
-import { LogLevel } from "../LogLevel.js";
-import type { LogEntry } from "../LogEntry.js";
+import { LogLevel } from '../LogLevel.js';
+import type { LogEntry } from '../LogEntry.js';
 
 const levelNames: Record<LogLevel, string> = {
-  [LogLevel.Debug]: "DEBUG",
-  [LogLevel.Info]: "INFO",
-  [LogLevel.Warn]: "WARN",
-  [LogLevel.Error]: "ERROR",
-  [LogLevel.Fatal]: "FATAL",
+  [LogLevel.Debug]: 'DEBUG',
+  [LogLevel.Info]: 'INFO',
+  [LogLevel.Warn]: 'WARN',
+  [LogLevel.Error]: 'ERROR',
+  [LogLevel.Fatal]: 'FATAL',
 };
 
 export class LogFormatter {
@@ -31,8 +31,8 @@ export class LogFormatter {
   toPretty(entry: LogEntry): string {
     const ts = entry.timestamp.toISOString();
     const level = levelNames[entry.level].padEnd(5);
-    const ctx = entry.context ? ` ${JSON.stringify(entry.context)}` : "";
-    const err = entry.error ? ` [${entry.error.name}: ${entry.error.message}]` : "";
+    const ctx = entry.context ? ` ${JSON.stringify(entry.context)}` : '';
+    const err = entry.error ? ` [${entry.error.name}: ${entry.error.message}]` : '';
     return `${ts} [${level}] ${entry.message}${ctx}${err}`;
   }
 }

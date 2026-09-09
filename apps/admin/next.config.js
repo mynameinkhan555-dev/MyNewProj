@@ -1,6 +1,6 @@
 /** @type {import("next").NextConfig} */
 const nextConfig = {
-  transpilePackages: ["@workspace/platform-client"],
+  transpilePackages: ['@workspace/platform-client'],
   eslint: {
     ignoreDuringBuilds: true,
   },

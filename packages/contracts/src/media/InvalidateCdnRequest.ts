@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const InvalidateCdnRequestSchema = z.object({
   paths: z.array(z.string()).optional(),

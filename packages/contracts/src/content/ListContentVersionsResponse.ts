@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { ContentVersionDtoSchema } from "./ContentVersionDto";
+import { z } from 'zod';
+import { ContentVersionDtoSchema } from './ContentVersionDto';
 
 export const ListContentVersionsResponseSchema = z.array(ContentVersionDtoSchema);
 

@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { SubscriptionDtoSchema } from "./SubscriptionDto";
+import { z } from 'zod';
+import { SubscriptionDtoSchema } from './SubscriptionDto';
 
 export const CreateSubscriptionResponseSchema = z.object({
   subscription: SubscriptionDtoSchema,

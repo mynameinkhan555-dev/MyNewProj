@@ -1,11 +1,14 @@
-import type { SocialIdentityRepository } from "../../domain/oauth/SocialIdentityRepository.js";
-import { SocialIdentity } from "../../domain/oauth/SocialIdentity.js";
-import type { OAuthProvider } from "../../domain/oauth/OAuthProvider.js";
+import type { SocialIdentityRepository } from '../../domain/oauth/SocialIdentityRepository.js';
+import { SocialIdentity } from '../../domain/oauth/SocialIdentity.js';
+import type { OAuthProvider } from '../../domain/oauth/OAuthProvider.js';
 
 export class InMemorySocialIdentityRepository implements SocialIdentityRepository {
   private readonly store = new Map<string, SocialIdentity>();
 
-  async findByProvider(provider: OAuthProvider, providerUserId: string): Promise<SocialIdentity | null> {
+  async findByProvider(
+    provider: OAuthProvider,
+    providerUserId: string
+  ): Promise<SocialIdentity | null> {
     for (const identity of this.store.values()) {
       if (identity.provider === provider && identity.providerUserId === providerUserId) {
         return identity;

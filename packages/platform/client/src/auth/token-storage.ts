@@ -1,4 +1,4 @@
-import type { AuthSession } from "./session";
+import type { AuthSession } from './session';
 
 export interface TokenStorage {
   read(): AuthSession | null;
@@ -6,7 +6,7 @@ export interface TokenStorage {
   clear(): void;
 }
 
-const STORAGE_KEY = "identity-platform.auth-session";
+const STORAGE_KEY = 'identity-platform.auth-session';
 
 interface BrowserStorage {
   getItem(key: string): string | null;

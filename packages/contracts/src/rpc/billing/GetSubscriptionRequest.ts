@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const GetSubscriptionRequestSchema = z.object({
   userId: z.string(),

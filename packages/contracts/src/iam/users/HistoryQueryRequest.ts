@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const HistoryQueryRequestSchema = z.object({
   page: z.number().int().min(1).optional(),

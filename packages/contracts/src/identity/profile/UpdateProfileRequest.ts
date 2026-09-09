@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const UpdateProfileRequestSchema = z.object({
   displayName: z.string().optional(),

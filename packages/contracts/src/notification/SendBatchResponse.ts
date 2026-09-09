@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const SendBatchResponseSchema = z.object({
   sent: z.number().int(),

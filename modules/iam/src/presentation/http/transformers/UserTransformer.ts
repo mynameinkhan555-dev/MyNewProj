@@ -1,5 +1,5 @@
-import type { User } from "../../../domain/User.js";
-import type { UserView } from "../../../application/queries/UserView.js";
+import type { User } from '../../../domain/User.js';
+import type { UserView } from '../../../application/queries/UserView.js';
 
 /** Never expose password hashes, refresh tokens, or internal domain events. */
 export class UserTransformer {

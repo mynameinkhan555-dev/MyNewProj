@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const BulkCreateContentResponseSchema = z.object({
   created: z.array(z.unknown()),

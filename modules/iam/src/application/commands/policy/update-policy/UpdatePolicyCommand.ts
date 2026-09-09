@@ -1,10 +1,10 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const UpdatePolicyCommandSchema = z.object({
   id: z.string().uuid(),
   name: z.string().min(1).max(255).optional(),
   description: z.string().optional(),
-  effect: z.enum(["allow", "deny"]).optional(),
+  effect: z.enum(['allow', 'deny']).optional(),
   subjects: z.array(z.string().min(1)).min(1).optional(),
   resources: z.array(z.string().min(1)).min(1).optional(),
   actions: z.array(z.string().min(1)).min(1).optional(),

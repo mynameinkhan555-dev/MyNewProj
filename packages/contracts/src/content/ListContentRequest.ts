@@ -1,7 +1,7 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ListContentRequestSchema = z.object({
-  status: z.enum(["draft", "pending", "published", "archived"]).optional(),
+  status: z.enum(['draft', 'pending', 'published', 'archived']).optional(),
   type: z.string().optional(),
   createdBy: z.string().optional(),
   page: z.number().int().optional(),

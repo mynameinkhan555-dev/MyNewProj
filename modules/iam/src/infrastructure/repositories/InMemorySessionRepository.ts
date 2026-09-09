@@ -1,5 +1,5 @@
-import type { SessionRepository } from "../../domain/repositories/SessionRepository.js";
-import type { Session } from "../../domain/Session.js";
+import type { SessionRepository } from '../../domain/repositories/SessionRepository.js';
+import type { Session } from '../../domain/Session.js';
 
 export class InMemorySessionRepository implements SessionRepository {
   private readonly sessions = new Map<string, Session>();
@@ -24,7 +24,7 @@ export class InMemorySessionRepository implements SessionRepository {
     id: string,
     currentRefreshToken: string,
     nextRefreshToken: string,
-    expiresAt: Date,
+    expiresAt: Date
   ): Promise<boolean> {
     const session = this.sessions.get(id);
     if (!session || session.refreshToken !== currentRefreshToken || session.isExpired()) {

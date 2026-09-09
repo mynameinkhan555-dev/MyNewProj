@@ -1,4 +1,4 @@
-import type { Role } from "../Role.js";
+import type { Role } from '../Role.js';
 
 export interface RoleRepository {
   findById(id: string): Promise<Role | null>;

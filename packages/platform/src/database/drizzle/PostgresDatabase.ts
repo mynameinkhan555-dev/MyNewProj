@@ -1,5 +1,5 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import pg from "pg";
+import { drizzle } from 'drizzle-orm/node-postgres';
+import pg from 'pg';
 
 const { Pool } = pg;
 
@@ -19,9 +19,7 @@ export interface PostgresDatabase {
  * Creates the application's PostgreSQL/Drizzle connection.
  * The host owns the lifecycle; platform owns the technical implementation.
  */
-export function createPostgresDatabase(
-  connectionString: string,
-): PostgresDatabase {
+export function createPostgresDatabase(connectionString: string): PostgresDatabase {
   const pool = new Pool({ connectionString });
   const db = drizzle(pool);
 
@@ -34,12 +32,12 @@ export function createPostgresDatabase(
 
 /** Platform-owned PostgreSQL health probe. */
 export async function checkPostgresDatabaseHealth(
-  database: PostgresDatabase,
+  database: PostgresDatabase
 ): Promise<DatabaseHealthResult> {
   const start = Date.now();
 
   try {
-    await database.pool.query("SELECT 1");
+    await database.pool.query('SELECT 1');
 
     return {
       healthy: true,

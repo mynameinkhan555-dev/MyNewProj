@@ -1,15 +1,18 @@
-import type { Result } from "@workspace/kernel";
-import { err, ok } from "@workspace/kernel";
-import type { UserRepository } from "../../../domain/index.js";
-import type { SuspendUserCommand } from "./SuspendUserCommand.js";
-import type { ApplicationError } from "../../ports/ApplicationError.js";
-import { NotFoundApplicationError, ValidationApplicationError } from "../../ports/ApplicationError.js";
-import type { EventBusPort } from "../../ports/EventBusPort.js";
+import type { Result } from '@workspace/kernel';
+import { err, ok } from '@workspace/kernel';
+import type { UserRepository } from '../../../domain/index.js';
+import type { SuspendUserCommand } from './SuspendUserCommand.js';
+import type { ApplicationError } from '../../ports/ApplicationError.js';
+import {
+  NotFoundApplicationError,
+  ValidationApplicationError,
+} from '../../ports/ApplicationError.js';
+import type { EventBusPort } from '../../ports/EventBusPort.js';
 
 export class SuspendUserHandler {
   constructor(
     private readonly userRepository: UserRepository,
-    private readonly eventBus: EventBusPort,
+    private readonly eventBus: EventBusPort
   ) {}
 
   async execute(command: SuspendUserCommand): Promise<Result<void, ApplicationError>> {

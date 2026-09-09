@@ -1,2 +1,2 @@
-export * from "./AssignRoleCommand.js";
-export * from "./AssignRoleHandler.js";
+export * from './AssignRoleCommand.js';
+export * from './AssignRoleHandler.js';

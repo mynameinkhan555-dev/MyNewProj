@@ -1,4 +1,4 @@
-import type { AuthService } from "../../application/services/AuthService.js";
+import type { AuthService } from '../../application/services/AuthService.js';
 
 /**
  * GraphQL adapter contract. GraphQL decorators/resolvers are intentionally not

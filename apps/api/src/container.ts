@@ -3,8 +3,12 @@ import {
   type Logger,
   createPostgresDatabase,
   type PostgresDatabase,
-} from "@workspace/platform";
-import { createIamContainer, createIamRouterFromContainer, type IamContainerOptions } from "./container/index.js";
+} from '@workspace/platform';
+import {
+  createIamContainer,
+  createIamRouterFromContainer,
+  type IamContainerOptions,
+} from './container/index.js';
 
 export interface AppContainer {
   logger: Logger;
@@ -13,12 +17,12 @@ export interface AppContainer {
   iamContainer: Awaited<ReturnType<typeof createIamContainer>>;
 }
 
-export interface ContainerOptions extends Omit<IamContainerOptions, "database"> {
+export interface ContainerOptions extends Omit<IamContainerOptions, 'database'> {
   databaseUrl: string;
 }
 
 export async function createContainer(options: ContainerOptions): Promise<AppContainer> {
-  const logger = createLogger("api");
+  const logger = createLogger('api');
   const database = createPostgresDatabase(options.databaseUrl);
   const iamContainer = await createIamContainer({
     ...options,

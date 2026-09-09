@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { RoleDtoSchema } from "./RoleDto.js";
+import { z } from 'zod';
+import { RoleDtoSchema } from './RoleDto.js';
 
 export const ListRolesResponseSchema = z.object({
   data: z.array(RoleDtoSchema),

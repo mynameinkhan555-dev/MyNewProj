@@ -1,9 +1,9 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const SettingsDtoSchema = z.object({
   autoPlay: z.boolean(),
   autoplayNext: z.boolean(),
-  quality: z.enum(["auto", "1080p", "720p", "480p"]),
+  quality: z.enum(['auto', '1080p', '720p', '480p']),
   subtitles: z.boolean(),
   subtitleLanguage: z.string(),
   audioLanguage: z.string(),

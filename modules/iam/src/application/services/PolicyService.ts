@@ -1,9 +1,9 @@
-import type { PolicyRepository } from "../../domain/policy/PolicyRepository.js";
-import { PolicyEffect } from "../../domain/policy/PolicyEffect.js";
-import { flattenContext } from "../../domain/policy/PolicyEvaluationContext.js";
-import type { PolicyEvaluationContext } from "../../domain/policy/PolicyEvaluationContext.js";
-import type { UserRepository } from "../../domain/repositories/UserRepository.js";
-import { UserId } from "../../domain/UserId.js";
+import type { PolicyRepository } from '../../domain/policy/PolicyRepository.js';
+import { PolicyEffect } from '../../domain/policy/PolicyEffect.js';
+import { flattenContext } from '../../domain/policy/PolicyEvaluationContext.js';
+import type { PolicyEvaluationContext } from '../../domain/policy/PolicyEvaluationContext.js';
+import type { UserRepository } from '../../domain/repositories/UserRepository.js';
+import { UserId } from '../../domain/UserId.js';
 
 /**
  * ABAC + RBAC combined authorization service.
@@ -21,14 +21,14 @@ import { UserId } from "../../domain/UserId.js";
 export class PolicyService {
   constructor(
     private readonly policyRepo: PolicyRepository,
-    private readonly userRepo: UserRepository,
+    private readonly userRepo: UserRepository
   ) {}
 
   async canAccess(
     userId: string,
     resource: string,
     action: string,
-    extraContext: Partial<PolicyEvaluationContext> = {},
+    extraContext: Partial<PolicyEvaluationContext> = {}
   ): Promise<boolean> {
     // Build subject descriptors
     const user = await this.userRepo.findById(userId);
@@ -36,10 +36,7 @@ export class PolicyService {
 
     const roles = user.roles.map((r) => r.name.value);
     const rbacAllowed = user.hasPermission(`${resource}:${action}`);
-    const subjectDescriptors = [
-      `user:${userId}`,
-      ...roles.map((r) => `role:${r}`),
-    ];
+    const subjectDescriptors = [`user:${userId}`, ...roles.map((r) => `role:${r}`)];
 
     const ctx: PolicyEvaluationContext = {
       subject: {
@@ -55,10 +52,7 @@ export class PolicyService {
     };
 
     const flat = flattenContext(ctx);
-    const policies = await this.policyRepo.findForSubjects([
-      "*",
-      ...subjectDescriptors,
-    ]);
+    const policies = await this.policyRepo.findForSubjects(['*', ...subjectDescriptors]);
 
     // Sort by priority ascending
     policies.sort((a, b) => a.priority - b.priority);
@@ -66,7 +60,7 @@ export class PolicyService {
     let hasAllow = false;
     for (const policy of policies) {
       const result = policy.evaluate(subjectDescriptors, resource, action, flat);
-      if (result === PolicyEffect.Deny) return false;   // Deny always wins
+      if (result === PolicyEffect.Deny) return false; // Deny always wins
       if (result === PolicyEffect.Allow) hasAllow = true;
     }
 
@@ -90,8 +84,6 @@ export class PolicyService {
   async hasPermission(userId: string, permissionName: string): Promise<boolean> {
     const user = await this.userRepo.findById(userId);
     if (!user) return false;
-    return user.roles.some((role) =>
-      role.hasPermission(permissionName),
-    );
+    return user.roles.some((role) => role.hasPermission(permissionName));
   }
 }

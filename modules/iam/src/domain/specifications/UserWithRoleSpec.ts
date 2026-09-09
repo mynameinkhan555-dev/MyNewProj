@@ -1,5 +1,5 @@
-import { CompositeSpecification } from "@workspace/kernel";
-import type { User } from "../User.js";
+import { CompositeSpecification } from '@workspace/kernel';
+import type { User } from '../User.js';
 
 export class UserWithRoleSpec extends CompositeSpecification<User> {
   constructor(private readonly roleName: string) {

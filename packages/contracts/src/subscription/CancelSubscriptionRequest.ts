@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const CancelSubscriptionRequestSchema = z.object({
   reason: z.string().optional(),

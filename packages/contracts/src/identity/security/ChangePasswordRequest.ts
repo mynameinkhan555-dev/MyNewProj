@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ChangePasswordRequestSchema = z.object({
   currentPassword: z.string(),

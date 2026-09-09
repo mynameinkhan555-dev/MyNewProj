@@ -1,6 +1,6 @@
-import type { Cache } from "./Cache.js";
-import type { CacheOptions } from "./CacheOptions.js";
-import type { CacheStats } from "./CacheStats.js";
+import type { Cache } from './Cache.js';
+import type { CacheOptions } from './CacheOptions.js';
+import type { CacheStats } from './CacheStats.js';
 
 interface Entry {
   value: unknown;

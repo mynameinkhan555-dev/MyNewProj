@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const DatabaseSchema = z.object({
   DATABASE_URL: z.string().url(),

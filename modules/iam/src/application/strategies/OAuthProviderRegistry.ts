@@ -1,5 +1,5 @@
-import type { OAuthProvider } from "../../domain/oauth/OAuthProvider.js";
-import type { OAuthProviderPort } from "./OAuthProviderPort.js";
+import type { OAuthProvider } from '../../domain/oauth/OAuthProvider.js';
+import type { OAuthProviderPort } from './OAuthProviderPort.js';
 
 /**
  * Registry that maps each OAuthProvider enum value to its concrete adapter.

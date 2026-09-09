@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const LoginRequestSchema = z.object({
   body: z.object({

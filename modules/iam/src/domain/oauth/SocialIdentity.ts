@@ -1,5 +1,5 @@
-import { randomUUID } from "node:crypto";
-import type { OAuthProvider } from "./OAuthProvider.js";
+import { randomUUID } from 'node:crypto';
+import type { OAuthProvider } from './OAuthProvider.js';
 
 /**
  * SocialIdentity — links an external OAuth provider account to a local User.
@@ -36,7 +36,7 @@ export class SocialIdentity {
     provider: OAuthProvider,
     providerUserId: string,
     providerEmail: string | null,
-    providerDisplayName: string,
+    providerDisplayName: string
   ): SocialIdentity {
     const now = new Date();
     return new SocialIdentity({
@@ -58,23 +58,41 @@ export class SocialIdentity {
     return new SocialIdentity(props);
   }
 
-  get id(): string { return this.props.id; }
-  get userId(): string { return this.props.userId; }
-  get provider(): OAuthProvider { return this.props.provider; }
-  get providerUserId(): string { return this.props.providerUserId; }
-  get providerEmail(): string | null { return this.props.providerEmail; }
-  get providerDisplayName(): string { return this.props.providerDisplayName; }
-  get accessToken(): string | null { return this.props.accessToken; }
-  get refreshToken(): string | null { return this.props.refreshToken; }
-  get tokenExpiresAt(): Date | null { return this.props.tokenExpiresAt; }
-  get createdAt(): Date { return this.props.createdAt; }
-  get updatedAt(): Date { return this.props.updatedAt; }
+  get id(): string {
+    return this.props.id;
+  }
+  get userId(): string {
+    return this.props.userId;
+  }
+  get provider(): OAuthProvider {
+    return this.props.provider;
+  }
+  get providerUserId(): string {
+    return this.props.providerUserId;
+  }
+  get providerEmail(): string | null {
+    return this.props.providerEmail;
+  }
+  get providerDisplayName(): string {
+    return this.props.providerDisplayName;
+  }
+  get accessToken(): string | null {
+    return this.props.accessToken;
+  }
+  get refreshToken(): string | null {
+    return this.props.refreshToken;
+  }
+  get tokenExpiresAt(): Date | null {
+    return this.props.tokenExpiresAt;
+  }
+  get createdAt(): Date {
+    return this.props.createdAt;
+  }
+  get updatedAt(): Date {
+    return this.props.updatedAt;
+  }
 
-  updateTokens(
-    accessToken: string,
-    refreshToken: string | null,
-    expiresAt: Date | null,
-  ): void {
+  updateTokens(accessToken: string, refreshToken: string | null, expiresAt: Date | null): void {
     this.props.accessToken = accessToken;
     this.props.refreshToken = refreshToken;
     this.props.tokenExpiresAt = expiresAt;

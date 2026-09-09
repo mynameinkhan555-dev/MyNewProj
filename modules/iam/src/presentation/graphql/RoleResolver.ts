@@ -1,4 +1,4 @@
-import type { RoleRepository } from "../../domain/repositories/RoleRepository.js";
+import type { RoleRepository } from '../../domain/repositories/RoleRepository.js';
 
 export class RoleResolver {
   constructor(private readonly roleRepository: RoleRepository) {}

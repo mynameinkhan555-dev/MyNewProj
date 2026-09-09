@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ScheduleContentResponseSchema = z.object({
   scheduled: z.literal(true),

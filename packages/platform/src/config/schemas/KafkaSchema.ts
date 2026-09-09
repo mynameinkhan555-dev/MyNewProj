@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const KafkaSchema = z.object({
   KAFKA_BROKERS: z.string().min(1),

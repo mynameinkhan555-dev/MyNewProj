@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const UserDtoSchema = z.object({
   id: z.string(),
@@ -6,7 +6,7 @@ export const UserDtoSchema = z.object({
   email: z.string().email(),
   displayName: z.string().optional(),
   avatarUrl: z.string().optional(),
-  status: z.enum(["active", "suspended", "banned"]),
+  status: z.enum(['active', 'suspended', 'banned']),
   role: z.string().optional(),
   createdAt: z.string().datetime(),
   updatedAt: z.string().datetime(),

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const TestTemplateRequestSchema = z.object({
   email: z.string().email().optional(),

@@ -1,1 +1,5 @@
-export enum MetricType { Counter = "counter", Gauge = "gauge", Histogram = "histogram" }
+export enum MetricType {
+  Counter = 'counter',
+  Gauge = 'gauge',
+  Histogram = 'histogram',
+}

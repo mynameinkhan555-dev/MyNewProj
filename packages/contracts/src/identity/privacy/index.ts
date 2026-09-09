@@ -1,2 +1,2 @@
-export * from "./PrivacyDto";
-export * from "./UpdatePrivacyRequest";
+export * from './PrivacyDto';
+export * from './UpdatePrivacyRequest';

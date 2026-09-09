@@ -1,6 +1,6 @@
-import { randomBytes, randomUUID } from "node:crypto";
-import { createId } from "@paralleldrive/cuid2";
-import type { RandomGenerator } from "./RandomGenerator.js";
+import { randomBytes, randomUUID } from 'node:crypto';
+import { createId } from '@paralleldrive/cuid2';
+import type { RandomGenerator } from './RandomGenerator.js';
 
 export class SecureRandomGenerator implements RandomGenerator {
   uuid(): string {
@@ -16,6 +16,6 @@ export class SecureRandomGenerator implements RandomGenerator {
   }
 
   token(n: number): string {
-    return randomBytes(n).toString("hex");
+    return randomBytes(n).toString('hex');
   }
 }

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const QualityDtoSchema = z.object({
   quality: z.string(),

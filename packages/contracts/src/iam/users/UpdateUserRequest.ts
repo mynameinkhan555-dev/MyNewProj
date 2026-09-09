@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const UpdateUserRequestSchema = z.object({
   username: z.string().min(3).optional(),

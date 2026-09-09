@@ -1,12 +1,12 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const OAuthProviderSchema = z.enum([
-  "google",
-  "github",
-  "facebook",
-  "telegram",
-  "microsoft",
-  "apple"
+  'google',
+  'github',
+  'facebook',
+  'telegram',
+  'microsoft',
+  'apple',
 ]);
 
 export const InitiateOAuthCommandSchema = z.object({

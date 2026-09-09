@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const AddCreditsResponseSchema = z.object({
   added: z.literal(true),

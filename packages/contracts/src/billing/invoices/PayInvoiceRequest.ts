@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const PayInvoiceRequestSchema = z.object({
   paymentMethodId: z.string().optional(),

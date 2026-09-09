@@ -1,5 +1,5 @@
-import type { OAuthProvider } from "../../domain/oauth/OAuthProvider.js";
-import type { OAuthStateRepository } from "../../domain/oauth/OAuthStateRepository.js";
+import type { OAuthProvider } from '../../domain/oauth/OAuthProvider.js';
+import type { OAuthStateRepository } from '../../domain/oauth/OAuthStateRepository.js';
 
 interface OAuthStateRecord {
   provider: OAuthProvider;

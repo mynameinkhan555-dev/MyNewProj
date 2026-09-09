@@ -1,4 +1,4 @@
-import { ValueObject, DomainError, Result, ok, err } from "@workspace/kernel";
+import { ValueObject, DomainError, Result, ok, err } from '@workspace/kernel';
 
 interface PermissionProps {
   name: string;
@@ -22,17 +22,17 @@ export class Permission extends ValueObject<PermissionProps> {
 
   static create(name: string, description: string): Result<Permission, DomainError> {
     if (!name || name.trim().length === 0) {
-      return err(new DomainError("PERMISSION_NAME_EMPTY", "Permission name cannot be empty"));
+      return err(new DomainError('PERMISSION_NAME_EMPTY', 'Permission name cannot be empty'));
     }
     if (!PERMISSION_REGEX.test(name)) {
       return err(
         new DomainError(
-          "PERMISSION_NAME_INVALID",
-          `Permission name must be in format "resource:action", got: ${name}`,
-        ),
+          'PERMISSION_NAME_INVALID',
+          `Permission name must be in format "resource:action", got: ${name}`
+        )
       );
     }
-    return ok(new Permission({ name, description: description ?? "" }));
+    return ok(new Permission({ name, description: description ?? '' }));
   }
 
   toString(): string {

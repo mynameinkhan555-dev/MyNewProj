@@ -1,5 +1,5 @@
-import type { DomainEvent } from "@workspace/kernel";
-import type { EventBusPort } from "../../application/ports/EventBusPort.js";
+import type { DomainEvent } from '@workspace/kernel';
+import type { EventBusPort } from '../../application/ports/EventBusPort.js';
 
 /**
  * Deterministic in-process bus for the development composition root and tests.

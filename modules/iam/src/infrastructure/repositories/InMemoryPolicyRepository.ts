@@ -1,5 +1,5 @@
-import type { PolicyRepository } from "../../domain/policy/PolicyRepository.js";
-import { Policy } from "../../domain/policy/Policy.js";
+import type { PolicyRepository } from '../../domain/policy/PolicyRepository.js';
+import { Policy } from '../../domain/policy/Policy.js';
 
 export class InMemoryPolicyRepository implements PolicyRepository {
   private readonly store = new Map<string, Policy>();
@@ -15,7 +15,7 @@ export class InMemoryPolicyRepository implements PolicyRepository {
 
   async findForSubjects(subjects: string[]): Promise<Policy[]> {
     return [...this.store.values()].filter(
-      (p) => p.isActive && p.subjects.some((s) => subjects.includes(s) || s === "*"),
+      (p) => p.isActive && p.subjects.some((s) => subjects.includes(s) || s === '*')
     );
   }
 

@@ -3,17 +3,13 @@
   "compilerOptions": {
     "noEmit": true,
     "jsx": "preserve",
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "allowJs": true,
     "strict": false,
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "references": [
     {
       "path": "../../packages/contracts"
@@ -25,7 +21,5 @@
       "path": "../../packages/ui"
     }
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }

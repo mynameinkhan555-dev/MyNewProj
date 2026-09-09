@@ -1,7 +1,7 @@
-import type { UserRepository } from "../../../domain/repositories/UserRepository.js";
-import type { PaginatedResult } from "@workspace/kernel";
-import type { ListUsersQuery } from "./ListUsersQuery.js";
-import type { UserView } from "../UserView.js";
+import type { UserRepository } from '../../../domain/repositories/UserRepository.js';
+import type { PaginatedResult } from '@workspace/kernel';
+import type { ListUsersQuery } from './ListUsersQuery.js';
+import type { UserView } from '../UserView.js';
 
 export class ListUsersHandler {
   constructor(private readonly userRepository: UserRepository) {}
@@ -9,7 +9,7 @@ export class ListUsersHandler {
   async execute(query: ListUsersQuery): Promise<PaginatedResult<UserView>> {
     const result = await this.userRepository.findAll(
       { search: query.search, status: query.status, roleFilter: query.roleFilter },
-      { page: Math.max(1, query.page), pageSize: Math.min(100, Math.max(1, query.pageSize)) },
+      { page: Math.max(1, query.page), pageSize: Math.min(100, Math.max(1, query.pageSize)) }
     );
     return {
       ...result,

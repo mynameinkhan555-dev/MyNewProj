@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ViewingSessionDtoSchema = z.object({
   sessionId: z.string(),

@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { TransactionDtoSchema } from "./TransactionDto";
+import { z } from 'zod';
+import { TransactionDtoSchema } from './TransactionDto';
 
 export const GetTransactionResponseSchema = z.object({
   transaction: TransactionDtoSchema,

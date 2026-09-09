@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const UpdateRatingRequestSchema = z.object({
   rating: z.number().int().min(1).max(10),

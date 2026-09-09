@@ -1,8 +1,8 @@
-import type { OAuthProviderPort } from "../../application/strategies/OAuthProviderPort.js";
-import type { OAuthProfile } from "../../domain/oauth/OAuthProfile.js";
-import { OAuthProvider } from "../../domain/oauth/OAuthProvider.js";
-import { OAuthProviderError } from "../../application/ports/OAuthErrors.js";
-import { validateRedirectUri } from "./validateRedirectUri.js";
+import type { OAuthProviderPort } from '../../application/strategies/OAuthProviderPort.js';
+import type { OAuthProfile } from '../../domain/oauth/OAuthProfile.js';
+import { OAuthProvider } from '../../domain/oauth/OAuthProvider.js';
+import { OAuthProviderError } from '../../application/ports/OAuthErrors.js';
+import { validateRedirectUri } from './validateRedirectUri.js';
 
 interface GitHubTokenResponse {
   access_token: string;
@@ -31,14 +31,10 @@ export class GitHubOAuthProvider implements OAuthProviderPort {
   private readonly clientSecret: string;
   private readonly redirectUri: string;
 
-  constructor(config: {
-    clientId: string;
-    clientSecret: string;
-    redirectUri: string;
-  }) {
+  constructor(config: { clientId: string; clientSecret: string; redirectUri: string }) {
     this.clientId = config.clientId;
     this.clientSecret = config.clientSecret;
-    this.redirectUri = validateRedirectUri("GitHub", config.redirectUri);
+    this.redirectUri = validateRedirectUri('GitHub', config.redirectUri);
   }
 
   getRedirectUri(): string {
@@ -46,8 +42,8 @@ export class GitHubOAuthProvider implements OAuthProviderPort {
   }
 
   getAuthorizationUrl(state: string, scopes?: string[]): string {
-    const defaultScopes = ["user:email", "read:user"];
-    const scope = [...defaultScopes, ...(scopes ?? [])].join(",");
+    const defaultScopes = ['user:email', 'read:user'];
+    const scope = [...defaultScopes, ...(scopes ?? [])].join(',');
 
     const params = new URLSearchParams({
       client_id: this.clientId,
@@ -61,50 +57,45 @@ export class GitHubOAuthProvider implements OAuthProviderPort {
 
   async exchangeCode(code: string): Promise<OAuthProfile> {
     // 1. Exchange code for access token
-    const tokenRes = await fetch(
-      "https://github.com/login/oauth/access_token",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify({
-          client_id: this.clientId,
-          client_secret: this.clientSecret,
-          code,
-          redirect_uri: this.redirectUri,
-        }),
+    const tokenRes = await fetch('https://github.com/login/oauth/access_token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
-    );
+      body: JSON.stringify({
+        client_id: this.clientId,
+        client_secret: this.clientSecret,
+        code,
+        redirect_uri: this.redirectUri,
+      }),
+    });
 
     if (!tokenRes.ok) {
-      throw new OAuthProviderError("GitHub", "token exchange");
+      throw new OAuthProviderError('GitHub', 'token exchange');
     }
 
     const tokens = (await tokenRes.json()) as GitHubTokenResponse;
     if (!tokens.access_token) {
-      throw new OAuthProviderError("GitHub", "token response validation");
+      throw new OAuthProviderError('GitHub', 'token response validation');
     }
 
     // 2. Fetch user profile
     const headers = {
       Authorization: `Bearer ${tokens.access_token}`,
-      Accept: "application/vnd.github+json",
+      Accept: 'application/vnd.github+json',
     };
 
     const [userRes, emailsRes] = await Promise.all([
-      fetch("https://api.github.com/user", { headers }),
-      fetch("https://api.github.com/user/emails", { headers }),
+      fetch('https://api.github.com/user', { headers }),
+      fetch('https://api.github.com/user/emails', { headers }),
     ]);
 
     if (!userRes.ok) {
-      throw new OAuthProviderError("GitHub", "user profile lookup");
+      throw new OAuthProviderError('GitHub', 'user profile lookup');
     }
     const user = (await userRes.json()) as GitHubUser;
-    const emails = emailsRes.ok
-      ? ((await emailsRes.json()) as GitHubEmail[])
-      : [];
+    const emails = emailsRes.ok ? ((await emailsRes.json()) as GitHubEmail[]) : [];
 
     // Prefer verified primary email
     const primaryEmail =

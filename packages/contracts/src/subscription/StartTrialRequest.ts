@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const StartTrialRequestSchema = z.object({
   planId: z.string(),

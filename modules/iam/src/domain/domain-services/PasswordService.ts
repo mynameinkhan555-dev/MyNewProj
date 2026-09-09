@@ -1,4 +1,4 @@
-import type { Result, DomainError } from "@workspace/kernel";
+import type { Result, DomainError } from '@workspace/kernel';
 
 export interface PasswordService {
   hash(plain: string): Promise<string>;

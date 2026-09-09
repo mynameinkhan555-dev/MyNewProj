@@ -1,12 +1,12 @@
-import type { Request, Response, NextFunction } from "express";
-import type { DomainTokenService as TokenService } from "../../../domain/domain-services/TokenService.js";
+import type { Request, Response, NextFunction } from 'express';
+import type { DomainTokenService as TokenService } from '../../../domain/domain-services/TokenService.js';
 
 export interface AuthenticatedUser {
   userId: string;
   roles: string[];
 }
 
-declare module "express" {
+declare module 'express' {
   interface Request {
     user?: AuthenticatedUser;
   }
@@ -17,16 +17,12 @@ declare module "express" {
  * Must be applied before RoleGuard and PermissionGuard.
  */
 export function createAuthGuard(tokenService: TokenService) {
-  return async function authGuard(
-    req: Request,
-    res: Response,
-    next: NextFunction,
-  ): Promise<void> {
-    const authHeader = req.headers["authorization"];
-    if (!authHeader?.startsWith("Bearer ")) {
+  return async function authGuard(req: Request, res: Response, next: NextFunction): Promise<void> {
+    const authHeader = req.headers['authorization'];
+    if (!authHeader?.startsWith('Bearer ')) {
       res.status(401).json({
         success: false,
-        error: { code: "UNAUTHORIZED", message: "Missing or invalid Authorization header" },
+        error: { code: 'UNAUTHORIZED', message: 'Missing or invalid Authorization header' },
       });
       return;
     }
@@ -39,7 +35,7 @@ export function createAuthGuard(tokenService: TokenService) {
     } catch {
       res.status(401).json({
         success: false,
-        error: { code: "TOKEN_INVALID", message: "Token is invalid or expired" },
+        error: { code: 'TOKEN_INVALID', message: 'Token is invalid or expired' },
       });
     }
   };

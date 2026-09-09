@@ -1,9 +1,9 @@
-import { eq, and } from "drizzle-orm";
-import type { NodePgDatabase } from "drizzle-orm/node-postgres";
-import type { SocialIdentityRepository } from "../../domain/oauth/SocialIdentityRepository.js";
-import { SocialIdentity } from "../../domain/oauth/SocialIdentity.js";
-import type { OAuthProvider } from "../../domain/oauth/OAuthProvider.js";
-import { socialIdentities } from "../database/schema/social_identities.table.js";
+import { eq, and } from 'drizzle-orm';
+import type { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import type { SocialIdentityRepository } from '../../domain/oauth/SocialIdentityRepository.js';
+import { SocialIdentity } from '../../domain/oauth/SocialIdentity.js';
+import type { OAuthProvider } from '../../domain/oauth/OAuthProvider.js';
+import { socialIdentities } from '../database/schema/social_identities.table.js';
 
 export class DrizzleSocialIdentityRepository implements SocialIdentityRepository {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -11,7 +11,7 @@ export class DrizzleSocialIdentityRepository implements SocialIdentityRepository
 
   async findByProvider(
     provider: OAuthProvider,
-    providerUserId: string,
+    providerUserId: string
   ): Promise<SocialIdentity | null> {
     const rows = await this.db
       .select()
@@ -19,8 +19,8 @@ export class DrizzleSocialIdentityRepository implements SocialIdentityRepository
       .where(
         and(
           eq(socialIdentities.provider, provider),
-          eq(socialIdentities.providerUserId, providerUserId),
-        ),
+          eq(socialIdentities.providerUserId, providerUserId)
+        )
       )
       .limit(1);
 
@@ -70,9 +70,7 @@ export class DrizzleSocialIdentityRepository implements SocialIdentityRepository
   }
 
   async deleteAllByUserId(userId: string): Promise<void> {
-    await this.db
-      .delete(socialIdentities)
-      .where(eq(socialIdentities.userId, userId));
+    await this.db.delete(socialIdentities).where(eq(socialIdentities.userId, userId));
   }
 
   private toDomain(row: typeof socialIdentities.$inferSelect): SocialIdentity {

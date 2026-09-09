@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const SendEmailRequestSchema = z.object({
   to: z.string().email(),

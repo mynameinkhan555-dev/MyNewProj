@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ResetPreferencesResponseSchema = z.object({
   reset: z.literal(true),

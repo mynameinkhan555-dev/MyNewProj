@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const DowngradePlanResponseSchema = z.object({
   downgraded: z.literal(true),

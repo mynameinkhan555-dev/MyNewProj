@@ -1,1 +1,1 @@
-export { Err as Failure } from "./Result.js";
+export { Err as Failure } from './Result.js';

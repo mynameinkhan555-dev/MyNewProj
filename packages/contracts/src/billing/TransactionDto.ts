@@ -1,8 +1,8 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const TransactionDtoSchema = z.object({
   id: z.string(),
-  type: z.enum(["credit", "debit"]),
+  type: z.enum(['credit', 'debit']),
   amount: z.number(),
   currency: z.string(),
   description: z.string().optional(),

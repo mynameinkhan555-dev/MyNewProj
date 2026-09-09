@@ -1,4 +1,4 @@
-import { Permission, Role, RoleId, RoleName } from "../../domain/index.js";
+import { Permission, Role, RoleId, RoleName } from '../../domain/index.js';
 
 export interface RolePersistence {
   id: string;

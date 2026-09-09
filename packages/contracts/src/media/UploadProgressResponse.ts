@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const UploadProgressResponseSchema = z.object({
   progress: z.number(),

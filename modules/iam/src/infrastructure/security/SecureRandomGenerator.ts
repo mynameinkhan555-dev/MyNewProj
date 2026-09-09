@@ -1,5 +1,5 @@
-import { randomBytes, randomUUID } from "node:crypto";
-import type { RandomGenerator } from "@workspace/platform";
+import { randomBytes, randomUUID } from 'node:crypto';
+import type { RandomGenerator } from '@workspace/platform';
 
 export class SecureRandomGenerator implements RandomGenerator {
   uuid(): string {
@@ -11,6 +11,6 @@ export class SecureRandomGenerator implements RandomGenerator {
   }
 
   token(length = 32): string {
-    return randomBytes(length).toString("base64url");
+    return randomBytes(length).toString('base64url');
   }
 }

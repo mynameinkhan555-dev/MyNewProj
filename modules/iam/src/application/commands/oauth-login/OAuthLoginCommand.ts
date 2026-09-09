@@ -1,4 +1,4 @@
-import type { OAuthProvider } from "../../../domain/oauth/OAuthProvider.js";
+import type { OAuthProvider } from '../../../domain/oauth/OAuthProvider.js';
 
 /**
  * Triggered by the OAuth callback controller after receiving the authorization code.

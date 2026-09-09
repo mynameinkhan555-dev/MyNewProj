@@ -1,4 +1,4 @@
-import type { Role } from "../../../domain/Role.js";
+import type { Role } from '../../../domain/Role.js';
 
 export interface RoleView {
   id: string;

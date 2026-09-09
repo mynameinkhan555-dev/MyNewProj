@@ -1,4 +1,4 @@
-import type { OAuthProvider } from "./OAuthProvider.js";
+import type { OAuthProvider } from './OAuthProvider.js';
 
 export interface OAuthStateRepository {
   save(state: string, provider: OAuthProvider, expiresAt: Date): Promise<void>;

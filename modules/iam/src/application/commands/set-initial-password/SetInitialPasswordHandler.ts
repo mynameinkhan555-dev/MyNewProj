@@ -1,20 +1,20 @@
-import type { DomainEvent, Result } from "@workspace/kernel";
-import { err, ok } from "@workspace/kernel";
-import { PasswordHash } from "../../../domain/index.js";
-import type { UserRepository, PasswordService } from "../../../domain/index.js";
-import type { SetInitialPasswordCommand } from "./SetInitialPasswordCommand.js";
-import type { ApplicationError } from "../../ports/ApplicationError.js";
+import type { DomainEvent, Result } from '@workspace/kernel';
+import { err, ok } from '@workspace/kernel';
+import { PasswordHash } from '../../../domain/index.js';
+import type { UserRepository, PasswordService } from '../../../domain/index.js';
+import type { SetInitialPasswordCommand } from './SetInitialPasswordCommand.js';
+import type { ApplicationError } from '../../ports/ApplicationError.js';
 import {
   ConflictApplicationError,
   NotFoundApplicationError,
   ValidationApplicationError,
-} from "../../ports/ApplicationError.js";
-import type { EventBusPort } from "../../ports/EventBusPort.js";
-import type { IamTransactionContext, IamUnitOfWork } from "../../ports/IamUnitOfWork.js";
-import type { OutboxPort } from "../../ports/OutboxPort.js";
+} from '../../ports/ApplicationError.js';
+import type { EventBusPort } from '../../ports/EventBusPort.js';
+import type { IamTransactionContext, IamUnitOfWork } from '../../ports/IamUnitOfWork.js';
+import type { OutboxPort } from '../../ports/OutboxPort.js';
 
 type PasswordTransactionContext = {
-  users: IamTransactionContext["users"];
+  users: IamTransactionContext['users'];
   outbox?: OutboxPort;
 };
 
@@ -23,17 +23,23 @@ export class SetInitialPasswordHandler {
     private readonly userRepository: UserRepository,
     private readonly passwordService: PasswordService,
     private readonly eventBus: EventBusPort,
-    private readonly unitOfWork?: IamUnitOfWork,
+    private readonly unitOfWork?: IamUnitOfWork
   ) {}
 
   async execute(command: SetInitialPasswordCommand): Promise<Result<void, ApplicationError>> {
     const events: DomainEvent[] = [];
     const result = this.unitOfWork
-      ? await this.unitOfWork.run((context) => this.executeWithRepositories(command, context, events))
-      : await this.executeWithRepositories(command, {
-        users: this.userRepository,
-        outbox: undefined,
-      }, events);
+      ? await this.unitOfWork.run((context) =>
+          this.executeWithRepositories(command, context, events)
+        )
+      : await this.executeWithRepositories(
+          command,
+          {
+            users: this.userRepository,
+            outbox: undefined,
+          },
+          events
+        );
 
     if (!this.unitOfWork) {
       await this.eventBus.publishAll(events);
@@ -44,14 +50,14 @@ export class SetInitialPasswordHandler {
   private async executeWithRepositories(
     command: SetInitialPasswordCommand,
     context: PasswordTransactionContext,
-    events: DomainEvent[],
+    events: DomainEvent[]
   ): Promise<Result<void, ApplicationError>> {
     const user = await context.users.findById(command.userId);
     if (!user) {
       return err(new NotFoundApplicationError(`User "${command.userId}" not found`));
     }
     if (user.passwordSet) {
-      return err(new ConflictApplicationError("A local password is already configured"));
+      return err(new ConflictApplicationError('A local password is already configured'));
     }
 
     const strengthResult = this.passwordService.validateStrength(command.newPassword);

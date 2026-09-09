@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { PaymentDtoSchema } from "./PaymentDto";
+import { z } from 'zod';
+import { PaymentDtoSchema } from './PaymentDto';
 
 export const GetPaymentResponseSchema = z.object({
   payment: PaymentDtoSchema,

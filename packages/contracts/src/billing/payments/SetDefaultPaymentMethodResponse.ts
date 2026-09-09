@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const SetDefaultPaymentMethodResponseSchema = z.object({
   default: z.literal(true),

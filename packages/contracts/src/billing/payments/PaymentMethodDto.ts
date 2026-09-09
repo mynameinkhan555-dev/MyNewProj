@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const BillingAddressSchema = z.object({
   line1: z.string().optional(),
@@ -12,7 +12,7 @@ export type BillingAddress = z.infer<typeof BillingAddressSchema>;
 
 export const PaymentMethodDtoSchema = z.object({
   id: z.string(),
-  type: z.enum(["card", "paypal", "crypto", "bank"]),
+  type: z.enum(['card', 'paypal', 'crypto', 'bank']),
   last4: z.string().optional(),
   brand: z.string().optional(),
   expiry: z.string().optional(),

@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { PermissionDtoSchema } from "../permissions/PermissionDto.js";
+import { z } from 'zod';
+import { PermissionDtoSchema } from '../permissions/PermissionDto.js';
 
 export const RoleDtoSchema = z.object({
   id: z.string(),

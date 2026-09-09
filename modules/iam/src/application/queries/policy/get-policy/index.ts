@@ -1,1 +1,1 @@
-export * from "./GetPolicyHandler.js";
+export * from './GetPolicyHandler.js';

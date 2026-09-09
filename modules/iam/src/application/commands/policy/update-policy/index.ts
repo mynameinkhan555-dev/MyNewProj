@@ -1,2 +1,2 @@
-export * from "./UpdatePolicyCommand.js";
-export * from "./UpdatePolicyHandler.js";
+export * from './UpdatePolicyCommand.js';
+export * from './UpdatePolicyHandler.js';

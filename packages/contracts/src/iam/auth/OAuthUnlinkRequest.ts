@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const OAuthUnlinkRequestSchema = z.object({
   password: z.string().min(1),

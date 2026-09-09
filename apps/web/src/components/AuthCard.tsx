@@ -1,5 +1,5 @@
-import type { FormEvent, ReactNode } from "react";
-import Link from "next/link";
+import type { FormEvent, ReactNode } from 'react';
+import Link from 'next/link';
 
 interface AuthCardProps {
   title: string;
@@ -12,7 +12,9 @@ export function AuthCard({ title, subtitle, children, footer }: AuthCardProps) {
   return (
     <main className="auth-shell">
       <section className="auth-card" aria-labelledby="auth-title">
-        <Link className="brand-mark" href="/">IdentityPlatform</Link>
+        <Link className="brand-mark" href="/">
+          IdentityPlatform
+        </Link>
         <div className="auth-heading">
           <h1 id="auth-title">{title}</h1>
           <p>{subtitle}</p>
@@ -27,7 +29,7 @@ export function AuthCard({ title, subtitle, children, footer }: AuthCardProps) {
 export function FormField({
   id,
   label,
-  type = "text",
+  type = 'text',
   value,
   onChange,
   autoComplete,
@@ -57,16 +59,10 @@ export function FormField({
   );
 }
 
-export function SubmitButton({
-  busy,
-  children,
-}: {
-  busy: boolean;
-  children: ReactNode;
-}) {
+export function SubmitButton({ busy, children }: { busy: boolean; children: ReactNode }) {
   return (
     <button className="primary-button" type="submit" disabled={busy}>
-      {busy ? "Please wait…" : children}
+      {busy ? 'Please wait…' : children}
     </button>
   );
 }

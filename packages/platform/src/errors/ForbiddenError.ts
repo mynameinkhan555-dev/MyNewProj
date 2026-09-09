@@ -1,7 +1,7 @@
-import { ApplicationError } from "./ApplicationError.js";
+import { ApplicationError } from './ApplicationError.js';
 
 export class ForbiddenError extends ApplicationError {
-  constructor(message = "Forbidden", code = "FORBIDDEN") {
+  constructor(message = 'Forbidden', code = 'FORBIDDEN') {
     super(message, 403, code);
   }
 }

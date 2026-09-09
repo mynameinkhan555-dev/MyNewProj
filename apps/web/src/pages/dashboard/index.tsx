@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import Link from "next/link";
-import { authSession, type AuthUser } from "@workspace/platform-client";
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { authSession, type AuthUser } from '@workspace/platform-client';
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -10,19 +10,28 @@ export default function DashboardPage() {
   useEffect(() => {
     const session = authSession.get();
     if (!session) {
-      void router.replace("/auth/login");
+      void router.replace('/auth/login');
       return;
     }
     setUser(session.user);
   }, [router]);
 
-  if (!user) return <main className="center-page"><p>Loading your dashboard…</p></main>;
+  if (!user)
+    return (
+      <main className="center-page">
+        <p>Loading your dashboard…</p>
+      </main>
+    );
 
   return (
     <main className="dashboard-shell">
       <header className="dashboard-header">
-        <Link className="brand-mark" href="/">IdentityPlatform</Link>
-        <Link className="text-button" href="/auth/logout">Sign out</Link>
+        <Link className="brand-mark" href="/">
+          IdentityPlatform
+        </Link>
+        <Link className="text-button" href="/auth/logout">
+          Sign out
+        </Link>
       </header>
       <section className="dashboard-content">
         <p className="eyebrow">Identity center</p>

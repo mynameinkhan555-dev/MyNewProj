@@ -1,7 +1,7 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ListInvoicesQuerySchema = z.object({
-  status: z.enum(["pending", "paid", "failed", "refunded"]).optional(),
+  status: z.enum(['pending', 'paid', 'failed', 'refunded']).optional(),
   from: z.string().datetime().optional(),
   to: z.string().datetime().optional(),
   page: z.number().int().optional(),

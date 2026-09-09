@@ -1,15 +1,12 @@
-import type { OAuthProvider } from "./OAuthProvider.js";
-import type { SocialIdentity } from "./SocialIdentity.js";
+import type { OAuthProvider } from './OAuthProvider.js';
+import type { SocialIdentity } from './SocialIdentity.js';
 
 /**
  * Port for SocialIdentity persistence.
  * Implemented in infrastructure/repositories/DrizzleSocialIdentityRepository.ts
  */
 export interface SocialIdentityRepository {
-  findByProvider(
-    provider: OAuthProvider,
-    providerUserId: string,
-  ): Promise<SocialIdentity | null>;
+  findByProvider(provider: OAuthProvider, providerUserId: string): Promise<SocialIdentity | null>;
 
   findAllByUserId(userId: string): Promise<SocialIdentity[]>;
 

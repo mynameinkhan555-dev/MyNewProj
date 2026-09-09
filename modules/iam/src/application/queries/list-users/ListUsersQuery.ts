@@ -1,4 +1,4 @@
-import type { UserStatus } from "../../../domain/UserStatus.js";
+import type { UserStatus } from '../../../domain/UserStatus.js';
 
 export interface ListUsersQuery {
   page: number;

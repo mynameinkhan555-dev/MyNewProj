@@ -1,4 +1,4 @@
-import type { z } from "zod";
+import type { z } from 'zod';
 
 /**
  * A validation error which retains the issues produced by a validator.
@@ -12,12 +12,12 @@ export class ValidationError extends Error {
   public readonly fieldErrors: Readonly<Record<string, string[]>>;
 
   constructor(
-    message = "Validation failed",
+    message = 'Validation failed',
     issues: readonly z.ZodIssue[] = [],
-    fieldErrors?: Readonly<Record<string, string[]>>,
+    fieldErrors?: Readonly<Record<string, string[]>>
   ) {
     super(message);
-    this.name = "ValidationError";
+    this.name = 'ValidationError';
     this.issues = [...issues];
     this.fieldErrors = fieldErrors ?? ValidationError.toFieldErrors(this.issues);
     Object.setPrototypeOf(this, new.target.prototype);
@@ -26,12 +26,10 @@ export class ValidationError extends Error {
     }
   }
 
-  private static toFieldErrors(
-    issues: readonly z.ZodIssue[],
-  ): Readonly<Record<string, string[]>> {
+  private static toFieldErrors(issues: readonly z.ZodIssue[]): Readonly<Record<string, string[]>> {
     const errors: Record<string, string[]> = {};
     for (const issue of issues) {
-      const field = issue.path.length > 0 ? issue.path.join(".") : "_root";
+      const field = issue.path.length > 0 ? issue.path.join('.') : '_root';
       (errors[field] ??= []).push(issue.message);
     }
     return errors;

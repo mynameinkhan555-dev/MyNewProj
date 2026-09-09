@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ListUsersRequestSchema = z.object({
   query: z.object({
@@ -7,8 +7,8 @@ export const ListUsersRequestSchema = z.object({
     search: z.string().max(255).optional().nullable(),
     role: z.string().max(100).optional(),
     isActive: z.boolean().optional(),
-    sortBy: z.enum(["createdAt", "updatedAt", "email", "name"]).default("createdAt"),
-    sortOrder: z.enum(["asc", "desc"]).default("desc"),
+    sortBy: z.enum(['createdAt', 'updatedAt', 'email', 'name']).default('createdAt'),
+    sortOrder: z.enum(['asc', 'desc']).default('desc'),
   }),
 });
 

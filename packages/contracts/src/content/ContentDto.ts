@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const CastMemberSchema = z.object({
   personId: z.string(),
@@ -14,7 +14,7 @@ export const ContentDtoSchema = z.object({
   id: z.string(),
   title: z.string(),
   originalTitle: z.string().optional(),
-  type: z.enum(["movie", "series", "episode"]),
+  type: z.enum(['movie', 'series', 'episode']),
   synopsis: z.string(),
   releaseYear: z.number().int(),
   duration: z.number().optional(),
@@ -27,7 +27,7 @@ export const ContentDtoSchema = z.object({
   cast: z.array(CastMemberSchema),
   crew: z.array(CrewMemberSchema),
   metadata: z.record(z.unknown()),
-  status: z.enum(["draft", "pending", "published", "archived"]).optional(),
+  status: z.enum(['draft', 'pending', 'published', 'archived']).optional(),
   createdBy: z.string().optional(),
   createdAt: z.string().datetime().optional(),
   updatedAt: z.string().datetime().optional(),

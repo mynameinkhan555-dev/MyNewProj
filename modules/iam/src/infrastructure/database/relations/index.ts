@@ -1,7 +1,7 @@
-import { relations } from "drizzle-orm";
-import { identities } from "../schema/identities.table.js";
-import { sessions } from "../schema/sessions.table.js";
-import { socialIdentities } from "../schema/social_identities.table.js";
+import { relations } from 'drizzle-orm';
+import { identities } from '../schema/identities.table.js';
+import { sessions } from '../schema/sessions.table.js';
+import { socialIdentities } from '../schema/social_identities.table.js';
 
 export const identityRelations = relations(identities, ({ many }) => ({
   sessions: many(sessions),

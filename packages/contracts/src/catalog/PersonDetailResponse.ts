@@ -1,6 +1,6 @@
-import { z } from "zod";
-import { PersonDtoSchema } from "./PersonDto";
-import { ContentDtoSchema } from "./ContentDto";
+import { z } from 'zod';
+import { PersonDtoSchema } from './PersonDto';
+import { ContentDtoSchema } from './ContentDto';
 
 export const PersonDetailResponseSchema = z.object({
   person: PersonDtoSchema,

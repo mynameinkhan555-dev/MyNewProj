@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const VerifyEmailResponseSchema = z.object({
   verified: z.literal(true),

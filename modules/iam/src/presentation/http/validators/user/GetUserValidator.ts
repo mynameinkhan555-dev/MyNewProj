@@ -1,8 +1,8 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const GetUserRequestSchema = z.object({
   params: z.object({
-    id: z.string().uuid("Invalid user ID format"),
+    id: z.string().uuid('Invalid user ID format'),
   }),
 });
 

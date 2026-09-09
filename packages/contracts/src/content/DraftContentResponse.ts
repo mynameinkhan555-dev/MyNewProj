@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const DraftContentResponseSchema = z.object({
   draft: z.literal(true),

@@ -1,11 +1,11 @@
-import { eq, type SQL } from "drizzle-orm";
-import type { NodePgDatabase } from "drizzle-orm/node-postgres";
-import type { RoleRepository } from "../../domain/repositories/RoleRepository.js";
-import type { Role } from "../../domain/Role.js";
-import { roles } from "../database/schema/roles.table.js";
-import { rolePermissions } from "../database/schema/role-permissions.table.js";
-import { permissions } from "../database/schema/permissions.table.js";
-import { RoleMapper } from "../mappers/RoleMapper.js";
+import { eq, type SQL } from 'drizzle-orm';
+import type { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import type { RoleRepository } from '../../domain/repositories/RoleRepository.js';
+import type { Role } from '../../domain/Role.js';
+import { roles } from '../database/schema/roles.table.js';
+import { rolePermissions } from '../database/schema/role-permissions.table.js';
+import { permissions } from '../database/schema/permissions.table.js';
+import { RoleMapper } from '../mappers/RoleMapper.js';
 
 export class DrizzleRoleRepository implements RoleRepository {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -25,12 +25,18 @@ export class DrizzleRoleRepository implements RoleRepository {
 
   async save(role: Role): Promise<void> {
     const row = RoleMapper.toPersistence(role);
-    await this.db.insert(roles).values({
-      id: row.id, name: row.name, description: row.description, isSystem: row.isSystem,
-    }).onConflictDoUpdate({
-      target: roles.id,
-      set: { name: row.name, description: row.description, isSystem: row.isSystem },
-    });
+    await this.db
+      .insert(roles)
+      .values({
+        id: row.id,
+        name: row.name,
+        description: row.description,
+        isSystem: row.isSystem,
+      })
+      .onConflictDoUpdate({
+        target: roles.id,
+        set: { name: row.name, description: row.description, isSystem: row.isSystem },
+      });
   }
 
   async delete(id: string): Promise<void> {
@@ -52,13 +58,16 @@ export class DrizzleRoleRepository implements RoleRepository {
       .leftJoin(permissions, eq(rolePermissions.permissionId, permissions.id))
       .where(where);
 
-    const roleMap = new Map<string, {
-      id: string;
-      name: string;
-      description: string;
-      isSystem: boolean;
-      permissions: Array<{ name: string; description: string }>;
-    }>();
+    const roleMap = new Map<
+      string,
+      {
+        id: string;
+        name: string;
+        description: string;
+        isSystem: boolean;
+        permissions: Array<{ name: string; description: string }>;
+      }
+    >();
 
     for (const row of rows) {
       const role = roleMap.get(row.id) ?? {
@@ -71,7 +80,7 @@ export class DrizzleRoleRepository implements RoleRepository {
       if (row.permissionName) {
         role.permissions.push({
           name: row.permissionName,
-          description: row.permissionDescription ?? "",
+          description: row.permissionDescription ?? '',
         });
       }
       roleMap.set(row.id, role);

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const StartTrialResponseSchema = z.object({
   trialStarted: z.literal(true),

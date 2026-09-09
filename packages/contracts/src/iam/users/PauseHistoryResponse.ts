@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const PauseHistoryResponseSchema = z.object({
   paused: z.literal(true),

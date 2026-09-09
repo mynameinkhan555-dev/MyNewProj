@@ -1,15 +1,13 @@
-import { z } from "zod";
-import { ValidationError } from "../ValidationError.js";
-import type { ValidationResult } from "../ValidationResult.js";
-import type { Validator } from "../Validator.js";
+import { z } from 'zod';
+import { ValidationError } from '../ValidationError.js';
+import type { ValidationResult } from '../ValidationResult.js';
+import type { Validator } from '../Validator.js';
 
 /**
  * Validator adapter for Zod schemas. The schema's output type is returned,
  * allowing transforms and defaults to be represented correctly.
  */
-export class ZodValidator<TSchema extends z.ZodTypeAny>
-  implements Validator<z.infer<TSchema>>
-{
+export class ZodValidator<TSchema extends z.ZodTypeAny> implements Validator<z.infer<TSchema>> {
   public readonly schema: TSchema;
 
   constructor(schema: TSchema) {

@@ -1,4 +1,4 @@
-import type { Request, Response, NextFunction } from "express";
+import type { Request, Response, NextFunction } from 'express';
 
 /**
  * RBAC middleware — checks that req.user has at least one of the required roles.
@@ -13,7 +13,7 @@ export function requireRole(...allowedRoles: string[]) {
     if (!req.user) {
       res.status(401).json({
         success: false,
-        error: { code: "UNAUTHORIZED", message: "Authentication required" },
+        error: { code: 'UNAUTHORIZED', message: 'Authentication required' },
       });
       return;
     }
@@ -23,8 +23,8 @@ export function requireRole(...allowedRoles: string[]) {
       res.status(403).json({
         success: false,
         error: {
-          code: "FORBIDDEN",
-          message: `Required role(s): ${allowedRoles.join(", ")}`,
+          code: 'FORBIDDEN',
+          message: `Required role(s): ${allowedRoles.join(', ')}`,
         },
       });
       return;

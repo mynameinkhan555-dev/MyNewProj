@@ -1,1 +1,1 @@
-export { CheckPermissionRequestSchema } from "./CheckPermissionValidator.js";
+export { CheckPermissionRequestSchema } from './CheckPermissionValidator.js';

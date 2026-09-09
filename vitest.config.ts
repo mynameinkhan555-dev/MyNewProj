@@ -25,14 +25,7 @@ export default defineConfig({
       },
     },
     include: ['**/*.test.ts', '**/*.test.tsx'],
-    exclude: [
-      'node_modules',
-      'dist',
-      '.next',
-      '.idea',
-      '.git',
-      'coverage',
-    ],
+    exclude: ['node_modules', 'dist', '.next', '.idea', '.git', 'coverage'],
   },
   resolve: {
     alias: {

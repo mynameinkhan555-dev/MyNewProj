@@ -1,7 +1,7 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const PrivacyDtoSchema = z.object({
-  profileVisibility: z.enum(["public", "private", "friends"]),
+  profileVisibility: z.enum(['public', 'private', 'friends']),
   showEmail: z.boolean(),
   showPhone: z.boolean(),
   showActivity: z.boolean(),

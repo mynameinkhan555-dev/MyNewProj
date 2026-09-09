@@ -1,5 +1,5 @@
-import argon2 from "argon2";
-import type { PasswordHasher } from "./PasswordHasher.js";
+import argon2 from 'argon2';
+import type { PasswordHasher } from './PasswordHasher.js';
 
 export class Argon2Hasher implements PasswordHasher {
   async hash(plain: string): Promise<string> {

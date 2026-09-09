@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const CreateContentVersionResponseSchema = z.object({
   version: z.number().int(),

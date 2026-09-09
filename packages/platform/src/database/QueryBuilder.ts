@@ -3,11 +3,8 @@ export interface SqlQuery {
   values: unknown[];
 }
 
-export function sql(
-  strings: TemplateStringsArray,
-  ...values: unknown[]
-): SqlQuery {
-  let text = "";
+export function sql(strings: TemplateStringsArray, ...values: unknown[]): SqlQuery {
+  let text = '';
   const params: unknown[] = [];
   for (let i = 0; i < strings.length; i++) {
     text += strings[i];

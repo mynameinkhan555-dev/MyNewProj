@@ -1,9 +1,9 @@
-import { LogLevel } from "./LogLevel.js";
-import type { Logger } from "./Logger.js";
-import type { LogContext } from "./LogContext.js";
-import type { LogEntry } from "./LogEntry.js";
-import type { Transport } from "./transports/Transport.js";
-import { ConsoleTransport } from "./transports/ConsoleTransport.js";
+import { LogLevel } from './LogLevel.js';
+import type { Logger } from './Logger.js';
+import type { LogContext } from './LogContext.js';
+import type { LogEntry } from './LogEntry.js';
+import type { Transport } from './transports/Transport.js';
+import { ConsoleTransport } from './transports/ConsoleTransport.js';
 
 export interface LoggerOptions {
   level?: LogLevel;
@@ -17,18 +17,14 @@ class DefaultLogger implements Logger {
   private readonly transports: Transport[];
   private readonly ctx: LogContext;
 
-  constructor(
-    name: string,
-    options: LoggerOptions = {},
-    ctx: LogContext = {},
-  ) {
+  constructor(name: string, options: LoggerOptions = {}, ctx: LogContext = {}) {
     this.name = name;
     this.level = options.level ?? LogLevel.Info;
     this.transports =
       options.transports && options.transports.length > 0
         ? options.transports
         : [new ConsoleTransport()];
-    this.ctx = { ...options.defaultContext, ...ctx, module: ctx["module"] ?? name };
+    this.ctx = { ...options.defaultContext, ...ctx, module: ctx['module'] ?? name };
   }
 
   private emit(level: LogLevel, message: string, context?: LogContext): void {
@@ -39,8 +35,8 @@ class DefaultLogger implements Logger {
       timestamp: new Date(),
       context: { ...this.ctx, ...context },
     };
-    if (context?.["error"] instanceof Error) {
-      entry.error = context["error"] as Error;
+    if (context?.['error'] instanceof Error) {
+      entry.error = context['error'] as Error;
     }
     for (const transport of this.transports) {
       transport.write(entry);
@@ -67,7 +63,7 @@ class DefaultLogger implements Logger {
     return new DefaultLogger(
       this.name,
       { level: this.level, transports: this.transports },
-      { ...this.ctx, ...context },
+      { ...this.ctx, ...context }
     );
   }
 }

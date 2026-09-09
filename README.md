@@ -92,7 +92,9 @@ _Describe the high-level user-facing capabilities of this app once they exist._
   or introducing a new top-level folder.
 
 ## Git Workflow Test
+
 This change was created on the main development computer.
 
 ## Second Computer Test
+
 This change was created on the second development computer.

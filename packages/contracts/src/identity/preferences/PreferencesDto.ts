@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const PreferencesDtoSchema = z.object({
   language: z.string(),

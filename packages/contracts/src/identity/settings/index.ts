@@ -1,2 +1,2 @@
-export * from "./SettingsDto";
-export * from "./UpdateSettingsRequest";
+export * from './SettingsDto';
+export * from './UpdateSettingsRequest';

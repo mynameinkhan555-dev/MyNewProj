@@ -1,9 +1,9 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const NotificationDtoSchema = z.object({
   id: z.string(),
   userId: z.string(),
-  type: z.enum(["email", "push", "sms"]),
+  type: z.enum(['email', 'push', 'sms']),
   title: z.string(),
   body: z.string(),
   data: z.record(z.unknown()).optional(),

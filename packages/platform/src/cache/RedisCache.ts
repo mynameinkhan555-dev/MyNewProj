@@ -1,8 +1,8 @@
-import { Redis } from "ioredis";
-import { serialize, deserialize } from "./utils/CacheSerialization.js";
-import type { Cache } from "./Cache.js";
-import type { CacheOptions } from "./CacheOptions.js";
-import type { CacheStats } from "./CacheStats.js";
+import { Redis } from 'ioredis';
+import { serialize, deserialize } from './utils/CacheSerialization.js';
+import type { Cache } from './Cache.js';
+import type { CacheOptions } from './CacheOptions.js';
+import type { CacheStats } from './CacheStats.js';
 
 export class RedisCache implements Cache {
   private readonly client: Redis;
@@ -11,7 +11,7 @@ export class RedisCache implements Cache {
   private misses = 0;
 
   constructor(client?: Redis, defaultTtlSeconds = 3600) {
-    this.client = client ?? new Redis(process.env["REDIS_URL"] ?? "redis://localhost:6379");
+    this.client = client ?? new Redis(process.env['REDIS_URL'] ?? 'redis://localhost:6379');
     this.defaultTtlSeconds = defaultTtlSeconds;
   }
 
@@ -26,7 +26,7 @@ export class RedisCache implements Cache {
   }
 
   async set<T>(key: string, value: T, opts?: CacheOptions): Promise<void> {
-    const prefix = opts?.prefix ? `${opts.prefix}:` : "";
+    const prefix = opts?.prefix ? `${opts.prefix}:` : '';
     const fullKey = prefix + key;
     const ttl = opts?.ttlSeconds ?? this.defaultTtlSeconds;
     const serialized = serialize(value);

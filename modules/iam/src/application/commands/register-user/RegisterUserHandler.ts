@@ -1,15 +1,19 @@
-import type { DomainEvent, Result } from "@workspace/kernel";
-import { err, ok } from "@workspace/kernel";
-import { Email, PasswordHash, User, UserStatus } from "../../../domain/index.js";
-import type { UserRepository } from "../../../domain/index.js";
-import type { RoleRepository } from "../../../domain/index.js";
-import type { PasswordService } from "../../../domain/index.js";
-import type { RegisterUserCommand } from "./RegisterUserCommand.js";
-import type { RegisterUserResult } from "./RegisterUserResult.js";
-import type { ApplicationError } from "../../ports/ApplicationError.js";
-import { ConflictApplicationError, InternalApplicationError, ValidationApplicationError } from "../../ports/ApplicationError.js";
-import type { EventBusPort } from "../../ports/EventBusPort.js";
-import type { IamTransactionContext, IamUnitOfWork } from "../../ports/IamUnitOfWork.js";
+import type { DomainEvent, Result } from '@workspace/kernel';
+import { err, ok } from '@workspace/kernel';
+import { Email, PasswordHash, User, UserStatus } from '../../../domain/index.js';
+import type { UserRepository } from '../../../domain/index.js';
+import type { RoleRepository } from '../../../domain/index.js';
+import type { PasswordService } from '../../../domain/index.js';
+import type { RegisterUserCommand } from './RegisterUserCommand.js';
+import type { RegisterUserResult } from './RegisterUserResult.js';
+import type { ApplicationError } from '../../ports/ApplicationError.js';
+import {
+  ConflictApplicationError,
+  InternalApplicationError,
+  ValidationApplicationError,
+} from '../../ports/ApplicationError.js';
+import type { EventBusPort } from '../../ports/EventBusPort.js';
+import type { IamTransactionContext, IamUnitOfWork } from '../../ports/IamUnitOfWork.js';
 
 export class RegisterUserHandler {
   constructor(
@@ -17,20 +21,28 @@ export class RegisterUserHandler {
     private readonly passwordService: PasswordService,
     private readonly roleRepository: RoleRepository,
     private readonly eventBus: EventBusPort,
-    private readonly unitOfWork?: IamUnitOfWork,
+    private readonly unitOfWork?: IamUnitOfWork
   ) {}
 
-  async execute(command: RegisterUserCommand): Promise<Result<RegisterUserResult, ApplicationError>> {
+  async execute(
+    command: RegisterUserCommand
+  ): Promise<Result<RegisterUserResult, ApplicationError>> {
     const events: DomainEvent[] = [];
     const result = this.unitOfWork
-      ? await this.unitOfWork.run((context) => this.executeWithRepositories(command, context, events))
-      : await this.executeWithRepositories(command, {
-        users: this.userRepository,
-        roles: this.roleRepository,
-        sessions: undefined as never,
-        socialIdentities: undefined as never,
-        outbox: undefined as never,
-      }, events);
+      ? await this.unitOfWork.run((context) =>
+          this.executeWithRepositories(command, context, events)
+        )
+      : await this.executeWithRepositories(
+          command,
+          {
+            users: this.userRepository,
+            roles: this.roleRepository,
+            sessions: undefined as never,
+            socialIdentities: undefined as never,
+            outbox: undefined as never,
+          },
+          events
+        );
 
     if (!this.unitOfWork) {
       await this.eventBus.publishAll(events);
@@ -41,7 +53,7 @@ export class RegisterUserHandler {
   private async executeWithRepositories(
     command: RegisterUserCommand,
     context: IamTransactionContext,
-    events: DomainEvent[],
+    events: DomainEvent[]
   ): Promise<Result<RegisterUserResult, ApplicationError>> {
     // Validate email
     const emailResult = Email.create(command.email);
@@ -81,13 +93,13 @@ export class RegisterUserHandler {
     }
 
     const user = userResult.value;
-    const defaultRole = await context.roles.findByName("user");
+    const defaultRole = await context.roles.findByName('user');
     if (!defaultRole) {
-      return err(new InternalApplicationError("Default user role is not configured"));
+      return err(new InternalApplicationError('Default user role is not configured'));
     }
     const roleAssignment = user.assignRole(defaultRole);
     if (roleAssignment.isErr()) {
-      return err(new InternalApplicationError("Default user role could not be assigned"));
+      return err(new InternalApplicationError('Default user role could not be assigned'));
     }
 
     // Persist

@@ -1,13 +1,21 @@
-import type { DomainEvent, Result } from "@workspace/kernel";
-import { err, ok } from "@workspace/kernel";
-import { Email, Session, SessionId } from "../../../domain/index.js";
-import type { UserRepository, SessionRepository, PasswordService, DomainTokenService } from "../../../domain/index.js";
-import type { LoginUserCommand } from "./LoginUserCommand.js";
-import type { LoginUserResult } from "./LoginUserResult.js";
-import type { ApplicationError } from "../../ports/ApplicationError.js";
-import { UnauthorizedApplicationError, ValidationApplicationError } from "../../ports/ApplicationError.js";
-import type { EventBusPort } from "../../ports/EventBusPort.js";
-import type { IamTransactionContext, IamUnitOfWork } from "../../ports/IamUnitOfWork.js";
+import type { DomainEvent, Result } from '@workspace/kernel';
+import { err, ok } from '@workspace/kernel';
+import { Email, Session, SessionId } from '../../../domain/index.js';
+import type {
+  UserRepository,
+  SessionRepository,
+  PasswordService,
+  DomainTokenService,
+} from '../../../domain/index.js';
+import type { LoginUserCommand } from './LoginUserCommand.js';
+import type { LoginUserResult } from './LoginUserResult.js';
+import type { ApplicationError } from '../../ports/ApplicationError.js';
+import {
+  UnauthorizedApplicationError,
+  ValidationApplicationError,
+} from '../../ports/ApplicationError.js';
+import type { EventBusPort } from '../../ports/EventBusPort.js';
+import type { IamTransactionContext, IamUnitOfWork } from '../../ports/IamUnitOfWork.js';
 
 const ACCESS_TOKEN_TTL_MS = 15 * 60 * 1000; // 15 minutes
 const REFRESH_TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
@@ -19,20 +27,26 @@ export class LoginUserHandler {
     private readonly passwordService: PasswordService,
     private readonly tokenService: DomainTokenService,
     private readonly eventBus: EventBusPort,
-    private readonly unitOfWork?: IamUnitOfWork,
+    private readonly unitOfWork?: IamUnitOfWork
   ) {}
 
   async execute(command: LoginUserCommand): Promise<Result<LoginUserResult, ApplicationError>> {
     const events: DomainEvent[] = [];
     const result = this.unitOfWork
-      ? await this.unitOfWork.run((context) => this.executeWithRepositories(command, context, events))
-      : await this.executeWithRepositories(command, {
-        users: this.userRepository,
-        roles: undefined as never,
-        sessions: this.sessionRepository,
-        socialIdentities: undefined as never,
-        outbox: undefined as never,
-      }, events);
+      ? await this.unitOfWork.run((context) =>
+          this.executeWithRepositories(command, context, events)
+        )
+      : await this.executeWithRepositories(
+          command,
+          {
+            users: this.userRepository,
+            roles: undefined as never,
+            sessions: this.sessionRepository,
+            socialIdentities: undefined as never,
+            outbox: undefined as never,
+          },
+          events
+        );
 
     if (!this.unitOfWork) {
       await this.eventBus.publishAll(events);
@@ -43,7 +57,7 @@ export class LoginUserHandler {
   private async executeWithRepositories(
     command: LoginUserCommand,
     context: IamTransactionContext,
-    events: DomainEvent[],
+    events: DomainEvent[]
   ): Promise<Result<LoginUserResult, ApplicationError>> {
     const emailResult = Email.create(command.email);
     if (emailResult.isErr()) {
@@ -52,15 +66,15 @@ export class LoginUserHandler {
 
     const user = await context.users.findByEmail(emailResult.value.value);
     if (!user) {
-      return err(new UnauthorizedApplicationError("Invalid credentials"));
+      return err(new UnauthorizedApplicationError('Invalid credentials'));
     }
 
     const passwordValid = await this.passwordService.compare(
       command.password,
-      user.passwordHash.value,
+      user.passwordHash.value
     );
     if (!passwordValid) {
-      return err(new UnauthorizedApplicationError("Invalid credentials"));
+      return err(new UnauthorizedApplicationError('Invalid credentials'));
     }
 
     if (!user.isActive()) {
@@ -75,7 +89,10 @@ export class LoginUserHandler {
     const now = new Date();
     const expiresAt = new Date(now.getTime() + REFRESH_TOKEN_TTL_MS);
     const sessionId = new SessionId();
-    const refreshToken = await this.tokenService.generateRefreshToken(user.id.value, sessionId.value);
+    const refreshToken = await this.tokenService.generateRefreshToken(
+      user.id.value,
+      sessionId.value
+    );
     const session = Session.create(sessionId, {
       userId: user.id.value,
       deviceId: command.deviceInfo.deviceId,

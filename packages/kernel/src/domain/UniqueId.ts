@@ -1,5 +1,5 @@
-import { randomUUID } from "node:crypto";
-import { ValueObject } from "./ValueObject.js";
+import { randomUUID } from 'node:crypto';
+import { ValueObject } from './ValueObject.js';
 
 interface UniqueIdProps extends Record<string, unknown> {
   value: string;
@@ -11,8 +11,8 @@ interface UniqueIdProps extends Record<string, unknown> {
  */
 export class UniqueId extends ValueObject<UniqueIdProps> {
   constructor(value?: string) {
-    if (value !== undefined && value.trim() === "") {
-      throw new Error("UniqueId value cannot be empty");
+    if (value !== undefined && value.trim() === '') {
+      throw new Error('UniqueId value cannot be empty');
     }
     super({ value: value ?? randomUUID() });
   }

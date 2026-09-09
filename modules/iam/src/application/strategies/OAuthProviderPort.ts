@@ -1,5 +1,5 @@
-import type { OAuthProfile } from "../../domain/oauth/OAuthProfile.js";
-import type { OAuthProvider } from "../../domain/oauth/OAuthProvider.js";
+import type { OAuthProfile } from '../../domain/oauth/OAuthProfile.js';
+import type { OAuthProvider } from '../../domain/oauth/OAuthProvider.js';
 
 /**
  * Port (interface) that every OAuth provider adapter must implement.

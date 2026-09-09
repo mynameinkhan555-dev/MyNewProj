@@ -30,18 +30,12 @@ export interface PolicyEvaluationContext {
 }
 
 /** Flatten a PolicyEvaluationContext into a single-level Record for condition evaluation. */
-export function flattenContext(
-  ctx: PolicyEvaluationContext,
-): Record<string, unknown> {
+export function flattenContext(ctx: PolicyEvaluationContext): Record<string, unknown> {
   return {
+    ...Object.fromEntries(Object.entries(ctx.subject).map(([k, v]) => [`subject.${k}`, v])),
+    ...Object.fromEntries(Object.entries(ctx.resource).map(([k, v]) => [`resource.${k}`, v])),
     ...Object.fromEntries(
-      Object.entries(ctx.subject).map(([k, v]) => [`subject.${k}`, v]),
-    ),
-    ...Object.fromEntries(
-      Object.entries(ctx.resource).map(([k, v]) => [`resource.${k}`, v]),
-    ),
-    ...Object.fromEntries(
-      Object.entries(ctx.environment ?? {}).map(([k, v]) => [`environment.${k}`, v]),
+      Object.entries(ctx.environment ?? {}).map(([k, v]) => [`environment.${k}`, v])
     ),
   };
 }

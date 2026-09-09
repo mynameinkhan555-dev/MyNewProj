@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const TestTemplateResponseSchema = z.object({
   sent: z.literal(true),

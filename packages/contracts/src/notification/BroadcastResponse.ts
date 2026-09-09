@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const BroadcastResponseSchema = z.object({
   broadcastId: z.string(),

@@ -1,5 +1,5 @@
-import type { RoleRepository } from "../../domain/repositories/RoleRepository.js";
-import type { Role } from "../../domain/Role.js";
+import type { RoleRepository } from '../../domain/repositories/RoleRepository.js';
+import type { Role } from '../../domain/Role.js';
 
 export class InMemoryRoleRepository implements RoleRepository {
   private readonly roles = new Map<string, Role>();

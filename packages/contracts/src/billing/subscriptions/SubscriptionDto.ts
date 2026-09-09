@@ -1,9 +1,9 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const SubscriptionDtoSchema = z.object({
   id: z.string(),
   planId: z.string(),
-  status: z.enum(["active", "inactive", "canceled", "past_due", "trialing"]),
+  status: z.enum(['active', 'inactive', 'canceled', 'past_due', 'trialing']),
   currentPeriodStart: z.string().datetime(),
   currentPeriodEnd: z.string().datetime(),
   cancelAtPeriodEnd: z.boolean(),

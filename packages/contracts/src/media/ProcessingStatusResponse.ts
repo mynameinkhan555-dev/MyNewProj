@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ProcessingStatusResponseSchema = z.object({
   status: z.string(),

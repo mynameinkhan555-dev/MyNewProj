@@ -1,4 +1,4 @@
-import type { OAuthProvider } from "../../../domain/oauth/OAuthProvider.js";
+import type { OAuthProvider } from '../../../domain/oauth/OAuthProvider.js';
 
 export interface LinkSocialAccountCommand {
   readonly userId: string;

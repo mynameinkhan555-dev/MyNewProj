@@ -1,9 +1,9 @@
-import { and, eq } from "drizzle-orm";
-import type { NodePgDatabase } from "drizzle-orm/node-postgres";
-import type { SessionRepository } from "../../domain/repositories/SessionRepository.js";
-import { Session } from "../../domain/Session.js";
-import { SessionId } from "../../domain/SessionId.js";
-import { sessions } from "../database/schema/sessions.table.js";
+import { and, eq } from 'drizzle-orm';
+import type { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import type { SessionRepository } from '../../domain/repositories/SessionRepository.js';
+import { Session } from '../../domain/Session.js';
+import { SessionId } from '../../domain/SessionId.js';
+import { sessions } from '../database/schema/sessions.table.js';
 
 export class DrizzleSessionRepository implements SessionRepository {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,31 +20,45 @@ export class DrizzleSessionRepository implements SessionRepository {
   }
 
   async findByRefreshToken(token: string): Promise<Session | null> {
-    const rows = await this.db.select().from(sessions).where(eq(sessions.refreshToken, token)).limit(1);
+    const rows = await this.db
+      .select()
+      .from(sessions)
+      .where(eq(sessions.refreshToken, token))
+      .limit(1);
     return rows[0] ? this.toDomain(rows[0]) : null;
   }
 
   async save(session: Session): Promise<void> {
-    await this.db.insert(sessions).values({
-      id: session.id.value, identityId: session.userId, deviceId: session.deviceId,
-      deviceName: session.deviceName, deviceType: session.deviceType,
-      ipAddress: session.ipAddress, userAgent: session.userAgent,
-      refreshToken: session.refreshToken, expiresAt: session.expiresAt,
-      lastActiveAt: session.lastActiveAt, createdAt: session.createdAt,
-    }).onConflictDoUpdate({
-      target: sessions.id,
-      set: {
-        refreshToken: session.refreshToken, expiresAt: session.expiresAt,
+    await this.db
+      .insert(sessions)
+      .values({
+        id: session.id.value,
+        identityId: session.userId,
+        deviceId: session.deviceId,
+        deviceName: session.deviceName,
+        deviceType: session.deviceType,
+        ipAddress: session.ipAddress,
+        userAgent: session.userAgent,
+        refreshToken: session.refreshToken,
+        expiresAt: session.expiresAt,
         lastActiveAt: session.lastActiveAt,
-      },
-    });
+        createdAt: session.createdAt,
+      })
+      .onConflictDoUpdate({
+        target: sessions.id,
+        set: {
+          refreshToken: session.refreshToken,
+          expiresAt: session.expiresAt,
+          lastActiveAt: session.lastActiveAt,
+        },
+      });
   }
 
   async rotate(
     id: string,
     currentRefreshToken: string,
     nextRefreshToken: string,
-    expiresAt: Date,
+    expiresAt: Date
   ): Promise<boolean> {
     const updated = await this.db
       .update(sessions)
@@ -68,10 +82,16 @@ export class DrizzleSessionRepository implements SessionRepository {
 
   private toDomain(row: typeof sessions.$inferSelect): Session {
     return Session.create(new SessionId(row.id), {
-      userId: row.identityId, deviceId: row.deviceId, deviceName: row.deviceName,
-      deviceType: row.deviceType, ipAddress: row.ipAddress, userAgent: row.userAgent,
-      refreshToken: row.refreshToken, expiresAt: row.expiresAt,
-      lastActiveAt: row.lastActiveAt, createdAt: row.createdAt,
+      userId: row.identityId,
+      deviceId: row.deviceId,
+      deviceName: row.deviceName,
+      deviceType: row.deviceType,
+      ipAddress: row.ipAddress,
+      userAgent: row.userAgent,
+      refreshToken: row.refreshToken,
+      expiresAt: row.expiresAt,
+      lastActiveAt: row.lastActiveAt,
+      createdAt: row.createdAt,
     });
   }
 }

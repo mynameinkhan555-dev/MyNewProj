@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 /**
  * A named collection of Zod schemas. This is useful for applications that
@@ -12,8 +12,6 @@ export type InferZodSchemas<TSchemas extends ZodSchemas> = {
 };
 
 /** Create a readonly schema collection with type inference preserved. */
-export function createZodSchemas<TSchemas extends ZodSchemas>(
-  schemas: TSchemas,
-): TSchemas {
+export function createZodSchemas<TSchemas extends ZodSchemas>(schemas: TSchemas): TSchemas {
   return schemas;
 }

@@ -1,4 +1,4 @@
-import { StatusPage } from "../components/StatusPage";
+import { StatusPage } from '../components/StatusPage';
 
 export default function HomePage() {
   return (

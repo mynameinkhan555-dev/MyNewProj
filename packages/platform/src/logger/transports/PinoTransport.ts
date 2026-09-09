@@ -1,14 +1,14 @@
-import pino from "pino";
-import { LogLevel } from "../LogLevel.js";
-import type { LogEntry } from "../LogEntry.js";
-import type { Transport } from "./Transport.js";
+import pino from 'pino';
+import { LogLevel } from '../LogLevel.js';
+import type { LogEntry } from '../LogEntry.js';
+import type { Transport } from './Transport.js';
 
 const levelMap: Record<LogLevel, string> = {
-  [LogLevel.Debug]: "debug",
-  [LogLevel.Info]: "info",
-  [LogLevel.Warn]: "warn",
-  [LogLevel.Error]: "error",
-  [LogLevel.Fatal]: "fatal",
+  [LogLevel.Debug]: 'debug',
+  [LogLevel.Info]: 'info',
+  [LogLevel.Warn]: 'warn',
+  [LogLevel.Error]: 'error',
+  [LogLevel.Fatal]: 'fatal',
 };
 
 export class PinoTransport implements Transport {

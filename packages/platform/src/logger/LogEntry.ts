@@ -1,4 +1,4 @@
-import type { LogLevel } from "./LogLevel.js";
+import type { LogLevel } from './LogLevel.js';
 
 export interface LogEntry {
   level: LogLevel;

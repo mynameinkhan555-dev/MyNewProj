@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const InvoiceItemSchema = z.object({
   id: z.string(),
@@ -11,7 +11,7 @@ export type InvoiceItem = z.infer<typeof InvoiceItemSchema>;
 
 export const InvoiceDtoSchema = z.object({
   id: z.string(),
-  status: z.enum(["pending", "paid", "failed", "refunded"]),
+  status: z.enum(['pending', 'paid', 'failed', 'refunded']),
   amount: z.number(),
   currency: z.string(),
   dueDate: z.string().datetime().optional(),

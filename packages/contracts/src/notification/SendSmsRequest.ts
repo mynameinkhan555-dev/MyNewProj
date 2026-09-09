@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const SendSmsRequestSchema = z.object({
   to: z.string().min(1),

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const PublishContentResponseSchema = z.object({
   published: z.literal(true),

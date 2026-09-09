@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ReorderWatchlistResponseSchema = z.object({
   reordered: z.literal(true),

@@ -3,5 +3,7 @@ export interface TransactionManager {
 }
 export class MemoryTransactionManager implements TransactionManager {
   constructor(private readonly transaction: unknown = undefined) {}
-  async withTransaction<T>(fn: (tx: unknown) => Promise<T>): Promise<T> { return fn(this.transaction); }
+  async withTransaction<T>(fn: (tx: unknown) => Promise<T>): Promise<T> {
+    return fn(this.transaction);
+  }
 }

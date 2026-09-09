@@ -1,7 +1,7 @@
-import type { PaginatedResult, PaginationParams } from "@workspace/kernel";
-import type { User } from "../User.js";
-import type { Role } from "../Role.js";
-import type { UserStatus } from "../UserStatus.js";
+import type { PaginatedResult, PaginationParams } from '@workspace/kernel';
+import type { User } from '../User.js';
+import type { Role } from '../Role.js';
+import type { UserStatus } from '../UserStatus.js';
 
 export interface UserFilters {
   search?: string;

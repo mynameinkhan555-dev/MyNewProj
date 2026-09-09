@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { ContentDtoSchema } from "./ContentDto";
+import { z } from 'zod';
+import { ContentDtoSchema } from './ContentDto';
 
 export const ContentListResponseSchema = z.object({
   data: z.array(ContentDtoSchema),

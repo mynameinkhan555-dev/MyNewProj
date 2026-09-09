@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const UseCreditsRequestSchema = z.object({
   amount: z.number(),

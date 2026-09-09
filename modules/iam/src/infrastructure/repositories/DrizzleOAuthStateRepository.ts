@@ -1,8 +1,8 @@
-import { and, eq, gt } from "drizzle-orm";
-import type { NodePgDatabase } from "drizzle-orm/node-postgres";
-import type { OAuthStateRepository } from "../../domain/oauth/OAuthStateRepository.js";
-import type { OAuthProvider } from "../../domain/oauth/OAuthProvider.js";
-import { oauthStates } from "../database/schema/oauth_states.table.js";
+import { and, eq, gt } from 'drizzle-orm';
+import type { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import type { OAuthStateRepository } from '../../domain/oauth/OAuthStateRepository.js';
+import type { OAuthProvider } from '../../domain/oauth/OAuthProvider.js';
+import { oauthStates } from '../database/schema/oauth_states.table.js';
 
 export class DrizzleOAuthStateRepository implements OAuthStateRepository {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -19,8 +19,8 @@ export class DrizzleOAuthStateRepository implements OAuthStateRepository {
         and(
           eq(oauthStates.state, state),
           eq(oauthStates.provider, provider),
-          gt(oauthStates.expiresAt, now),
-        ),
+          gt(oauthStates.expiresAt, now)
+        )
       )
       .returning({ state: oauthStates.state });
     return consumed.length > 0;

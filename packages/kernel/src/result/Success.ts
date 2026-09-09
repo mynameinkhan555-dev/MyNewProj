@@ -1,1 +1,1 @@
-export { Ok as Success } from "./Result.js";
+export { Ok as Success } from './Result.js';

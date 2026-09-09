@@ -1,6 +1,6 @@
-import { User, Email, PasswordHash, UserStatus } from "../../domain/index.js";
-import type { UserReconstructProps } from "../../domain/User.js";
-import type { Role } from "../../domain/Role.js";
+import { User, Email, PasswordHash, UserStatus } from '../../domain/index.js';
+import type { UserReconstructProps } from '../../domain/User.js';
+import type { Role } from '../../domain/Role.js';
 
 export interface UserPersistence {
   id: string;

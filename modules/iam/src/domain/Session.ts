@@ -1,5 +1,5 @@
-import { Entity } from "@workspace/kernel";
-import { SessionId } from "./SessionId.js";
+import { Entity } from '@workspace/kernel';
+import { SessionId } from './SessionId.js';
 
 export interface SessionProps {
   userId: string;
@@ -41,17 +41,39 @@ export class Session extends Entity<SessionId> {
     this._createdAt = props.createdAt;
   }
 
-  get userId(): string { return this._userId; }
-  get deviceId(): string { return this._deviceId; }
-  get deviceName(): string { return this._deviceName; }
-  get deviceType(): string { return this._deviceType; }
-  get ipAddress(): string { return this._ipAddress; }
-  get userAgent(): string { return this._userAgent; }
-  get refreshToken(): string { return this._refreshToken; }
-  get expiresAt(): Date { return this._expiresAt; }
-  get lastActiveAt(): Date { return this._lastActiveAt; }
-  get createdAt(): Date { return this._createdAt; }
-  get revoked(): boolean { return this._revoked; }
+  get userId(): string {
+    return this._userId;
+  }
+  get deviceId(): string {
+    return this._deviceId;
+  }
+  get deviceName(): string {
+    return this._deviceName;
+  }
+  get deviceType(): string {
+    return this._deviceType;
+  }
+  get ipAddress(): string {
+    return this._ipAddress;
+  }
+  get userAgent(): string {
+    return this._userAgent;
+  }
+  get refreshToken(): string {
+    return this._refreshToken;
+  }
+  get expiresAt(): Date {
+    return this._expiresAt;
+  }
+  get lastActiveAt(): Date {
+    return this._lastActiveAt;
+  }
+  get createdAt(): Date {
+    return this._createdAt;
+  }
+  get revoked(): boolean {
+    return this._revoked;
+  }
 
   refresh(newToken: string, newExpiry: Date): void {
     this._refreshToken = newToken;

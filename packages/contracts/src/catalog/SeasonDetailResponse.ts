@@ -1,6 +1,6 @@
-import { z } from "zod";
-import { SeasonDtoSchema } from "./SeasonDto";
-import { EpisodeDtoSchema } from "./EpisodeDto";
+import { z } from 'zod';
+import { SeasonDtoSchema } from './SeasonDto';
+import { EpisodeDtoSchema } from './EpisodeDto';
 
 export const SeasonDetailResponseSchema = z.object({
   season: SeasonDtoSchema,

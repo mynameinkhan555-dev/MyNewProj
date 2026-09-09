@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { MediaDtoSchema } from "./MediaDto";
+import { z } from 'zod';
+import { MediaDtoSchema } from './MediaDto';
 
 export const GetMediaResponseSchema = z.object({
   media: MediaDtoSchema,

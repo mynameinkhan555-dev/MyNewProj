@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const PublishContentRequestSchema = z.object({
   scheduleAt: z.string().datetime().optional(),

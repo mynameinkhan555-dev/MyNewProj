@@ -1,6 +1,6 @@
-import { z } from "zod";
-import type { User } from "../../domain/User.js";
-import type { UserView } from "../../application/queries/UserView.js";
+import { z } from 'zod';
+import type { User } from '../../domain/User.js';
+import type { UserView } from '../../application/queries/UserView.js';
 
 export const CreateUserInputSchema = z.object({
   email: z.string().email(),

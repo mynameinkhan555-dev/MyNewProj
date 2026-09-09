@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const BulkUpdateContentResponseSchema = z.object({
   updated: z.array(z.unknown()),

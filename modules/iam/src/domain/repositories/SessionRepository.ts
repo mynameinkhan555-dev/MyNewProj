@@ -1,4 +1,4 @@
-import type { Session } from "../Session.js";
+import type { Session } from '../Session.js';
 
 export interface SessionRepository {
   findById(id: string): Promise<Session | null>;
@@ -9,7 +9,7 @@ export interface SessionRepository {
     id: string,
     currentRefreshToken: string,
     nextRefreshToken: string,
-    expiresAt: Date,
+    expiresAt: Date
   ): Promise<boolean>;
   delete(id: string): Promise<void>;
   deleteAllForUser(userId: string): Promise<void>;

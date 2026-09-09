@@ -1,6 +1,6 @@
-import type { UserRepository } from "../../../domain/repositories/UserRepository.js";
-import type { GetUserByEmailQuery } from "./GetUserByEmailQuery.js";
-import type { UserView } from "../UserView.js";
+import type { UserRepository } from '../../../domain/repositories/UserRepository.js';
+import type { GetUserByEmailQuery } from './GetUserByEmailQuery.js';
+import type { UserView } from '../UserView.js';
 
 export class GetUserByEmailHandler {
   constructor(private readonly userRepository: UserRepository) {}

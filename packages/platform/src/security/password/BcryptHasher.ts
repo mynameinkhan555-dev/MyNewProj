@@ -1,7 +1,7 @@
 // Legacy name kept for backward compatibility.
 // Uses argon2 under the hood with a lighter configuration.
-import argon2 from "argon2";
-import type { PasswordHasher } from "./PasswordHasher.js";
+import argon2 from 'argon2';
+import type { PasswordHasher } from './PasswordHasher.js';
 
 export class BcryptHasher implements PasswordHasher {
   async hash(plain: string): Promise<string> {

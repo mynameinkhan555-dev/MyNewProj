@@ -1,6 +1,6 @@
-import type { Cache } from "@workspace/platform";
-import { RedisCache } from "@workspace/platform";
-import type { Session } from "../../domain/Session.js";
+import type { Cache } from '@workspace/platform';
+import { RedisCache } from '@workspace/platform';
+import type { Session } from '../../domain/Session.js';
 
 export class RedisSessionCache {
   constructor(private readonly cache: Cache = new RedisCache()) {}

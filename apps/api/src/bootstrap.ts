@@ -1,7 +1,7 @@
-import { loadConfig, type AppConfig } from "./config";
-import { createContainer, type AppContainer } from "./container";
-import { createServer } from "./server";
-import type { Express } from "express";
+import { loadConfig, type AppConfig } from './config';
+import { createContainer, type AppContainer } from './container';
+import { createServer } from './server';
+import type { Express } from 'express';
 
 export interface Bootstrapped {
   app: Express;

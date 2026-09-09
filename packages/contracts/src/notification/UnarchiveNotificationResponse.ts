@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const UnarchiveNotificationResponseSchema = z.object({
   unarchived: z.literal(true),

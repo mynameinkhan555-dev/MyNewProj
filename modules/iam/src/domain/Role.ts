@@ -1,7 +1,7 @@
-import { Entity } from "@workspace/kernel";
-import { RoleId } from "./RoleId.js";
-import { RoleName } from "./RoleName.js";
-import { Permission } from "./Permission.js";
+import { Entity } from '@workspace/kernel';
+import { RoleId } from './RoleId.js';
+import { RoleName } from './RoleName.js';
+import { Permission } from './Permission.js';
 
 export interface RoleProps {
   name: RoleName;

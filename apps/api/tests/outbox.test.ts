@@ -1,5 +1,5 @@
-import assert from "node:assert/strict";
-import { test } from "node:test";
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
 import {
   OutboxEventBus,
   OutboxEventDispatcher,
@@ -7,15 +7,15 @@ import {
   type EventHandler,
   type OutboxMessage,
   type OutboxStore,
-} from "@workspace/platform";
-import type { DomainEvent } from "@workspace/kernel";
+} from '@workspace/platform';
+import type { DomainEvent } from '@workspace/kernel';
 
 const event: DomainEvent = {
-  eventId: "event-1",
-  eventName: "iam.UserRegistered",
-  occurredAt: new Date("2026-09-02T00:00:00.000Z"),
-  aggregateId: "user-1",
-  aggregateType: "User",
+  eventId: 'event-1',
+  eventName: 'iam.UserRegistered',
+  occurredAt: new Date('2026-09-02T00:00:00.000Z'),
+  aggregateId: 'user-1',
+  aggregateType: 'User',
 };
 
 class FakeStore implements OutboxStore {
@@ -61,7 +61,7 @@ class FakeTransport implements EventBus {
   }
 }
 
-test("OutboxEventBus durably enqueues single and batched events", async () => {
+test('OutboxEventBus durably enqueues single and batched events', async () => {
   const store = new FakeStore();
   const bus = new OutboxEventBus(store, new FakeTransport());
 
@@ -71,7 +71,7 @@ test("OutboxEventBus durably enqueues single and batched events", async () => {
   assert.deepEqual(store.enqueued, [event, event]);
 });
 
-test("dispatcher marks delivered events as published", async () => {
+test('dispatcher marks delivered events as published', async () => {
   const store = new FakeStore();
   store.messages = [{ id: event.eventId, event, attempts: 1 }];
   const transport = new FakeTransport();
@@ -83,15 +83,18 @@ test("dispatcher marks delivered events as published", async () => {
   assert.deepEqual(store.failed, []);
 });
 
-test("dispatcher returns failed deliveries to retry state", async () => {
+test('dispatcher returns failed deliveries to retry state', async () => {
   const store = new FakeStore();
   store.messages = [{ id: event.eventId, event, attempts: 2 }];
-  const dispatcher = new OutboxEventDispatcher(store, new FakeTransport(new Error("broker offline")));
+  const dispatcher = new OutboxEventDispatcher(
+    store,
+    new FakeTransport(new Error('broker offline'))
+  );
 
   assert.equal(await dispatcher.dispatchOnce(), 1);
   assert.deepEqual(store.published, []);
   assert.equal(store.failed.length, 1);
   assert.equal(store.failed[0]?.id, event.eventId);
-  assert.equal(store.failed[0]?.error, "broker offline");
+  assert.equal(store.failed[0]?.error, 'broker offline');
   assert.ok(store.failed[0]?.retryAt.getTime() > Date.now());
 });

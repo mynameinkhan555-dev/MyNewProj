@@ -16,7 +16,7 @@ export interface PaginationParams {
 export function paginate<T>(
   items: T[],
   total: number,
-  { page, pageSize }: PaginationParams,
+  { page, pageSize }: PaginationParams
 ): PaginatedResult<T> {
   const totalPages = Math.ceil(total / pageSize);
   return {

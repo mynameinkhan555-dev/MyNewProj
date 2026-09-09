@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const UpdateMetadataRequestSchema = z.object({
   metadata: z.record(z.unknown()),

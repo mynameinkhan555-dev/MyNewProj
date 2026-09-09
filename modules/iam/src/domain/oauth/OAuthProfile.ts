@@ -1,4 +1,4 @@
-import type { OAuthProvider } from "./OAuthProvider.js";
+import type { OAuthProvider } from './OAuthProvider.js';
 
 /**
  * Normalized profile returned by any OAuth provider after successful authentication.

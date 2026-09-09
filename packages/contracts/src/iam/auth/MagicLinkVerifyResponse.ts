@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { AuthUserDtoSchema } from "./AuthUserDto";
+import { z } from 'zod';
+import { AuthUserDtoSchema } from './AuthUserDto';
 
 export const MagicLinkVerifyResponseSchema = z.object({
   accessToken: z.string(),

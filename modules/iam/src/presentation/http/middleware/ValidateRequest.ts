@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express";
-import { AnyZodObject, ZodError } from "zod";
+import { Request, Response, NextFunction } from 'express';
+import { AnyZodObject, ZodError } from 'zod';
 
 export const validateRequest = (schema: AnyZodObject) => {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -10,7 +10,7 @@ export const validateRequest = (schema: AnyZodObject) => {
         query: req.query,
         params: req.params,
       });
-      
+
       // Attach to request
       req.validated = validated;
       next();
@@ -19,9 +19,9 @@ export const validateRequest = (schema: AnyZodObject) => {
         res.status(422).json({
           success: false,
           error: {
-            code: "VALIDATION_ERROR",
-            message: "Invalid request",
-            details: error.errors.map(err => ({
+            code: 'VALIDATION_ERROR',
+            message: 'Invalid request',
+            details: error.errors.map((err) => ({
               path: err.path.join('.'),
               message: err.message,
             })),

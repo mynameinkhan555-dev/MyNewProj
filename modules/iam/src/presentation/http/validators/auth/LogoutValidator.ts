@@ -1,8 +1,8 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const LogoutRequestSchema = z.object({
   body: z.object({
-    sessionId: z.string().uuid("Invalid session ID format"),
+    sessionId: z.string().uuid('Invalid session ID format'),
   }),
 });
 

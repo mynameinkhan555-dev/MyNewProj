@@ -1,8 +1,11 @@
-import type { OAuthProviderPort } from "../../application/strategies/OAuthProviderPort.js";
-import type { OAuthProfile } from "../../domain/oauth/OAuthProfile.js";
-import { OAuthProvider } from "../../domain/oauth/OAuthProvider.js";
-import { OAuthProviderError, OAuthAuthenticationError } from "../../application/ports/OAuthErrors.js";
-import { validateRedirectUri } from "./validateRedirectUri.js";
+import type { OAuthProviderPort } from '../../application/strategies/OAuthProviderPort.js';
+import type { OAuthProfile } from '../../domain/oauth/OAuthProfile.js';
+import { OAuthProvider } from '../../domain/oauth/OAuthProvider.js';
+import {
+  OAuthProviderError,
+  OAuthAuthenticationError,
+} from '../../application/ports/OAuthErrors.js';
+import { validateRedirectUri } from './validateRedirectUri.js';
 
 interface GoogleTokenResponse {
   access_token: string;
@@ -27,14 +30,10 @@ export class GoogleOAuthProvider implements OAuthProviderPort {
   private readonly clientSecret: string;
   private readonly redirectUri: string;
 
-  constructor(config: {
-    clientId: string;
-    clientSecret: string;
-    redirectUri: string;
-  }) {
+  constructor(config: { clientId: string; clientSecret: string; redirectUri: string }) {
     this.clientId = config.clientId;
     this.clientSecret = config.clientSecret;
-    this.redirectUri = validateRedirectUri("Google", config.redirectUri);
+    this.redirectUri = validateRedirectUri('Google', config.redirectUri);
   }
 
   getRedirectUri(): string {
@@ -42,17 +41,17 @@ export class GoogleOAuthProvider implements OAuthProviderPort {
   }
 
   getAuthorizationUrl(state: string, scopes?: string[]): string {
-    const defaultScopes = ["openid", "email", "profile"];
-    const scope = [...defaultScopes, ...(scopes ?? [])].join(" ");
+    const defaultScopes = ['openid', 'email', 'profile'];
+    const scope = [...defaultScopes, ...(scopes ?? [])].join(' ');
 
     const params = new URLSearchParams({
       client_id: this.clientId,
       redirect_uri: this.redirectUri,
-      response_type: "code",
+      response_type: 'code',
       scope,
       state,
-      access_type: "offline",
-      prompt: "select_account",
+      access_type: 'offline',
+      prompt: 'select_account',
     });
 
     return `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
@@ -60,39 +59,39 @@ export class GoogleOAuthProvider implements OAuthProviderPort {
 
   async exchangeCode(code: string): Promise<OAuthProfile> {
     // 1. Exchange code for tokens
-    const tokenRes = await fetch("https://oauth2.googleapis.com/token", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({
         code,
         client_id: this.clientId,
         client_secret: this.clientSecret,
         redirect_uri: this.redirectUri,
-        grant_type: "authorization_code",
+        grant_type: 'authorization_code',
       }),
     });
 
     if (!tokenRes.ok) {
-      throw new OAuthProviderError("Google", "token exchange");
+      throw new OAuthProviderError('Google', 'token exchange');
     }
 
     const tokens = (await tokenRes.json()) as GoogleTokenResponse;
 
     // 2. Fetch user info
-    const userRes = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+    const userRes = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
       headers: { Authorization: `Bearer ${tokens.access_token}` },
     });
 
     if (!userRes.ok) {
-      throw new OAuthProviderError("Google", "user profile lookup");
+      throw new OAuthProviderError('Google', 'user profile lookup');
     }
 
     const userInfo = (await userRes.json()) as GoogleUserInfo;
     if (!userInfo.sub) {
-      throw new OAuthProviderError("Google", "user profile validation");
+      throw new OAuthProviderError('Google', 'user profile validation');
     }
     if (userInfo.email && userInfo.email_verified === false) {
-      throw new OAuthAuthenticationError("Google account email is not verified");
+      throw new OAuthAuthenticationError('Google account email is not verified');
     }
 
     return {

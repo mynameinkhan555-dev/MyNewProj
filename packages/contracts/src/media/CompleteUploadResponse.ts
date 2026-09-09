@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const CompleteUploadResponseSchema = z.object({
   mediaId: z.string(),

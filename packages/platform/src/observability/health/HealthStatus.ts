@@ -1,1 +1,1 @@
-export type HealthStatus = "healthy" | "degraded" | "unhealthy";
+export type HealthStatus = 'healthy' | 'degraded' | 'unhealthy';

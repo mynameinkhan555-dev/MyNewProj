@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ArchiveNotificationResponseSchema = z.object({
   archived: z.literal(true),

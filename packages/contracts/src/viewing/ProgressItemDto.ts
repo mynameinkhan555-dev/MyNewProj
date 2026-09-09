@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ProgressItemDtoSchema = z.object({
   contentId: z.string(),

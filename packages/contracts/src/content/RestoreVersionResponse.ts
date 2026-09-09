@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const RestoreVersionResponseSchema = z.object({
   restored: z.literal(true),

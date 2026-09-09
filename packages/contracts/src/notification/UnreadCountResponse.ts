@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const UnreadCountResponseSchema = z.object({
   count: z.number().int(),

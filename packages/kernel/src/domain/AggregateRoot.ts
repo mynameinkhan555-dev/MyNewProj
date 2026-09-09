@@ -1,6 +1,6 @@
-import type { DomainEvent } from "./DomainEvent.js";
-import { Entity } from "./Entity.js";
-import { UniqueId } from "./UniqueId.js";
+import type { DomainEvent } from './DomainEvent.js';
+import { Entity } from './Entity.js';
+import { UniqueId } from './UniqueId.js';
 
 /**
  * Aggregate root — the consistency boundary of a DDD aggregate.

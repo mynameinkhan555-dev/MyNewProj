@@ -1,2 +1,2 @@
-export * from "./LinkSocialAccountCommand.js";
-export * from "./LinkSocialAccountHandler.js";
+export * from './LinkSocialAccountCommand.js';
+export * from './LinkSocialAccountHandler.js';

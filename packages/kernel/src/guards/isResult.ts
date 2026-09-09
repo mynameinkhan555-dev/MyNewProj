@@ -1,4 +1,4 @@
-import { Ok, Err, type Result } from "../result/Result.js";
+import { Ok, Err, type Result } from '../result/Result.js';
 
 export function isOk<T, E extends Error>(r: Result<T, E>): r is Ok<T, E> {
   return r instanceof Ok;

@@ -87,6 +87,7 @@ curl http://localhost:3000/api/v1/health
 ### Prometheus
 
 Access Grafana dashboard:
+
 ```bash
 kubectl port-forward service/prometheus-grafana 3000:80 -n monitoring
 ```
@@ -96,6 +97,7 @@ Default credentials: admin / prom-operator
 ### Logs
 
 View application logs:
+
 ```bash
 kubectl logs -f deployment/identity-platform-api -n production
 ```
@@ -105,6 +107,7 @@ kubectl logs -f deployment/identity-platform-api -n production
 ### Automated Backups
 
 Database backups are automated via cron job:
+
 ```bash
 kubectl apply -f deployment/kubernetes/manifests/production/backup-cronjob.yaml
 ```
@@ -130,6 +133,7 @@ gunzip -c backup.sql.gz | psql -h host -U user -d database
 ### Horizontal Pod Autoscaling
 
 The HPA is configured to scale based on CPU and memory:
+
 - API: 3-10 replicas
 - Web: 2-5 replicas
 
@@ -138,14 +142,15 @@ Adjust scaling parameters in the deployment manifests.
 ### Vertical Scaling
 
 Update resource limits in deployment manifests:
+
 ```yaml
 resources:
   requests:
-    memory: "512Mi"
-    cpu: "500m"
+    memory: '512Mi'
+    cpu: '500m'
   limits:
-    memory: "1Gi"
-    cpu: "1000m"
+    memory: '1Gi'
+    cpu: '1000m'
 ```
 
 ## Rollback
@@ -206,6 +211,7 @@ kubectl run -it --rm psql --image=postgres:16 --restart=Never -- psql -h postgre
 ### Network Policies
 
 Apply network policies to restrict traffic:
+
 ```bash
 kubectl apply -f deployment/kubernetes/manifests/production/network-policies.yaml
 ```
@@ -213,6 +219,7 @@ kubectl apply -f deployment/kubernetes/manifests/production/network-policies.yam
 ### Pod Security Standards
 
 Ensure pods run with non-root user and minimal privileges:
+
 ```yaml
 securityContext:
   runAsNonRoot: true
@@ -225,6 +232,7 @@ securityContext:
 ### Resource Limits
 
 Monitor resource usage and adjust limits:
+
 ```bash
 kubectl top pods -n production
 kubectl top nodes
@@ -258,6 +266,7 @@ kubectl top nodes
 ### Rolling Updates
 
 Use rolling updates for zero-downtime deployments:
+
 ```bash
 kubectl set image deployment/identity-platform-api api=your-registry/identity-platform-api:new-version -n production
 ```
@@ -265,6 +274,7 @@ kubectl set image deployment/identity-platform-api api=your-registry/identity-pl
 ### Canary Deployment
 
 For gradual rollout, use canary deployment strategy:
+
 ```bash
 # Deploy canary version
 kubectl apply -f deployment/kubernetes/manifests/canary/ -n production

@@ -1,4 +1,4 @@
-import type { LogContext } from "./LogContext.js";
+import type { LogContext } from './LogContext.js';
 
 export interface Logger {
   debug(message: string, context?: LogContext): void;

@@ -19,7 +19,7 @@ export class JwtValidator {
     const tolerance = options.clockTolerance ?? 0;
 
     if (claims.exp !== undefined && now > claims.exp + tolerance) {
-      throw new Error("JWT has expired");
+      throw new Error('JWT has expired');
     }
 
     if (options.issuer !== undefined && claims.iss !== options.issuer) {
@@ -27,15 +27,11 @@ export class JwtValidator {
     }
 
     if (options.audience !== undefined) {
-      const expectedAuds = Array.isArray(options.audience)
-        ? options.audience
-        : [options.audience];
-      const claimAuds = Array.isArray(claims.aud)
-        ? claims.aud
-        : [claims.aud ?? ""];
+      const expectedAuds = Array.isArray(options.audience) ? options.audience : [options.audience];
+      const claimAuds = Array.isArray(claims.aud) ? claims.aud : [claims.aud ?? ''];
       const hasAud = expectedAuds.some((a) => claimAuds.includes(a));
       if (!hasAud) {
-        throw new Error("JWT audience mismatch");
+        throw new Error('JWT audience mismatch');
       }
     }
   }

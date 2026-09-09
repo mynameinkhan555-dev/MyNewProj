@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const MarkAsUnreadResponseSchema = z.object({
   read: z.literal(false),

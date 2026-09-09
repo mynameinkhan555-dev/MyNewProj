@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const GetNotificationsQuerySchema = z.object({
   page: z.number().int().optional(),

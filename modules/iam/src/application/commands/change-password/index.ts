@@ -1,2 +1,2 @@
-export * from "./ChangePasswordCommand.js";
-export * from "./ChangePasswordHandler.js";
+export * from './ChangePasswordCommand.js';
+export * from './ChangePasswordHandler.js';

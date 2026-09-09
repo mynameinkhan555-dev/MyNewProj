@@ -1,6 +1,6 @@
-import type { Router } from "express";
-import { createAuthGuard, createIamRouter } from "@workspace/iam";
-import type { IamContainer } from "./iam-container.js";
+import type { Router } from 'express';
+import { createAuthGuard, createIamRouter } from '@workspace/iam';
+import type { IamContainer } from './iam-container.js';
 
 export function createIamRouterFromContainer(container: IamContainer): Router {
   return createIamRouter({

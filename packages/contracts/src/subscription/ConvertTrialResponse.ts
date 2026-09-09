@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { SubscriptionDtoSchema } from "./SubscriptionDto";
+import { z } from 'zod';
+import { SubscriptionDtoSchema } from './SubscriptionDto';
 
 export const ConvertTrialResponseSchema = z.object({
   converted: z.literal(true),

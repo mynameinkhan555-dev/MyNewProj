@@ -1,7 +1,7 @@
-import type { DomainEvent } from "@workspace/kernel";
-import { randomUUID } from "node:crypto";
-import type { EventBus } from "./EventBus.js";
-import type { EventHandler } from "./EventHandler.js";
+import type { DomainEvent } from '@workspace/kernel';
+import { randomUUID } from 'node:crypto';
+import type { EventBus } from './EventBus.js';
+import type { EventHandler } from './EventHandler.js';
 
 export interface OutboxMessage {
   id: string;
@@ -24,7 +24,7 @@ export interface OutboxStore {
 export class OutboxEventBus implements EventBus {
   constructor(
     private readonly store: OutboxStore,
-    private readonly transport: EventBus,
+    private readonly transport: EventBus
   ) {}
 
   publish(event: DomainEvent): Promise<void> {
@@ -51,7 +51,7 @@ export class OutboxEventDispatcher {
 
   constructor(
     private readonly store: OutboxStore,
-    private readonly transport: EventBus,
+    private readonly transport: EventBus
   ) {}
 
   start(intervalMs = 1000): void {
@@ -80,8 +80,8 @@ export class OutboxEventDispatcher {
         await this.store.markFailed(
           message.id,
           this.workerId,
-          error instanceof Error ? error.message : "Event delivery failed",
-          new Date(Date.now() + retryDelayMs),
+          error instanceof Error ? error.message : 'Event delivery failed',
+          new Date(Date.now() + retryDelayMs)
         );
       }
     }

@@ -1,4 +1,4 @@
-import { UniqueId } from "@workspace/kernel";
+import { UniqueId } from '@workspace/kernel';
 
 export class RoleId extends UniqueId {
   constructor(value?: string) {

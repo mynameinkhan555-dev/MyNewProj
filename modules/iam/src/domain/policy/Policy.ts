@@ -1,7 +1,7 @@
-import { randomUUID } from "node:crypto";
-import { PolicyEffect } from "./PolicyEffect.js";
-import type { AttributeCondition } from "./AttributeCondition.js";
-import { evaluateCondition } from "./AttributeCondition.js";
+import { randomUUID } from 'node:crypto';
+import { PolicyEffect } from './PolicyEffect.js';
+import type { AttributeCondition } from './AttributeCondition.js';
+import { evaluateCondition } from './AttributeCondition.js';
 
 export interface PolicyProps {
   id: string;
@@ -39,7 +39,7 @@ export interface PolicyProps {
 export class Policy {
   private constructor(private readonly props: PolicyProps) {}
 
-  static create(input: Omit<PolicyProps, "id" | "createdAt" | "updatedAt">): Policy {
+  static create(input: Omit<PolicyProps, 'id' | 'createdAt' | 'updatedAt'>): Policy {
     const now = new Date();
     return new Policy({ ...input, id: randomUUID(), createdAt: now, updatedAt: now });
   }
@@ -48,19 +48,45 @@ export class Policy {
     return new Policy(props);
   }
 
-  get id(): string { return this.props.id; }
-  get name(): string { return this.props.name; }
-  get description(): string { return this.props.description; }
-  get effect(): PolicyEffect { return this.props.effect; }
-  get subjects(): string[] { return this.props.subjects; }
-  get resources(): string[] { return this.props.resources; }
-  get actions(): string[] { return this.props.actions; }
-  get conditions(): AttributeCondition[] { return this.props.conditions; }
-  get priority(): number { return this.props.priority; }
-  get isActive(): boolean { return this.props.isActive; }
-  get createdAt(): Date { return this.props.createdAt; }
-  get updatedAt(): Date { return this.props.updatedAt; }
-  get createdBy(): string { return this.props.createdBy; }
+  get id(): string {
+    return this.props.id;
+  }
+  get name(): string {
+    return this.props.name;
+  }
+  get description(): string {
+    return this.props.description;
+  }
+  get effect(): PolicyEffect {
+    return this.props.effect;
+  }
+  get subjects(): string[] {
+    return this.props.subjects;
+  }
+  get resources(): string[] {
+    return this.props.resources;
+  }
+  get actions(): string[] {
+    return this.props.actions;
+  }
+  get conditions(): AttributeCondition[] {
+    return this.props.conditions;
+  }
+  get priority(): number {
+    return this.props.priority;
+  }
+  get isActive(): boolean {
+    return this.props.isActive;
+  }
+  get createdAt(): Date {
+    return this.props.createdAt;
+  }
+  get updatedAt(): Date {
+    return this.props.updatedAt;
+  }
+  get createdBy(): string {
+    return this.props.createdBy;
+  }
 
   /**
    * Check whether this policy applies to the given subject + resource + action
@@ -73,35 +99,33 @@ export class Policy {
     subjectDescriptors: string[],
     resource: string,
     action: string,
-    context: Record<string, unknown>,
+    context: Record<string, unknown>
   ): PolicyEffect | null {
     if (!this.isActive) return null;
 
     const subjectMatch = this.props.subjects.some(
-      (s) => s === "*" || subjectDescriptors.includes(s),
+      (s) => s === '*' || subjectDescriptors.includes(s)
     );
     if (!subjectMatch) return null;
 
-    const resourceMatch = this.props.resources.some(
-      (r) => r === "*" || globMatch(r, resource),
-    );
+    const resourceMatch = this.props.resources.some((r) => r === '*' || globMatch(r, resource));
     if (!resourceMatch) return null;
 
-    const actionMatch = this.props.actions.some(
-      (a) => a === "*" || a === action,
-    );
+    const actionMatch = this.props.actions.some((a) => a === '*' || a === action);
     if (!actionMatch) return null;
 
-    const conditionsPass = this.props.conditions.every((c) =>
-      evaluateCondition(c, context),
-    );
+    const conditionsPass = this.props.conditions.every((c) => evaluateCondition(c, context));
     if (!conditionsPass) return null;
 
     return this.props.effect;
   }
 
-  activate(): void { (this.props as PolicyProps).isActive = true; }
-  deactivate(): void { (this.props as PolicyProps).isActive = false; }
+  activate(): void {
+    (this.props as PolicyProps).isActive = true;
+  }
+  deactivate(): void {
+    (this.props as PolicyProps).isActive = false;
+  }
 
   updateName(name: string): void {
     (this.props as PolicyProps).name = name;
@@ -143,16 +167,20 @@ export class Policy {
     (this.props as PolicyProps).updatedAt = new Date();
   }
 
-  toPersistence(): PolicyProps { return { ...this.props }; }
+  toPersistence(): PolicyProps {
+    return { ...this.props };
+  }
 }
 
 /** Simple glob matching: "*" matches any segment, "**" matches across slashes. */
 function globMatch(pattern: string, value: string): boolean {
   const regexStr = pattern
-    .split("**").map((p) => p.split("*").map(escapeRegex).join("[^:]*")).join(".*");
+    .split('**')
+    .map((p) => p.split('*').map(escapeRegex).join('[^:]*'))
+    .join('.*');
   return new RegExp(`^${regexStr}$`).test(value);
 }
 
 function escapeRegex(s: string): string {
-  return s.replace(/[.+?^${}()|[\]\\]/g, "\\$&");
+  return s.replace(/[.+?^${}()|[\]\\]/g, '\\$&');
 }

@@ -1,2 +1,2 @@
-export * from "./DeletePolicyCommand.js";
-export * from "./DeletePolicyHandler.js";
+export * from './DeletePolicyCommand.js';
+export * from './DeletePolicyHandler.js';

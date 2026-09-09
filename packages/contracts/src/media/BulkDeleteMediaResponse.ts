@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const BulkDeleteMediaResponseSchema = z.object({
   deleted: z.array(z.string()),

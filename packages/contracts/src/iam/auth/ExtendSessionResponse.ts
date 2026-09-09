@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ExtendSessionResponseSchema = z.object({
   expiresAt: z.string().datetime(),

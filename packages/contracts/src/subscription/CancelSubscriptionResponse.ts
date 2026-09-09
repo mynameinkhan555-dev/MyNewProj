@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const CancelSubscriptionResponseSchema = z.object({
   cancelled: z.literal(true),

@@ -1,7 +1,7 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ConnectedAccountDtoSchema = z.object({
-  provider: z.enum(["google", "facebook", "apple"]),
+  provider: z.enum(['google', 'facebook', 'apple']),
   connected: z.boolean(),
   email: z.string(),
 });

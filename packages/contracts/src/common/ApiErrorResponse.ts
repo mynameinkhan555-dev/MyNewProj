@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ApiErrorDetailSchema = z.object({
   field: z.string().optional(),

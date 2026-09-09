@@ -1,4 +1,4 @@
-import { ValueObject } from "@workspace/kernel";
+import { ValueObject } from '@workspace/kernel';
 
 interface PasswordHashProps {
   value: string;
@@ -18,6 +18,6 @@ export class PasswordHash extends ValueObject<PasswordHashProps> {
   }
 
   toString(): string {
-    return "[REDACTED]";
+    return '[REDACTED]';
   }
 }

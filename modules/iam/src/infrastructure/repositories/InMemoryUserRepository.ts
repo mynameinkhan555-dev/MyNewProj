@@ -1,7 +1,7 @@
-import type { PaginatedResult, PaginationParams } from "@workspace/kernel";
-import type { UserRepository, UserFilters } from "../../domain/repositories/UserRepository.js";
-import type { User } from "../../domain/User.js";
-import type { Role } from "../../domain/Role.js";
+import type { PaginatedResult, PaginationParams } from '@workspace/kernel';
+import type { UserRepository, UserFilters } from '../../domain/repositories/UserRepository.js';
+import type { User } from '../../domain/User.js';
+import type { Role } from '../../domain/Role.js';
 
 export class InMemoryUserRepository implements UserRepository {
   private readonly users = new Map<string, User>();
@@ -15,12 +15,15 @@ export class InMemoryUserRepository implements UserRepository {
     return [...this.users.values()].find((u) => u.email.value === normalized) ?? null;
   }
 
-  async findAll(filters: UserFilters, pagination: PaginationParams): Promise<PaginatedResult<User>> {
+  async findAll(
+    filters: UserFilters,
+    pagination: PaginationParams
+  ): Promise<PaginatedResult<User>> {
     let values = [...this.users.values()];
     if (filters.search) {
       const search = filters.search.toLowerCase();
-      values = values.filter((u) =>
-        u.email.value.includes(search) || u.displayName.toLowerCase().includes(search),
+      values = values.filter(
+        (u) => u.email.value.includes(search) || u.displayName.toLowerCase().includes(search)
       );
     }
     if (filters.status) values = values.filter((u) => u.status === filters.status);

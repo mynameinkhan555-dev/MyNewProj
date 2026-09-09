@@ -1,4 +1,4 @@
-import type { DomainTokenService } from "../../domain/domain-services/TokenService.js";
+import type { DomainTokenService } from '../../domain/domain-services/TokenService.js';
 
 /** Application-facing token facade. Keeps handlers independent from JWT details. */
 export class TokenService {

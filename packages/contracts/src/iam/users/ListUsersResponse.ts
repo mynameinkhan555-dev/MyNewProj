@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { UserDtoSchema } from "./UserDto";
+import { z } from 'zod';
+import { UserDtoSchema } from './UserDto';
 
 export const ListUsersResponseSchema = z.object({
   data: z.array(UserDtoSchema),

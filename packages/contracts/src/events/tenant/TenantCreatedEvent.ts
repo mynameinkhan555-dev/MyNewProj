@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const TenantCreatedEventSchema = z.object({
   eventId: z.string(),

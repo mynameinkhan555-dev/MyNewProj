@@ -1,2 +1,2 @@
-export * from "./PreferencesDto";
-export * from "./UpdatePreferencesRequest";
+export * from './PreferencesDto';
+export * from './UpdatePreferencesRequest';

@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { TenantDtoSchema } from "./TenantDto.js";
+import { z } from 'zod';
+import { TenantDtoSchema } from './TenantDto.js';
 
 export const ListTenantsResponseSchema = z.object({
   data: z.array(TenantDtoSchema),

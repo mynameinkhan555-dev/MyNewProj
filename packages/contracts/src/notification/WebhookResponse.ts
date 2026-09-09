@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const WebhookResponseSchema = z.object({
   received: z.literal(true),

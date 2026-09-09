@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const DisconnectAccountResponseSchema = z.object({
   disconnected: z.literal(true),

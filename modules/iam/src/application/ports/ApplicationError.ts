@@ -13,36 +13,36 @@ export class ApplicationError extends Error {
 
 export class ValidationApplicationError extends ApplicationError {
   constructor(message: string) {
-    super("VALIDATION_ERROR", message, 400);
+    super('VALIDATION_ERROR', message, 400);
   }
 }
 
 export class ConflictApplicationError extends ApplicationError {
   constructor(message: string) {
-    super("CONFLICT", message, 409);
+    super('CONFLICT', message, 409);
   }
 }
 
 export class UnauthorizedApplicationError extends ApplicationError {
   constructor(message: string) {
-    super("UNAUTHORIZED", message, 401);
+    super('UNAUTHORIZED', message, 401);
   }
 }
 
 export class ForbiddenApplicationError extends ApplicationError {
   constructor(message: string) {
-    super("FORBIDDEN", message, 403);
+    super('FORBIDDEN', message, 403);
   }
 }
 
 export class NotFoundApplicationError extends ApplicationError {
   constructor(message: string) {
-    super("NOT_FOUND", message, 404);
+    super('NOT_FOUND', message, 404);
   }
 }
 
 export class InternalApplicationError extends ApplicationError {
   constructor(message: string) {
-    super("INTERNAL_ERROR", message, 500);
+    super('INTERNAL_ERROR', message, 500);
   }
 }

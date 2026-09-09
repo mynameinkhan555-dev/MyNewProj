@@ -1,2 +1,2 @@
-export * from "./SuspendUserCommand.js";
-export * from "./SuspendUserHandler.js";
+export * from './SuspendUserCommand.js';
+export * from './SuspendUserHandler.js';

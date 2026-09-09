@@ -1,5 +1,5 @@
-import type { CacheOptions } from "./CacheOptions.js";
-import type { CacheStats } from "./CacheStats.js";
+import type { CacheOptions } from './CacheOptions.js';
+import type { CacheStats } from './CacheStats.js';
 
 export interface Cache {
   get<T>(key: string): Promise<T | null>;

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const BulkPublishContentResponseSchema = z.object({
   published: z.array(z.unknown()),

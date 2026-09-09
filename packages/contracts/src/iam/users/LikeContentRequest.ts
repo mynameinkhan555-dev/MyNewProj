@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const LikeContentRequestSchema = z.object({
   contentId: z.string(),

@@ -1,2 +1,2 @@
-export * from "./ListPoliciesQuery.js";
-export * from "./ListPoliciesHandler.js";
+export * from './ListPoliciesQuery.js';
+export * from './ListPoliciesHandler.js';

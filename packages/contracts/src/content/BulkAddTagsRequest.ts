@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const BulkAddTagsRequestSchema = z.object({
   tags: z.array(z.string()),

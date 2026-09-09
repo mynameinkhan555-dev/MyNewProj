@@ -1,4 +1,4 @@
-import type { UserRepository } from "../../domain/repositories/UserRepository.js";
+import type { UserRepository } from '../../domain/repositories/UserRepository.js';
 
 /** Fast RBAC checks. Use PolicyService when resource attributes are required. */
 export class PermissionService {

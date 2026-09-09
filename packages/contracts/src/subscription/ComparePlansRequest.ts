@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ComparePlansRequestSchema = z.object({
   ids: z.array(z.string()),

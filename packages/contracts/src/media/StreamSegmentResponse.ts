@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const StreamSegmentResponseSchema = z.object({
   segment: z.string(),

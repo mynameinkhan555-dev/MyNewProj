@@ -1,9 +1,9 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const UpdateContentRequestSchema = z.object({
   title: z.string().optional(),
   originalTitle: z.string().optional(),
-  type: z.enum(["movie", "series", "episode"]).optional(),
+  type: z.enum(['movie', 'series', 'episode']).optional(),
   synopsis: z.string().optional(),
   releaseYear: z.number().int().optional(),
   duration: z.number().optional(),

@@ -1,8 +1,8 @@
-import { Router, type IRouter } from "express";
+import { Router, type IRouter } from 'express';
 
-import { createHealthRouter } from "./health";
+import { createHealthRouter } from './health';
 
-import type { AppContainer } from "./container";
+import type { AppContainer } from './container';
 
 // This is the composition root's HTTP surface, versioned under /api/v1.
 
@@ -79,12 +79,11 @@ export function createRoutes(container: AppContainer): IRouter {
   // IAM owns identity, auth, users, RBAC and ABAC policy routes.
   // The identity alias preserves the contract's /identity namespace while
   // the root mount supports /auth and /users clients.
-  v1.use("/", container.iamRouter);
-  v1.use("/identity", container.iamRouter);
+  v1.use('/', container.iamRouter);
+  v1.use('/identity', container.iamRouter);
 
   // The composition root mounts this router at /api in server.ts.
-  router.use("/v1", v1);
+  router.use('/v1', v1);
 
   return router;
 }
-

@@ -1,6 +1,6 @@
-import { apiClient } from "../http/client";
-import type { TokenStorage } from "./token-storage";
-import { BrowserTokenStorage } from "./token-storage";
+import { apiClient } from '../http/client';
+import type { TokenStorage } from './token-storage';
+import { BrowserTokenStorage } from './token-storage';
 
 export interface AuthUser {
   id: string;
@@ -38,9 +38,13 @@ export class AuthSessionManager {
     if (!session) return;
 
     try {
-      await apiClient.post("/v1/auth/logout", { sessionId: session.sessionId }, {
-        headers: { authorization: `Bearer ${session.accessToken}` },
-      });
+      await apiClient.post(
+        '/v1/auth/logout',
+        { sessionId: session.sessionId },
+        {
+          headers: { authorization: `Bearer ${session.accessToken}` },
+        }
+      );
     } finally {
       this.clear();
     }

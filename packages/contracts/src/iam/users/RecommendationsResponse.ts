@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const RecommendationsResponseSchema = z.object({
   data: z.array(z.unknown()),

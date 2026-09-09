@@ -1,8 +1,8 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const StripeWebhookPayloadSchema = z.object({
   id: z.string(),
-  object: z.literal("event"),
+  object: z.literal('event'),
   type: z.string(),
   apiVersion: z.string().optional(),
   created: z.number().int(),

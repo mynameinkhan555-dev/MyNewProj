@@ -1,6 +1,6 @@
-import type { EventBusPort } from "../../ports/EventBusPort.js";
-import type { UserRegisteredEvent } from "../../../domain/events/UserRegisteredEvent.js";
-import type { UserRegisteredEventHandler } from "../handlers/UserRegisteredEventHandler.js";
+import type { EventBusPort } from '../../ports/EventBusPort.js';
+import type { UserRegisteredEvent } from '../../../domain/events/UserRegisteredEvent.js';
+import type { UserRegisteredEventHandler } from '../handlers/UserRegisteredEventHandler.js';
 
 /**
  * Composition helper. The concrete event bus adapter owns transport concerns;
@@ -9,7 +9,7 @@ import type { UserRegisteredEventHandler } from "../handlers/UserRegisteredEvent
 export class IamEventSubscriber {
   constructor(
     private readonly eventBus: EventBusPort,
-    private readonly userRegisteredHandler: UserRegisteredEventHandler,
+    private readonly userRegisteredHandler: UserRegisteredEventHandler
   ) {}
 
   subscribe(): void {

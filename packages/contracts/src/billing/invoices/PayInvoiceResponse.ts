@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const PayInvoiceResponseSchema = z.object({
   paid: z.literal(true),

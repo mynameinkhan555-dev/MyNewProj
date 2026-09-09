@@ -5,12 +5,10 @@ export interface AppConfig {
 }
 
 export function loadConfig(): AppConfig {
-  const rawPort = process.env["PORT"];
+  const rawPort = process.env['PORT'];
 
   if (!rawPort) {
-    throw new Error(
-      "PORT environment variable is required but was not provided.",
-    );
+    throw new Error('PORT environment variable is required but was not provided.');
   }
 
   const port = Number(rawPort);
@@ -19,16 +17,14 @@ export function loadConfig(): AppConfig {
     throw new Error(`Invalid PORT value: "${rawPort}"`);
   }
 
-  const databaseUrl = process.env["DATABASE_URL"];
+  const databaseUrl = process.env['DATABASE_URL'];
   if (!databaseUrl) {
-    throw new Error(
-      "DATABASE_URL environment variable is required but was not provided.",
-    );
+    throw new Error('DATABASE_URL environment variable is required but was not provided.');
   }
 
   return {
     port,
-    nodeEnv: process.env["NODE_ENV"] ?? "development",
+    nodeEnv: process.env['NODE_ENV'] ?? 'development',
     databaseUrl,
   };
 }

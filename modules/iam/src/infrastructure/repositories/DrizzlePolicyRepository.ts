@@ -1,10 +1,10 @@
-import { eq, inArray } from "drizzle-orm";
-import type { NodePgDatabase } from "drizzle-orm/node-postgres";
-import type { PolicyRepository } from "../../domain/policy/PolicyRepository.js";
-import { Policy } from "../../domain/policy/Policy.js";
-import { PolicyEffect } from "../../domain/policy/PolicyEffect.js";
-import { policies } from "../database/schema/policies.table.js";
-import type { AttributeCondition } from "../../domain/policy/AttributeCondition.js";
+import { eq, inArray } from 'drizzle-orm';
+import type { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import type { PolicyRepository } from '../../domain/policy/PolicyRepository.js';
+import { Policy } from '../../domain/policy/Policy.js';
+import { PolicyEffect } from '../../domain/policy/PolicyEffect.js';
+import { policies } from '../database/schema/policies.table.js';
+import type { AttributeCondition } from '../../domain/policy/AttributeCondition.js';
 
 export class DrizzlePolicyRepository implements PolicyRepository {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -26,7 +26,7 @@ export class DrizzlePolicyRepository implements PolicyRepository {
     const rows = await this.db.select().from(policies).where(eq(policies.isActive, true));
     return rows
       .map((r) => this.toDomain(r))
-      .filter((p) => p.subjects.some((s) => subjects.includes(s) || s === "*"));
+      .filter((p) => p.subjects.some((s) => subjects.includes(s) || s === '*'));
   }
 
   async save(policy: Policy): Promise<void> {
@@ -73,7 +73,7 @@ export class DrizzlePolicyRepository implements PolicyRepository {
     return Policy.reconstitute({
       id: row.id,
       name: row.name,
-      description: row.description ?? "",
+      description: row.description ?? '',
       effect: row.effect as PolicyEffect,
       subjects: (row.subjects ?? []) as string[],
       resources: (row.resources ?? []) as string[],

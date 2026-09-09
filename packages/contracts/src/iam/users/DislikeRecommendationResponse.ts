@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const DislikeRecommendationResponseSchema = z.object({
   disliked: z.literal(true),

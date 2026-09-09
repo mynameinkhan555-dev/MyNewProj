@@ -1,4 +1,4 @@
-import type { Lock } from "./Lock.js";
+import type { Lock } from './Lock.js';
 export interface LockManager {
   acquire(key: string, ttlMs?: number): Promise<Lock | null>;
   release(lock: Lock): Promise<void>;

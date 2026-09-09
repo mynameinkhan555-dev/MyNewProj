@@ -1,8 +1,8 @@
-import { createHash, createHmac, timingSafeEqual } from "node:crypto";
-import type { OAuthProviderPort } from "../../application/strategies/OAuthProviderPort.js";
-import type { OAuthProfile } from "../../domain/oauth/OAuthProfile.js";
-import { OAuthProvider } from "../../domain/oauth/OAuthProvider.js";
-import { OAuthAuthenticationError } from "../../application/ports/OAuthErrors.js";
+import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
+import type { OAuthProviderPort } from '../../application/strategies/OAuthProviderPort.js';
+import type { OAuthProfile } from '../../domain/oauth/OAuthProfile.js';
+import { OAuthProvider } from '../../domain/oauth/OAuthProvider.js';
+import { OAuthAuthenticationError } from '../../application/ports/OAuthErrors.js';
 
 /**
  * Telegram Login Widget authentication.
@@ -54,7 +54,7 @@ export class TelegramOAuthProvider implements OAuthProviderPort {
     try {
       data = JSON.parse(code) as TelegramAuthData;
     } catch {
-      throw new OAuthAuthenticationError("Invalid Telegram auth data");
+      throw new OAuthAuthenticationError('Invalid Telegram auth data');
     }
 
     this.verifyTelegramHash(data);
@@ -62,15 +62,13 @@ export class TelegramOAuthProvider implements OAuthProviderPort {
     // Check auth_date is not older than 24 hours
     const ageSeconds = Math.floor(Date.now() / 1000) - data.auth_date;
     if (ageSeconds > 86400) {
-      throw new OAuthAuthenticationError("Telegram auth data is expired");
+      throw new OAuthAuthenticationError('Telegram auth data is expired');
     }
     if (ageSeconds < -60) {
-      throw new OAuthAuthenticationError("Telegram auth data timestamp is invalid");
+      throw new OAuthAuthenticationError('Telegram auth data timestamp is invalid');
     }
 
-    const displayName = [data.first_name, data.last_name]
-      .filter(Boolean)
-      .join(" ");
+    const displayName = [data.first_name, data.last_name].filter(Boolean).join(' ');
 
     return {
       provider: OAuthProvider.Telegram,
@@ -90,19 +88,17 @@ export class TelegramOAuthProvider implements OAuthProviderPort {
     const checkString = Object.entries(rest)
       .sort(([a], [b]) => a.localeCompare(b))
       .map(([k, v]) => `${k}=${String(v)}`)
-      .join("\n");
+      .join('\n');
 
     // Secret key = SHA-256(bot_token), NOT the token itself
-    const secretKey = createHash("sha256").update(this.botToken).digest();
+    const secretKey = createHash('sha256').update(this.botToken).digest();
 
-    const expectedHash = createHmac("sha256", secretKey)
-      .update(checkString)
-      .digest("hex");
+    const expectedHash = createHmac('sha256', secretKey).update(checkString).digest('hex');
 
-    const expected = Buffer.from(expectedHash, "hex");
-    const actual = Buffer.from(hash, "hex");
+    const expected = Buffer.from(expectedHash, 'hex');
+    const actual = Buffer.from(hash, 'hex');
     if (actual.length !== expected.length || !timingSafeEqual(expected, actual)) {
-      throw new OAuthAuthenticationError("Telegram auth data hash verification failed");
+      throw new OAuthAuthenticationError('Telegram auth data hash verification failed');
     }
   }
 }

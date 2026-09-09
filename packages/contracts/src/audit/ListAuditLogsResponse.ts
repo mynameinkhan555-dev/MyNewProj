@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { AuditLogDtoSchema } from "./AuditLogDto.js";
+import { z } from 'zod';
+import { AuditLogDtoSchema } from './AuditLogDto.js';
 
 export const ListAuditLogsResponseSchema = z.object({
   data: z.array(AuditLogDtoSchema),

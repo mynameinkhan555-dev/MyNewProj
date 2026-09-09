@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ViewingAnalyticsResponseSchema = z.object({
   totalViews: z.number(),

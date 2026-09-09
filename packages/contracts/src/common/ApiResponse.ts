@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const apiResponseSchema = <T extends z.ZodTypeAny>(dataSchema: T) =>
   z.object({

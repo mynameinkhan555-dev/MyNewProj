@@ -1,4 +1,4 @@
-import type { ConfigLoader } from "./ConfigLoader.js";
+import type { ConfigLoader } from './ConfigLoader.js';
 
 export class EnvConfigLoader implements ConfigLoader {
   async load(): Promise<Record<string, unknown>> {

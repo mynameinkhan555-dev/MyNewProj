@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ConfirmPaymentRequestSchema = z.object({
   paymentIntentId: z.string(),

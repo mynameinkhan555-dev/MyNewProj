@@ -157,6 +157,7 @@ implements interfaces from Domain/Application
 ### Public API (`src/index.ts`)
 
 Export only what consumers need:
+
 - Router factories
 - Middleware factories
 - Application handlers (for testing)
@@ -165,6 +166,7 @@ Export only what consumers need:
 - Domain service interfaces (for mocking)
 
 **Do NOT export:**
+
 - Domain entities (unless explicitly needed)
 - Internal infrastructure details
 - Database schemas
@@ -172,6 +174,7 @@ Export only what consumers need:
 ## Composition Root
 
 The app consuming this module (`apps/api`) is responsible for:
+
 1. Creating repository instances (Drizzle/InMemory)
 2. Creating infrastructure services (JWT, Password)
 3. Registering OAuth providers
@@ -179,23 +182,24 @@ The app consuming this module (`apps/api`) is responsible for:
 5. Starting background workers (event dispatcher)
 
 Example:
+
 ```typescript
 // apps/api/src/container/iam-container.ts
 export async function createIamContainer(): Promise<IamContainer> {
   // 1. Repositories
   const users = new DrizzleUserRepository(db);
   const roles = new DrizzleRoleRepository(db);
-  
+
   // 2. Infrastructure
   const passwordService = new BcryptPasswordHasher();
   const tokenService = new IamJwtService();
-  
+
   // 3. Handlers
   const registerUser = new RegisterUserHandler(users, passwordService, roles, events, unitOfWork);
-  
+
   // 4. Controllers
   const authRouter = createAuthRouter({ registerUser, loginUser, ... });
-  
+
   return { users, roles, registerUser, authRouter, ... };
 }
 ```
@@ -203,16 +207,19 @@ export async function createIamContainer(): Promise<IamContainer> {
 ## Testing Strategy
 
 ### Unit Tests
+
 - Test domain entities in isolation
 - Test application handlers with in-memory repositories
 - Mock domain services
 
 ### Integration Tests
+
 - Use in-memory repositories for fast tests
 - Test full use case flows
 - Test event publishing
 
 ### E2E Tests
+
 - Use real database (test instance)
 - Test HTTP endpoints
 - Test OAuth flows with mock providers
@@ -220,11 +227,13 @@ export async function createIamContainer(): Promise<IamContainer> {
 ## Event-Driven Architecture
 
 ### Domain Events
+
 - Raised by domain entities
 - Collected by AggregateRoot
 - Published via EventBusPort
 
 ### Outbox Pattern
+
 - Events stored in outbox table
 - Dispatcher reads and publishes
 - Ensures at-least-once delivery
@@ -233,16 +242,19 @@ export async function createIamContainer(): Promise<IamContainer> {
 ## Security
 
 ### Authentication
+
 - JWT access tokens (15 min TTL)
 - Refresh tokens (30 days TTL)
 - Bcrypt/Argon2 password hashing
 
 ### Authorization
+
 - RBAC: Role-based access control
 - ABAC: Attribute-based access control (policies)
 - Guards: AuthGuard → RoleGuard → PermissionGuard
 
 ### OAuth
+
 - State parameter for CSRF protection
 - Cookie-bound state verification
 - Provider-specific flows (Google, GitHub, Telegram)
@@ -250,15 +262,18 @@ export async function createIamContainer(): Promise<IamContainer> {
 ## Error Handling
 
 ### Domain Errors
+
 - `DomainError` - Business rule violations
 - Returned as `Result<T, DomainError>`
 
 ### Application Errors
+
 - `ApplicationError` - Use case failures
 - Mapped to HTTP status codes
 - Structured error responses
 
 ### Infrastructure Errors
+
 - Logged and wrapped in ApplicationError
 - Generic error messages to clients
 - Detailed errors in logs

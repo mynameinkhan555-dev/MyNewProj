@@ -1,17 +1,21 @@
-import type { Result } from "@workspace/kernel";
-import { err, ok } from "@workspace/kernel";
-import { PasswordHash } from "../../../domain/index.js";
-import type { UserRepository, PasswordService } from "../../../domain/index.js";
-import type { ChangePasswordCommand } from "./ChangePasswordCommand.js";
-import type { ApplicationError } from "../../ports/ApplicationError.js";
-import { NotFoundApplicationError, UnauthorizedApplicationError, ValidationApplicationError } from "../../ports/ApplicationError.js";
-import type { EventBusPort } from "../../ports/EventBusPort.js";
+import type { Result } from '@workspace/kernel';
+import { err, ok } from '@workspace/kernel';
+import { PasswordHash } from '../../../domain/index.js';
+import type { UserRepository, PasswordService } from '../../../domain/index.js';
+import type { ChangePasswordCommand } from './ChangePasswordCommand.js';
+import type { ApplicationError } from '../../ports/ApplicationError.js';
+import {
+  NotFoundApplicationError,
+  UnauthorizedApplicationError,
+  ValidationApplicationError,
+} from '../../ports/ApplicationError.js';
+import type { EventBusPort } from '../../ports/EventBusPort.js';
 
 export class ChangePasswordHandler {
   constructor(
     private readonly userRepository: UserRepository,
     private readonly passwordService: PasswordService,
-    private readonly eventBus: EventBusPort,
+    private readonly eventBus: EventBusPort
   ) {}
 
   async execute(command: ChangePasswordCommand): Promise<Result<void, ApplicationError>> {
@@ -22,10 +26,10 @@ export class ChangePasswordHandler {
 
     const currentValid = await this.passwordService.compare(
       command.currentPassword,
-      user.passwordHash.value,
+      user.passwordHash.value
     );
     if (!currentValid) {
-      return err(new UnauthorizedApplicationError("Current password is incorrect"));
+      return err(new UnauthorizedApplicationError('Current password is incorrect'));
     }
 
     const strengthResult = this.passwordService.validateStrength(command.newPassword);

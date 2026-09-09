@@ -1,5 +1,5 @@
-import type { UserRepository } from "../../../domain/repositories/UserRepository.js";
-import type { CheckPermissionQuery } from "./CheckPermissionQuery.js";
+import type { UserRepository } from '../../../domain/repositories/UserRepository.js';
+import type { CheckPermissionQuery } from './CheckPermissionQuery.js';
 
 export class CheckPermissionHandler {
   constructor(private readonly userRepository: UserRepository) {}
