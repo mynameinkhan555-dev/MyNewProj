@@ -1,8 +1,13 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
-import type { DatabaseHealthResult } from "../DatabaseHealthCheck.js";
 
 const { Pool } = pg;
+
+export interface DatabaseHealthResult {
+  healthy: boolean;
+  latency: number;
+  error?: string;
+}
 
 export interface PostgresDatabase {
   db: ReturnType<typeof drizzle>;
@@ -14,7 +19,9 @@ export interface PostgresDatabase {
  * Creates the application's PostgreSQL/Drizzle connection.
  * The host owns the lifecycle; platform owns the technical implementation.
  */
-export function createPostgresDatabase(connectionString: string): PostgresDatabase {
+export function createPostgresDatabase(
+  connectionString: string,
+): PostgresDatabase {
   const pool = new Pool({ connectionString });
   const db = drizzle(pool);
 
@@ -33,7 +40,11 @@ export async function checkPostgresDatabaseHealth(
 
   try {
     await database.pool.query("SELECT 1");
-    return { healthy: true, latency: Date.now() - start };
+
+    return {
+      healthy: true,
+      latency: Date.now() - start,
+    };
   } catch (err: unknown) {
     return {
       healthy: false,
