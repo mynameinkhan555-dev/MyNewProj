@@ -1,3 +1,3 @@
-export * from './ListSessionsResponse';
-export * from './RevokeAllSessionsRequest';
-export * from './SessionDto';
+export * from './ListSessionsResponse.js';
+export * from './RevokeAllSessionsRequest.js';
+export * from './SessionDto.js';

@@ -5,7 +5,24 @@
   "type": "module",
   "scripts": {
     "hello": "tsx ./src/hello.ts",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "migrate": "tsx ./src/migrate.ts",
+    "migrate:baseline": "tsx ./src/migrate.ts --baseline",
+    "generate-fingerprint": "tsx ./generate-fingerprint.ts",
+    "generate-baseline-fingerprint": "tsx ./generate-baseline-fingerprint.ts",
+    "validate-baseline-fingerprint": "tsx ./validate-baseline-fingerprint.ts",
+    "test-oid-independence": "tsx ./test-oid-independence.ts",
+    "test-semantic-mutations": "tsx ./test-semantic-mutations.ts",
+    "test-enum-mutation": "tsx ./test-enum-mutation.ts",
+    "test-journal-exclusion": "tsx ./test-journal-exclusion.ts",
+    "test-fresh-reproduction": "tsx ./test-fresh-reproduction.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@workspace/migration-runtime": "workspace:*",
+    "@workspace/platform-database": "workspace:*",
+    "@workspace/platform-logger": "workspace:*",
+    "dotenv": "^16.4.7"
   },
   "devDependencies": {
     "@types/node": "catalog:",

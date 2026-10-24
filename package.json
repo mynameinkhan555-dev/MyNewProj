@@ -17,15 +17,19 @@
     "test:e2e:ui": "playwright test --ui",
     "clean": "pnpm -r --if-present run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "db:migrate": "pnpm --filter @workspace/scripts migrate",
+    "db:migrate:baseline": "pnpm --filter @workspace/scripts migrate:baseline"
   },
   "devDependencies": {
+    "@playwright/test": "^1.48.0",
+    "@types/node": "^26.6.3",
+    "@vitest/coverage-v8": "^1.6.0",
     "@workspace/eslint-config": "workspace:*",
     "@workspace/prettier-config": "workspace:*",
-    "@workspace/tsconfig": "workspace:*",
     "@workspace/test-utils": "workspace:*",
-    "@playwright/test": "^1.48.0",
-    "@vitest/coverage-v8": "^1.6.0",
+    "@workspace/tsconfig": "workspace:*",
+    "drizzle-kit": "^0.31.11",
     "jose": "^5.9.6",
     "playwright": "^1.48.0",
     "prettier": "^3.9.4",
@@ -36,5 +40,11 @@
     "node": ">=22.0.0",
     "pnpm": ">=9.0.0"
   },
-  "packageManager": "pnpm@9.15.0"
+  "packageManager": "pnpm@9.15.0",
+  "pnpm": {
+    "overrides": {
+      "drizzle-orm": "0.30.0",
+      "drizzle-kit": "0.20.0"
+    }
+  }
 }

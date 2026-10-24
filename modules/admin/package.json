@@ -1,5 +1,5 @@
 {
-  "name": "@workspace/admin",
+  "name": "@workspace/admin-module",
   "version": "0.0.0",
   "private": true,
   "type": "module",

@@ -1,16 +1,11 @@
-export type { PasswordHasher } from './password/PasswordHasher.js';
-export { PasswordValidator } from './password/PasswordValidator.js';
-export type { PasswordValidationResult } from './password/PasswordValidator.js';
+// Password hashing
 export { Argon2Hasher } from './password/Argon2Hasher.js';
-export { BcryptHasher } from './password/BcryptHasher.js';
+export type { PasswordHasher } from './password/PasswordHasher.js';
 
-export type { JwtService, JwtSignOptions } from './jwt/JwtService.js';
-export { JwtValidator } from './jwt/JwtValidator.js';
-export type { JwtClaims, JwtValidationOptions } from './jwt/JwtValidator.js';
+// JWT
 export { JsonWebTokenService } from './jwt/JsonWebTokenService.js';
+export type { JwtService } from './jwt/JwtService.js';
 
-export type { RandomGenerator } from './random/RandomGenerator.js';
+// Random generation
 export { SecureRandomGenerator } from './random/SecureRandomGenerator.js';
-
-export type { EncryptionService } from './encryption/EncryptionService.js';
-export { AESEncryptionService } from './encryption/AESEncryptionService.js';
+export type { RandomGenerator } from './random/RandomGenerator.js';

@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { GenreDtoSchema } from './GenreDto';
-import { ContentDtoSchema } from './ContentDto';
+import { GenreDtoSchema } from './GenreDto.js';
+import { ContentDtoSchema } from './ContentDto.js';
 
 export const GenreDetailResponseSchema = z.object({
   genre: GenreDtoSchema,

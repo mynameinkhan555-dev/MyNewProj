@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { UpdateContentRequestSchema } from './UpdateContentRequest';
+import { UpdateContentRequestSchema } from './UpdateContentRequest.js';
 
 export const BulkUpdateContentRequestSchema = z.object({
   ids: z.array(z.string()),

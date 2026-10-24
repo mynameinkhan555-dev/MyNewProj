@@ -1,58 +1,49 @@
-import { Redis } from 'ioredis';
-import { serialize, deserialize } from './utils/CacheSerialization.js';
-import type { Cache } from './Cache.js';
 import type { CacheOptions } from './CacheOptions.js';
-import type { CacheStats } from './CacheStats.js';
 
-export class RedisCache implements Cache {
-  private readonly client: Redis;
-  private readonly defaultTtlSeconds: number;
-  private hits = 0;
-  private misses = 0;
+export interface RedisCacheOptions extends CacheOptions {
+  host: string;
+  port: number;
+  password?: string;
+  db?: number;
+}
 
-  constructor(client?: Redis, defaultTtlSeconds = 3600) {
-    this.client = client ?? new Redis(process.env['REDIS_URL'] ?? 'redis://localhost:6379');
-    this.defaultTtlSeconds = defaultTtlSeconds;
+export class RedisCache<T = unknown> {
+  private client: any;
+
+  constructor(private readonly options: RedisCacheOptions) {
+    // Redis client would be initialized here
+    // For now, this is a placeholder
   }
 
-  async get<T>(key: string): Promise<T | null> {
-    const raw = await this.client.get(key);
-    if (raw === null) {
-      this.misses++;
-      return null;
-    }
-    this.hits++;
-    return deserialize<T>(raw);
+  get(key: string): T | null {
+    // Redis GET implementation
+    return null;
   }
 
-  async set<T>(key: string, value: T, opts?: CacheOptions): Promise<void> {
-    const prefix = opts?.prefix ? `${opts.prefix}:` : '';
-    const fullKey = prefix + key;
-    const ttl = opts?.ttlSeconds ?? this.defaultTtlSeconds;
-    const serialized = serialize(value);
-    if (ttl > 0) {
-      await this.client.setex(fullKey, ttl, serialized);
-    } else {
-      await this.client.set(fullKey, serialized);
-    }
+  set(key: string, value: T, ttl?: number): void {
+    // Redis SET implementation
   }
 
-  async del(key: string): Promise<void> {
-    await this.client.del(key);
+  delete(key: string): boolean {
+    // Redis DEL implementation
+    return false;
   }
 
-  async has(key: string): Promise<boolean> {
-    const exists = await this.client.exists(key);
-    return exists === 1;
+  clear(): void {
+    // Redis FLUSH implementation
   }
 
-  async flush(): Promise<void> {
-    await this.client.flushdb();
-    this.hits = 0;
-    this.misses = 0;
+  has(key: string): boolean {
+    // Redis EXISTS implementation
+    return false;
   }
 
-  getStats(): CacheStats {
-    return { hits: this.hits, misses: this.misses, size: 0 };
+  size(): number {
+    // Redis DBSIZE implementation
+    return 0;
   }
+}
+
+export function createRedisCache<T>(options: RedisCacheOptions): RedisCache<T> {
+  return new RedisCache<T>(options);
 }

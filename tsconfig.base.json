@@ -3,7 +3,7 @@
     "incremental": true,
     "isolatedModules": true,
     "lib": ["es2022"],
-    "module": "esnext",
+    "module": "ESNext",
     "moduleResolution": "bundler",
     "noEmitOnError": true,
     "noFallthroughCasesInSwitch": true,
@@ -20,6 +20,30 @@
     "alwaysStrict": true,
     "skipLibCheck": true,
     "target": "es2022",
-    "types": []
+    "types": [],
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@workspace/kernel": ["packages/kernel/src/index.ts"],
+      "@workspace/kernel/*": ["packages/kernel/src/*"],
+      "@workspace/contracts": ["packages/contracts/src/index.ts"],
+      "@workspace/contracts/*": ["packages/contracts/src/*"],
+      "@workspace/platform": ["packages/platform/src/index.ts"],
+      "@workspace/platform/*": ["packages/platform/src/*"],
+      "@workspace/platform-database": ["packages/platform-database/src/index.ts"],
+      "@workspace/platform-database/*": ["packages/platform-database/src/*"],
+      "@workspace/identity": ["modules/identity/src/index.ts"],
+      "@workspace/identity/*": ["modules/identity/src/*"],
+      "@workspace/tenant": ["modules/tenant/src/index.ts"],
+      "@workspace/tenant/*": ["modules/tenant/src/*"],
+      "@workspace/access-control": ["modules/access-control/src/index.ts"],
+      "@workspace/access-control/*": ["modules/access-control/src/*"]
+    }
   }
 }

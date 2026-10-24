@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { CreateContentRequestSchema } from './CreateContentRequest';
+import { CreateContentRequestSchema } from './CreateContentRequest.js';
 
 export const BulkCreateContentRequestSchema = z.object({
   items: z.array(CreateContentRequestSchema),

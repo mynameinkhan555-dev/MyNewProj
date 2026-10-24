@@ -1,4 +1,4 @@
-import type Redis from 'ioredis';
+import type { Redis } from 'ioredis';
 import type { DomainEvent } from '@workspace/kernel';
 import type { EventBus } from '../EventBus.js';
 import type { EventHandler } from '../EventHandler.js';

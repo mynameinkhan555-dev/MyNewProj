@@ -1,6 +1,6 @@
-import { apiClient } from '../http/client';
-import type { TokenStorage } from './token-storage';
-import { BrowserTokenStorage } from './token-storage';
+import { apiClient } from '../http/client.js';
+import type { TokenStorage } from './token-storage.js';
+import { BrowserTokenStorage } from './token-storage.js';
 
 export interface AuthUser {
   id: string;

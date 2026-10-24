@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { TransactionDtoSchema } from './TransactionDto';
+import { TransactionDtoSchema } from './TransactionDto.js';
 
 export const GetTransactionResponseSchema = z.object({
   transaction: TransactionDtoSchema,

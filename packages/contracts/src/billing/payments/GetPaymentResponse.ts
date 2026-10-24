@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { PaymentDtoSchema } from './PaymentDto';
+import { PaymentDtoSchema } from './PaymentDto.js';
 
 export const GetPaymentResponseSchema = z.object({
   payment: PaymentDtoSchema,

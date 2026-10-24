@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { paginatedResponseSchema } from '../common/Pagination';
-import { ContentDtoSchema } from './ContentDto';
+import { paginatedResponseSchema } from '../common/Pagination.js';
+import { ContentDtoSchema } from './ContentDto.js';
 
 export const ListContentResponseSchema = paginatedResponseSchema(ContentDtoSchema);
 

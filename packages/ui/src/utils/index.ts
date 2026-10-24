@@ -1,3 +1,3 @@
-export * from './cn';
-export * from './composeRefs';
-export * from './slot';
+export * from './cn.js';
+export * from './composeRefs.js';
+export * from './slot.js';

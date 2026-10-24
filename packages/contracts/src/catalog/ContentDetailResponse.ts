@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { ContentDtoSchema } from './ContentDto';
-import { GenreDtoSchema } from './GenreDto';
-import { SeasonDtoSchema } from './SeasonDto';
+import { ContentDtoSchema } from './ContentDto.js';
+import { GenreDtoSchema } from './GenreDto.js';
+import { SeasonDtoSchema } from './SeasonDto.js';
 
 export const ContentDetailResponseSchema = ContentDtoSchema.extend({
   genres: z.array(GenreDtoSchema).optional(),

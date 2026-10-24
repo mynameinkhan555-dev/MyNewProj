@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { SubtitleDtoSchema } from './SubtitleDto';
+import { SubtitleDtoSchema } from './SubtitleDto.js';
 
 export const UploadSubtitlesResponseSchema = z.object({
   subtitle: SubtitleDtoSchema,

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { BillingAddressSchema } from './PaymentMethodDto';
+import { BillingAddressSchema } from './PaymentMethodDto.js';
 
 export const AddPaymentMethodRequestSchema = z.object({
   type: z.enum(['card', 'paypal', 'bank']),

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ContentDtoSchema } from './ContentDto';
+import { ContentDtoSchema } from './ContentDto.js';
 
 export const BatchContentResponseSchema = z.object({
   data: z.array(ContentDtoSchema),

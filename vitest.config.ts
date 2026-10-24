@@ -5,6 +5,17 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
+    testTimeout: 30000,
+    hookTimeout: 30000,
+    pool: 'forks',
+    poolOptions: {
+      forks: {
+        singleFork: true,
+      },
+    },
+    sequence: {
+      concurrent: false,
+    },
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
@@ -40,6 +51,8 @@ export default defineConfig({
       '@workspace/kernel': path.resolve(__dirname, './packages/kernel/src'),
       '@workspace/contracts': path.resolve(__dirname, './packages/contracts/src'),
       '@workspace/platform': path.resolve(__dirname, './packages/platform/src'),
+      '@workspace/platform-database': path.resolve(__dirname, './packages/platform-database/src'),
+      '@workspace/platform-logger': path.resolve(__dirname, './packages/platform-logger/src'),
       '@workspace/platform-client': path.resolve(__dirname, './packages/platform/client/src'),
       '@workspace/ui': path.resolve(__dirname, './packages/ui/src'),
     },

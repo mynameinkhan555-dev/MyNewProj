@@ -3,18 +3,62 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./src/index.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./domain": {
+      "types": "./dist/domain/index.d.ts",
+      "import": "./dist/domain/index.js"
+    },
+    "./domain/events": {
+      "types": "./dist/domain/events/index.d.ts",
+      "import": "./dist/domain/events/index.js"
+    },
+    "./application": {
+      "types": "./dist/application/index.d.ts",
+      "import": "./dist/application/index.js"
+    },
+    "./application/use-cases": {
+      "types": "./dist/application/use-cases/index.d.ts",
+      "import": "./dist/application/use-cases/index.js"
+    },
+    "./infrastructure": {
+      "types": "./dist/infrastructure/index.d.ts",
+      "import": "./dist/infrastructure/index.js"
+    },
+    "./infrastructure/persistence/drizzle/schema": {
+      "types": "./dist/infrastructure/persistence/drizzle/schema/index.d.ts",
+      "import": "./dist/infrastructure/persistence/drizzle/schema/index.js"
+    },
+    "./infrastructure/persistence/drizzle/repositories": {
+      "types": "./dist/infrastructure/persistence/drizzle/repositories/index.d.ts",
+      "import": "./dist/infrastructure/persistence/drizzle/repositories/index.js"
+    },
+    "./presentation": {
+      "types": "./dist/presentation/index.d.ts",
+      "import": "./dist/presentation/index.js"
+    }
   },
   "scripts": {
-    "typecheck": "tsc -b tsconfig.json"
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest",
+    "test:integration": "vitest --config vitest.integration.config.ts"
   },
   "dependencies": {
     "@workspace/kernel": "workspace:*",
-    "@workspace/contracts": "workspace:*",
-    "@workspace/platform": "workspace:*"
+    "@workspace/platform": "workspace:*",
+    "@workspace/platform-database": "workspace:*",
+    "@workspace/tenant": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "catalog:"
+    "@types/node": "^20.0.0",
+    "dotenv": "^16.4.7",
+    "typescript": "^5.0.0",
+    "vitest": "^1.6.1"
   }
 }

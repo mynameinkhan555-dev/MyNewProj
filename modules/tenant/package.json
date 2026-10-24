@@ -4,17 +4,36 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./domain": "./src/domain/index.ts",
+    "./domain/repositories": "./src/domain/repositories/index.ts",
+    "./domain/events": "./src/domain/events/index.ts",
+    "./application": "./src/application/index.ts",
+    "./application/use-cases": "./src/application/use-cases/index.ts",
+    "./infrastructure": "./src/infrastructure/index.ts",
+    "./infrastructure/persistence/drizzle/schema": "./src/infrastructure/persistence/drizzle/schema/index.ts",
+    "./infrastructure/persistence/drizzle/repositories": "./src/infrastructure/persistence/drizzle/repositories/index.ts",
+    "./presentation": "./src/presentation/index.ts"
   },
   "scripts": {
-    "typecheck": "tsc -b tsconfig.json"
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest",
+    "test:integration": "vitest --config vitest.integration.config.ts",
+    "migrate": "tsx scripts/run-migrations.ts"
   },
   "dependencies": {
     "@workspace/kernel": "workspace:*",
-    "@workspace/contracts": "workspace:*",
-    "@workspace/platform": "workspace:*"
+    "@workspace/platform": "workspace:*",
+    "@workspace/platform-database": "workspace:*",
+    "drizzle-orm": "0.30.0",
+    "postgres": "^3.4.9"
   },
   "devDependencies": {
-    "@types/node": "catalog:"
+    "@types/node": "^20.0.0",
+    "dotenv": "^16.4.7",
+    "drizzle-kit": "^0.31.11",
+    "typescript": "^5.0.0",
+    "vitest": "^1.6.1"
   }
 }

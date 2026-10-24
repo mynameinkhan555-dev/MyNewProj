@@ -1,5 +1,5 @@
 import type { ErrorRequestHandler } from 'express';
-import type { Logger } from '@workspace/platform';
+import type { Logger } from '@workspace/platform-logger';
 
 export function createErrorHandler(logger: Logger): ErrorRequestHandler {
   return (err, _req, res, _next) => {

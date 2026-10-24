@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3001",
     "build": "echo 'Skipping web build - placeholder app'",
-    "start": "next start",
+    "start": "next start -p 3001",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "clean": "if exist .next rmdir /s /q .next"
   },

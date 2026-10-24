@@ -1,4 +1,4 @@
-import type Redis from 'ioredis';
+import type { Redis } from 'ioredis';
 import type { Lock } from './Lock.js';
 import type { LockManager } from './LockManager.js';
 import { randomUUID } from 'node:crypto';

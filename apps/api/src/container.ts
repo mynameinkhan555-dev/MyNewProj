@@ -1,34 +1,48 @@
 import {
   createLogger,
   type Logger,
+} from '@workspace/platform-logger';
+import {
   createPostgresDatabase,
   type PostgresDatabase,
-} from '@workspace/platform';
-import {
-  createIamContainer,
-  createIamRouterFromContainer,
-  type IamContainerOptions,
-} from './container/index.js';
+} from '@workspace/platform-database';
+import { IdentityContainer } from './container/identity-container.js';
+import { TenantContainer } from './container/tenant-container.js';
+import { createAuthorizationContainer } from './container/authorization-container.js';
 
 export interface AppContainer {
   logger: Logger;
   database: PostgresDatabase;
-  iamRouter: ReturnType<typeof createIamRouterFromContainer>;
-  iamContainer: Awaited<ReturnType<typeof createIamContainer>>;
+  identityContainer: IdentityContainer;
+  tenantContainer: TenantContainer;
+  authorizationContainer: ReturnType<typeof createAuthorizationContainer>;
 }
 
-export interface ContainerOptions extends Omit<IamContainerOptions, 'database'> {
+export interface ContainerOptions {
   databaseUrl: string;
 }
 
 export async function createContainer(options: ContainerOptions): Promise<AppContainer> {
   const logger = createLogger('api');
   const database = createPostgresDatabase(options.databaseUrl);
-  const iamContainer = await createIamContainer({
-    ...options,
-    database,
-  });
-  const iamRouter = createIamRouterFromContainer(iamContainer);
 
-  return { logger, database, iamRouter, iamContainer };
+  // Initialize identity and tenant containers with real DB
+  const identityContainer = new IdentityContainer(database.pool as any);
+  const tenantContainer = new TenantContainer(database.pool as any);
+
+  // Initialize authorization container with cross-module dependencies
+  const authorizationContainer = createAuthorizationContainer(
+    database.pool as any,
+    tenantContainer.membershipRepository,
+    tenantContainer.tenantRepository,
+    identityContainer.userRepository
+  );
+
+  return {
+    logger,
+    database,
+    identityContainer,
+    tenantContainer,
+    authorizationContainer,
+  };
 }

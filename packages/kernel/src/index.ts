@@ -9,7 +9,6 @@ export { CompositeSpecification } from './domain/Specification.js';
 export type { Specification } from './domain/Specification.js';
 export type { Repository } from './domain/Repository.js';
 export type { DomainService } from './domain/DomainService.js';
-export type { UnitOfWork } from './domain/UnitOfWork.js';
 
 // ─── Result Monad ──────────────────────────────────────────────────────────
 export { Ok, Err, ok, err, combine } from './result/Result.js';
@@ -18,6 +17,7 @@ export { ErrorCode } from './result/Error.js';
 
 // ─── Types ─────────────────────────────────────────────────────────────────
 export type { Brand, Branded } from './types/Brand.js';
+export { isBranded, createBrand, BrandedString } from './types/Brand.js';
 export type { Primitive } from './types/Primitive.js';
 export type { Nullable, Optional, Maybe } from './types/Nullable.js';
 export type { JsonValue, JsonObject, JsonArray, JsonPrimitive } from './types/JsonValue.js';
@@ -38,3 +38,13 @@ export { isOk, isErr } from './guards/isResult.js';
 export { assert } from './utils/assert.js';
 export { invariant } from './utils/invariant.js';
 export { identity, noop, sleep } from './utils/identity.js';
+
+// ─── Time ───────────────────────────────────────────────────────────────────
+export type { Clock } from './time/index.js';
+export { SystemClock, TestClock } from './time/index.js';
+
+// ─── ID Generation ─────────────────────────────────────────────────────────
+export type { IdGenerator } from './id/index.js';
+export { UuidGenerator, FakeIdGenerator } from './id/index.js';
+export type { EventIdGenerator } from './id/index.js';
+export { UuidEventIdGenerator, FakeEventIdGenerator } from './id/index.js';

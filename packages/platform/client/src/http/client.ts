@@ -28,7 +28,7 @@ export class HttpClient {
   private readonly fetcher: typeof fetch;
 
   constructor(options: HttpClientOptions = {}) {
-    this.baseUrl = (options.baseUrl ?? process.env.NEXT_PUBLIC_API_BASE_URL ?? '/api').replace(
+    this.baseUrl = (options.baseUrl ?? process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://localhost:3000/api').replace(
       /\/$/,
       ''
     );

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { AuthUserDtoSchema } from './AuthUserDto';
+import { AuthUserDtoSchema } from './AuthUserDto.js';
 
 export const OAuthCallbackResponseSchema = z.object({
   accessToken: z.string(),

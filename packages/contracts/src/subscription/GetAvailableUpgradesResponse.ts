@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { PlanDtoSchema } from './PlanDto';
+import { PlanDtoSchema } from './PlanDto.js';
 
 export const AvailableUpgradeItemSchema = z.object({
   plan: PlanDtoSchema,

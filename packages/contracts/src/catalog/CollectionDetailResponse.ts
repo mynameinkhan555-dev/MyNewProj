@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { CollectionDtoSchema } from './CollectionDto';
-import { ContentDtoSchema } from './ContentDto';
+import { CollectionDtoSchema } from './CollectionDto.js';
+import { ContentDtoSchema } from './ContentDto.js';
 
 export const CollectionDetailResponseSchema = z.object({
   collection: CollectionDtoSchema,

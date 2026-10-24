@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { InvoiceDtoSchema, InvoiceItemSchema } from './InvoiceDto';
-import { PaymentDtoSchema } from '../payments/PaymentDto';
+import { InvoiceDtoSchema, InvoiceItemSchema } from './InvoiceDto.js';
+import { PaymentDtoSchema } from '../payments/PaymentDto.js';
 
 export const GetInvoiceDetailResponseSchema = z.object({
   invoice: InvoiceDtoSchema,

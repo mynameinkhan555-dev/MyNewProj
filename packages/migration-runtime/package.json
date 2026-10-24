@@ -1,0 +1,28 @@
+{
+  "name": "@workspace/migration-runtime",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@workspace/platform-database": "workspace:*",
+    "@workspace/platform-logger": "workspace:*",
+    "drizzle-orm": "^0.45.2",
+    "pg": "^8.14.1"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "@types/pg": "^8.11.10",
+    "typescript": "catalog:"
+  }
+}

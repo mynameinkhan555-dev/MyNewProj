@@ -1,6 +1,7 @@
 import { SignJWT, jwtVerify } from 'jose';
 import type { JWTPayload } from 'jose';
 import type { JwtService, JwtSignOptions } from './JwtService.js';
+import { createHash } from 'crypto';
 
 function parseTTL(ttl: string | number): number {
   if (typeof ttl === 'number') return ttl;
@@ -27,6 +28,8 @@ export class JsonWebTokenService implements JwtService {
   private readonly algorithm: string;
   private readonly defaultIssuer?: string;
   private readonly defaultAudience?: string;
+  private readonly secretFingerprint: string;
+  private readonly instanceId: string;
 
   constructor(options?: {
     secret?: string;
@@ -34,14 +37,25 @@ export class JsonWebTokenService implements JwtService {
     issuer?: string;
     audience?: string;
   }) {
+    this.instanceId = `jwt-platform-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     const secret = options?.secret ?? process.env['JWT_SECRET'];
     if (!secret || secret.length < 16) {
       throw new Error('JWT_SECRET must be configured with at least 16 characters');
     }
     this.secret = new TextEncoder().encode(secret);
+    this.secretFingerprint = createHash('sha256').update(secret).digest('hex');
     this.algorithm = options?.algorithm ?? 'HS256';
     this.defaultIssuer = options?.issuer ?? process.env['JWT_ISSUER'];
     this.defaultAudience = options?.audience ?? process.env['JWT_AUDIENCE'];
+    
+    console.log('[FORENSIC] Platform JWT Service constructed', {
+      instanceId: this.instanceId,
+      algorithm: this.algorithm,
+      secretFingerprint: this.secretFingerprint,
+      secretLength: secret.length,
+      issuer: this.defaultIssuer,
+      audience: this.defaultAudience
+    });
   }
 
   async sign(payload: Record<string, unknown>, options?: JwtSignOptions): Promise<string> {
@@ -70,7 +84,21 @@ export class JsonWebTokenService implements JwtService {
           : (expiresIn as string)
     );
 
-    return builder.sign(key);
+    const token = await builder.sign(key);
+    const tokenFingerprint = createHash('sha256').update(token).digest('hex').slice(0, 16);
+    
+    console.log('[FORENSIC] JWT signed', {
+      instanceId: this.instanceId,
+      algorithm: this.algorithm,
+      secretFingerprint: this.secretFingerprint,
+      tokenLength: token.length,
+      tokenFingerprint,
+      issuer,
+      audience,
+      subject: options?.subject
+    });
+
+    return token;
   }
 
   async verify<T>(token: string): Promise<T> {
@@ -81,8 +109,33 @@ export class JsonWebTokenService implements JwtService {
     if (this.defaultIssuer) verifyOptions['issuer'] = this.defaultIssuer;
     if (this.defaultAudience) verifyOptions['audience'] = [this.defaultAudience];
 
-    const { payload } = await jwtVerify(token, key, verifyOptions);
-    return payload as unknown as T;
+    const tokenFingerprint = createHash('sha256').update(token).digest('hex').slice(0, 16);
+    
+    console.log('[FORENSIC] JWT verify started', {
+      instanceId: this.instanceId,
+      algorithm: this.algorithm,
+      secretFingerprint: this.secretFingerprint,
+      tokenLength: token.length,
+      tokenFingerprint,
+      issuer: this.defaultIssuer,
+      audience: this.defaultAudience
+    });
+
+    try {
+      const { payload } = await jwtVerify(token, key, verifyOptions);
+      console.log('[FORENSIC] JWT verify success', {
+        instanceId: this.instanceId,
+        tokenFingerprint
+      });
+      return payload as unknown as T;
+    } catch (error) {
+      console.log('[FORENSIC] JWT verify failed', {
+        instanceId: this.instanceId,
+        tokenFingerprint,
+        error: String(error)
+      });
+      throw error;
+    }
   }
 }
 

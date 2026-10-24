@@ -1,5 +1,5 @@
 import { Router, type IRouter } from 'express';
-import { checkPostgresDatabaseHealth, type PostgresDatabase } from '@workspace/platform';
+import { checkPostgresDatabaseHealth, type PostgresDatabase } from '@workspace/platform-database';
 import { z } from 'zod';
 
 const HealthCheckResponse = z.object({

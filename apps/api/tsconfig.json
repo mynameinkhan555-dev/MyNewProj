@@ -5,13 +5,15 @@
     "types": ["node"]
   },
   "include": ["src"],
+  "exclude": ["../../modules/access-control/infrastructure"],
   "references": [
     { "path": "../../packages/kernel" },
     { "path": "../../packages/contracts" },
-    { "path": "../../packages/platform" },
-    { "path": "../../modules/iam" },
-    { "path": "../../modules/billing" },
+    { "path": "../../packages/platform-database" },
+    { "path": "../../modules/identity" },
     { "path": "../../modules/tenant" },
+    { "path": "../../modules/access-control" },
+    { "path": "../../modules/billing" },
     { "path": "../../modules/notification" },
     { "path": "../../modules/audit" }
   ]
