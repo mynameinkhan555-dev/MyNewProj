@@ -25,7 +25,8 @@
     "@workspace/kernel": "workspace:*",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.33.0",
-    "pg": "^8.14.1"
+    "pg": "^8.14.1",
+    "postgres": "^3.4.9"
   },
   "devDependencies": {
     "@types/node": "catalog:",
