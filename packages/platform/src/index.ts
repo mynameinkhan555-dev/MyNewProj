@@ -1,11 +1,6 @@
 // Re-export from scoped packages for backward compatibility
-export {
-  createPostgresDatabase,
-  PostgresDatabase,
-  type DatabaseConfig as PlatformDatabaseConfig,
-} from '@workspace/platform-database';
 export * from '@workspace/platform-logger';
-export type { IUnitOfWork } from './ports/IUnitOfWork.js';
+export type { IUnitOfWork } from '@workspace/kernel';
 
 // Platform-specific exports
 export * from './errors/index.js';

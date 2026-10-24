@@ -48,3 +48,6 @@ export type { IdGenerator } from './id/index.js';
 export { UuidGenerator, FakeIdGenerator } from './id/index.js';
 export type { EventIdGenerator } from './id/index.js';
 export { UuidEventIdGenerator, FakeEventIdGenerator } from './id/index.js';
+
+// ─── Ports ─────────────────────────────────────────────────────────────────
+export type { IUnitOfWork } from './ports/IUnitOfWork.js';

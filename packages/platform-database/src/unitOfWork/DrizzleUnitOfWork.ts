@@ -1,4 +1,4 @@
-import type { IUnitOfWork } from '@workspace/platform/ports';
+import type { IUnitOfWork } from '@workspace/kernel';
 import { TransactionContext } from './TransactionContext.js';
 import {
   PersistenceError,

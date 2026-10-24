@@ -28,9 +28,6 @@
       "path": "./packages/tooling/test-utils"
     },
     {
-      "path": "./modules/iam"
-    },
-    {
       "path": "./modules/billing"
     },
     {

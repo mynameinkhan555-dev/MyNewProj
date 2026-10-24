@@ -3,7 +3,11 @@
  * Export all database-related functionality
  */
 
-export { PostgresDatabase, createPostgresDatabase, checkPostgresDatabaseHealth } from './database.js';
+export {
+  PostgresDatabase,
+  createPostgresDatabase,
+  checkPostgresDatabaseHealth,
+} from './database.js';
 export type { DatabaseConfig, LockHandle } from './database.js';
 export { SchemaIntrospector } from './introspection.js';
 export { CatalogNormalizer } from './normalizer.js';
@@ -15,4 +19,4 @@ export * from './persistence/index.js';
 export * from './types.js';
 export { DrizzleUnitOfWork } from './unitOfWork/DrizzleUnitOfWork.js';
 export { TransactionContext } from './unitOfWork/TransactionContext.js';
-export type { IUnitOfWork } from '@workspace/platform/ports';
+export type { IUnitOfWork } from '@workspace/kernel';

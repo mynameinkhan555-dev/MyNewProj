@@ -918,9 +918,6 @@ importers:
       '@workspace/kernel':
         specifier: workspace:*
         version: link:../kernel
-      '@workspace/platform-database':
-        specifier: workspace:*
-        version: link:../platform-database
       '@workspace/platform-logger':
         specifier: workspace:*
         version: link:../platform-logger
@@ -1006,9 +1003,6 @@ importers:
       '@workspace/kernel':
         specifier: workspace:*
         version: link:../kernel
-      '@workspace/platform':
-        specifier: workspace:*
-        version: link:../platform
       dotenv:
         specifier: ^16.4.7
         version: 16.4.7

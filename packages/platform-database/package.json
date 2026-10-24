@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "@workspace/kernel": "workspace:*",
-    "@workspace/platform": "workspace:*",
     "dotenv": "^16.4.7",
     "drizzle-orm": "^0.33.0",
     "postgres": "^3.4.9"
